@@ -1,0 +1,34 @@
+<h1 class="animated fast fadeIn display-3"> Mis Archivos</h1>
+  <br>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Extension</th>
+      <th scope="col">Tamaño</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let file of fileList">
+      <th scope="row">#</th>
+      <td>{{file.name}}</td>
+      <td>{{file.extension}}</td>
+      <td>{{file.size}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<h2 class="animated fast fadeIn display-3">Subir Archivo</h2>
+<hr>
+<br>
+
+<div class="jumbotron jumbotron-fluid animated fadeIn ">
+  <input type="file" (change)=onFileSelected($event)>
+  <button type="button" (click)="onUpload()">Subir Archivo</button>
+  <span ng-if="porcentaje != 0">{{porcentaje}}</span>
+
+</div>

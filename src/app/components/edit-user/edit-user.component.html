@@ -1,0 +1,54 @@
+<h1 class="animated fast fadeIn display-3">Editar Usuario</h1>
+<hr>
+<br>
+
+<select (change)='onOptionSelected($event)'>
+  <option value = "-1" selected="selected">Seleccionar Usuario</option>
+  <option *ngFor = "let file of fileList; let i = index" [value] = 'i' >{{file.email}}</option>
+</select>
+
+<br>
+<br>
+<form class="user-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="jumbotron animated fast fadeIn">
+      <div class="form-group">
+          <input type="text" formControlName="email" emailExists placeholder="Email"  readonly="readonly" class="form-control" uniqueEmail [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div class="alert alert-danger" *ngIf="f.email.errors.required">Email is required</div>
+              <div class="alert alert-danger" *ngIf="f.email.errors.email">Email must be a valid email address</div>
+              <div class="alert alert-danger" *ngIf="f.email.errors['uniqueEmail']">Email existe</div>
+              </div>
+          </div>
+
+        <div class="form-group">
+            <input type="text" formControlName="name" placeholder="Nombre" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+
+                <div class="alert alert-danger" *ngIf="f.name.errors.required">First Name is required</div>
+                </div>
+            </div>
+
+        <div class="form-group">
+            <input type="text" formControlName="secondName" placeholder="Apellido" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.secondName.errors }" />
+            <div *ngIf="submitted && f.secondName.errors" class="invalid-feedback">
+
+                <div class="alert alert-danger" *ngIf="f.secondName.errors.required">Last Name is required</div>
+                </div>
+            </div>
+        <div class="form-group">
+            <input type="text" formControlName="gmail" placeholder="Gmail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.gmail.errors }" />
+            <div *ngIf="submitted && f.gmail.errors" class="invalid-feedback">
+
+                <div class="alert alert-danger" *ngIf="f.gmail.errors.email">Gmail must be a valid email address</div>
+                </div>
+            </div>
+        <div class="form-group">
+            Habilitar usuario <input type="checkbox" [checked]="enable" (change)="$event.target.checked" />
+        </div>
+
+
+        <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary">Register</button>
+        </div>
+    </div>
+    </form>

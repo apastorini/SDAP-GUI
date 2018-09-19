@@ -1,0 +1,194 @@
+/* You can add global styles to this file, and also import other style files */
+.main-container{
+margin-top: 100px;
+}
+.navbar{
+  overflow: hidden;
+     position: fixed; /* Set the navbar to fixed position */
+     top: 0; /* Position the navbar at the top of the page */
+     width: 100%; /* Full width */
+     z-index: 1030;
+     -webkit-box-shadow: 0 8px 6px -6px #999;
+     -moz-box-shadow: 0 8px 6px -6px #999;
+      box-shadow: 0 8px 6px -6px #999;
+      background-color: #064598;
+      color:#ffffff;
+
+}
+
+.nav-item{
+    color:red;
+}
+
+.form-control{
+  width: 250px
+}
+
+.login-box{
+   position: absolute;
+   padding-top: 30px;
+   width: 450px;
+   height: 400px;
+   z-index: 15;
+   top: 30%;
+   left: 39%;
+   margin-top: -50px;
+   margin-left: -50px;
+   text-align:center;
+   box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   background-color: #064598;
+   color:#ffffff;
+}
+.signin-box{
+   position: absolute;
+   padding-top: 30px;
+   width: 400px;
+   height: 550px;
+   z-index: 15;
+   top: 30%;
+   left: 39%;
+   margin-top: -50px;
+   margin-left: -50px;
+   text-align:center;
+   box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   background-color: #064598;
+   color:#ffffff;
+}
+
+.signin-box .header-box{
+  padding-bottom: 20px;
+  font-size: 16px
+}
+
+.signin-box h1{
+  font-size: 28px
+}
+
+
+.signin-box .form-control{
+   /*align: center;*/
+   margin: auto;
+}
+
+.login-box .header-box{
+  padding-bottom: 20px;
+}
+
+
+.login-box .form-control{
+   /*align: center;*/
+   margin: auto;
+}
+.password-link{
+  margin-top: 10px;
+}
+
+/*Errors*/
+.invalid-feedback  div{
+  color: red;
+  font-size: 14px;
+}
+
+
+
+
+/*FOOOOOOOOOTER*/
+
+
+
+footer{
+     background-color: #120767;
+     padding:30px 0px;
+}
+
+
+.address span , .menu span{
+   color: #FFF;
+  /* font-weight: bold;*/
+   border-bottom: 1px solid #FFF;
+   padding:10px 0px;
+   display: block;
+   /*text-transform: uppercase;*/
+   font-size: 16px;
+   letter-spacing: 3px;
+}
+
+.address li a , .menu li a{
+    color:#FFF;
+    letter-spacing: 3px;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.address li, .menu li{
+    margin:20px 0px;
+    list-style: none;
+}
+
+.address li a:hover , .menu li a:hover{
+    color: #FFF;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
+.address .fa{
+    color: #FFF;
+    margin-right: 10px;
+    font-size:18px;
+}
+
+.center {
+   margin: auto;
+   width: 50%;
+   padding: 10px;
+}
+.invert{
+    -webkit-filter: invert(100%);
+}
+
+
+/*animationes*/
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.fast {
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+}
+
+.successfully-saved.hide-opacity{
+    opacity: 0;
+}
+
+.successfully-saved {
+    color: #FFFFFF;
+    text-align: center;
+
+    -webkit-transition: opacity 3s ease-in-out;
+    -moz-transition: opacity 3s ease-in-out;
+    -ms-transition: opacity 3s ease-in-out;
+    -o-transition: opacity 3s ease-in-out;
+     opacity: 1;
+}

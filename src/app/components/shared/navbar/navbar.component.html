@@ -1,0 +1,33 @@
+<!-- *ngIf="isLoggedIn$ | async" -->
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded animated fast fadeIn" *ngIf="isLoggedIn$ | async">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" [routerLink]="['home']"> <img src="assets/img/logo.png" width="88" height="24" alt="" class="img-fluid pull-xs-left" alt="..."></a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active" *ngIf="role=='2'" >
+        <a class="nav-link" style="color:white;" [routerLink]="['files']">Archivos</a>
+      </li>
+      <li class="nav-item" *ngIf="role=='1'" >
+        <a class="nav-link" style="color:white;" [routerLink]="['create-user']" href="#">Crear Usuario</a>
+      </li>
+      <li class="nav-item" *ngIf="role=='1'" >
+        <a class="nav-link" style="color:white;" [routerLink]="['edit-user']" href="#">Editar Usuario</a>
+      </li>
+      <li class="nav-item" *ngIf="role=='2'" >
+        <a class="nav-link" style="color:white;" [routerLink]="['analyze']" href="#">Analizar</a>
+      </li>
+      <li class="nav-item" *ngIf="role=='2'" >
+        <a class="nav-link" style="color:white;" [routerLink]="['reports']" href="#">Reportes</a>
+      </li>
+      <li class="nav-item" *ngIf="role=='2'" >
+        <a class="nav-link" style="color:white;" [routerLink]="['google-drive']" href="#">Google Drive</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+        <a class="navbar-link" style="color:white;" [routerLink]="['edit-profile']" href="#">{{email}}</a>
+      <button mat-button (click)="onLogout()">Logout</button>
+    </form>
+  </div>
+</nav>
