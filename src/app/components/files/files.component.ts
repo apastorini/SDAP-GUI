@@ -63,9 +63,17 @@ export class FilesComponent implements OnInit {
     this.getAllUserFiles();
   }
 
-
   getAllUserFiles(){
     this.fileService.userFilesList(sessionStorage.getItem('email'),sessionStorage.getItem('token'))
+    .subscribe(res => {
+      this.fileList = res['result'];
+    });
+  }
+
+
+  downloadFile(fileID: string ){
+    console.log("entro!!!  " + fileID)
+    this.fileService.downloadFile(sessionStorage.getItem('email'),sessionStorage.getItem('token'), fileID)
     .subscribe(res => {
       this.fileList = res['result'];
     });

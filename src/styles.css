@@ -148,6 +148,14 @@ footer{
     -webkit-filter: invert(100%);
 }
 
+/*scroll*/
+.table-wrapper-scroll-y {
+  display: block;
+  max-height: 300px;
+  overflow-y: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
 
 /*animationes*/
 .animated {
