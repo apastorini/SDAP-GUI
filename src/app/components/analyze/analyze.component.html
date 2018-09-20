@@ -14,26 +14,28 @@
   <span><strong>2 - Elegir archivos para comparar</strong></span>
   <br>
   <br>
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Extension</th>
-        <th scope="col">Tamaño</th>
-        <th scope="col">Seleccionar</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let f of fileList">
-        <th scope="row">#</th>
-        <td>{{f.name}}</td>
-        <td>{{f.extension}}</td>
-        <td>{{f.size}}</td>
-        <td><input type="checkbox"  (change)="onChange(f.idFile, $event.target.checked)"name="{{ f.name }}" type="checkbox" id="{{f.idFile}}"/></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-wrapper-scroll-y">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Extension</th>
+          <th scope="col">Tamaño</th>
+          <th scope="col">Seleccionar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let f of fileList">
+          <th scope="row">#</th>
+          <td>{{f.name}}</td>
+          <td>{{f.extension}}</td>
+          <td>{{f.size}}</td>
+          <td><input type="checkbox"  (change)="onChange(f.idFile, $event.target.checked)"name="{{ f.name }}" type="checkbox" id="{{f.idFile}}"/></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <form action="action_page.php">
       <div class="container">
