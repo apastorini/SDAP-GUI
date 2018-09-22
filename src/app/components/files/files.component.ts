@@ -4,6 +4,7 @@ import { FileService } from '../../services/file.service';
 import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { Session } from '../../auth/loginData';
 
+
 @Component({
   selector: 'app-files',
   templateUrl: './files.component.html',
@@ -58,7 +59,6 @@ export class FilesComponent implements OnInit {
       }
   }
 
-
   ngOnInit() {
     this.getAllUserFiles();
   }
@@ -75,7 +75,11 @@ export class FilesComponent implements OnInit {
     console.log("entro!!!  " + fileID)
     this.fileService.downloadFile(sessionStorage.getItem('email'),sessionStorage.getItem('token'), fileID)
     .subscribe(res => {
-      this.fileList = res['result'];
+      console.log("entro!!!  " + res);
+
+      var file = new Blob([res], {type: 'application/pdf'});
+      var fileURL = URL.createObjectURL(file);
+      //console.log("entro!!!  " + JSON.stringify(res));
     });
   }
 

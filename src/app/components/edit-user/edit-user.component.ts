@@ -56,9 +56,6 @@ onSubmit() {
   }
   else{
    this.userService.modifyUser(this.registerForm.value).subscribe(res =>{
-     console.log('FLAG 11')
-     console.log(JSON.stringify(res));
-     console.log(JSON.stringify(res['code']));
      if(true){
        this.router.navigate(['create-user-success']);
      }

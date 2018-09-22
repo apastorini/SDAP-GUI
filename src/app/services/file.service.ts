@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Constants } from '../utils/Constants';
-import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders,HttpParams} from '@angular/common/http';
 import { ErrorHandler } from '../utils/ErrorHandler';
 import { RequestOptions } from '@angular/http';
 import { Session } from '../auth/loginData';
+import { ResponseContentType,RequestMethod } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
@@ -15,8 +16,8 @@ import {URLSearchParams} from '@angular/http';
 export class FileService {
 
   private fileListUrl = Constants.BASE_URL +  'documentController/listUserFiles';
-  private downloadFileUrl = Constants.BASE_URL + 'documentController/download/';
-  private downloadFileUrl2 = Constants.BASE_URL + 'documentController/downloadUserFiles/';
+  //private downloadFileUrl = Constants.BASE_URL + 'documentController/download/';
+  private downloadFileUrl = Constants.BASE_URL + 'documentController/downloadUserFiles/';
 
   //documentController/download/{fileID}/{email}/{token}
   //documentController//downloadUserFiles/{email}/{token}/{fileID}/
@@ -28,14 +29,27 @@ export class FileService {
     );
   }
 
-  public downloadFile(email: string, token: string, fileId: string): Observable<any>{
-  //  console.log("Servicio " +email+token+fileId);
-    let url=this.downloadFileUrl2 + fileId + "/" + email + "/" + token;
-    console.log("Servicio " + url);
-    return this.http.get(url).pipe(
-      catchError(new ErrorHandler().handleError('LoginService', null))
-    );
+
+
+  // public downloadFile(email: string, token: string, fileId: string): Observable<any>{
+  //   let url = this.http.get(this.downloadFileUrl + "?email=" + email + "&token=" + token + "&fileID=" + fileId)
+  //   console.log("url " + JSON.stringify(url))
+  //
+  //   return this.http.get(this.downloadFileUrl + "?email=" + email + "&token=" + token + "&fileID=" + fileId).pipe(
+  //     catchError(new ErrorHandler().handleError('LoginService', null))
+  //   );
+  // }
+
+
+
+  downloadFile(email: string, token: string, fileId: string) { //get file from service
+    let headers = new HttpHeaders();
+    headers = headers.set('Accept', 'application/pdf');
+    let url = this.downloadFileUrl + "?email=" + email + "&token=" + token + "&fileID=" + fileId
+    return this.http.get(url,{ headers: headers, responseType: 'blob' })
   }
+
+
 
 
 
