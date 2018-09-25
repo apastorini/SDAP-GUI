@@ -21,6 +21,7 @@ export class PasswordComponent implements OnInit {
   onSubmitClicked() {
     const payload = new PasswordPayload();
     payload.userEmail = this.userEmail;
+
     this.loginService.recuperarPassword(this.userEmail);
   }
   goToLogin(){

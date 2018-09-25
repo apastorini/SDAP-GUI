@@ -101,7 +101,7 @@ recuperarPassword(eMail: string){
         headers = headers.append('Content-Type', 'text/xml');
         //this.http.post(this.checkUserUrl, user, {responseType: 'text'}).subscribe(respuesta =>this.manageLoginResponse(respuesta));
         this.http.get(this.passwordByEmail)
-          .subscribe(res => console.log( "PASS "+ JSON.stringify(res)))
+          .subscribe(res => alert("eMail Enviado"))
         //localStorage.setItem('userID',currentUser.userID);
   }
 }
