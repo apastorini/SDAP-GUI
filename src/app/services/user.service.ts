@@ -32,10 +32,12 @@ export class UserService {
   public createUser(user: User){
 
     if (user.name !== '' && user.password !== '') { // {3}
+
         let headers = new HttpHeaders();
         headers = headers.set('Content-Type', 'application/json; charset=utf-8');
         headers.append('Access-Control-Allow-Origin','*');
         console.log('headers' + headers.get('Content-Type'));
+        console.log('User ' + JSON.stringify(user));
         return this.http.post(this.createUserUrl+"?email=" + sessionStorage.getItem('email') + "&token=" + sessionStorage.getItem('token'), user, {headers: headers})
         //this.http.post(this.createUserUrl, user, {headers: headers})
            //.subscribe(respuesta =>JSON.stringify(console.log(respuesta)))

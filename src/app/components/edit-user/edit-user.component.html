@@ -9,6 +9,7 @@
 
 <br>
 <br>
+
 <form class="user-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="jumbotron animated fast fadeIn">
       <div class="form-group">
@@ -36,15 +37,15 @@
                 </div>
             </div>
         <div class="form-group">
-            <input type="text" formControlName="gmail" placeholder="Gmail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.gmail.errors }" />
-            <div *ngIf="submitted && f.gmail.errors" class="invalid-feedback">
-
-                <div class="alert alert-danger" *ngIf="f.gmail.errors.email">Gmail must be a valid email address</div>
-                </div>
-            </div>
-        <div class="form-group">
-            Habilitar usuario <input type="checkbox" [checked]="enable"  (change)="$event.target.checked" />
+            <input type="text" formControlName="googleMail" placeholder="Gmail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.googleMail.errors }" />
+            <div *ngIf="submitted && f.googleMail.errors" class="invalid-feedback">
+              <div class="alert alert-danger" *ngIf="f.googleMail.errors.email">Gmail must be a valid email address</div>
+              </div>
         </div>
+
+        <!-- <div class="form-group">
+            Habilitar usuario <input type="checkbox" formControlName="enablecheck" name="enablecheck"  (change)="$event.target.checked" />
+        </div> -->
 
         <br>
         <div class="form-group">

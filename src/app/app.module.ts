@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FileSelectDirective } from 'ng2-file-upload';
 
+
 //Components
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { HomeComponent } from './components/home/home.component';
+//import { ConfirmationDialogComponent } from './components/shared/confirmation-dialog/confirmation-dialog.component';
 
 //Servicios
 import { LoginService } from './services/login.service';

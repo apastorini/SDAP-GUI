@@ -21,6 +21,7 @@ export class EditUserComponent implements OnInit {
   optionSelected: any;
   enable:boolean;
   private formSubmitAttempt: boolean; // {2}
+  private isChecked: boolean
 
   constructor(
     private userService: UserService,
@@ -37,7 +38,7 @@ export class EditUserComponent implements OnInit {
     this.registerForm = this.fb.group({     // {5}
     name: ['', Validators.required],
     secondName: ['', Validators.required],
-    gmail: ['', Validators.email],
+    googleMail: ['', Validators.email],
     email: ['',
     [Validators.required,Validators.email]],
     //passwordGoogle:['Mensaje requerido', Validators.required],
@@ -55,15 +56,19 @@ onSubmit() {
     return;
   }
   else{
-   this.userService.modifyUser(this.registerForm.value).subscribe(res =>{
+    if(confirm("Esta seguro que quiere modificar el usuario")) {
+    this.userService.modifyUser(this.registerForm.value).subscribe(res =>{
      if(true){
-       this.router.navigate(['create-user-success']);
+       this.getAllUsers();
+       alert("Usuario modificado")
      }
      else{
        //  alert("Error al crear usuario")
        }
      })
- }
+
+   }
+ }
 }
 
 getAllUsers(){
@@ -74,15 +79,21 @@ getAllUsers(){
 }
 
   onOptionSelected(event){
+    console.log("cheked :  "+ this.isChecked);
      console.log(event); //option value will be sent as event
      this.optionSelected = event.target.value;
-     console.log("REtencion "+ event.target.value);
+     console.log("REtencion "+ event.target.value.enable);
+    //this.isChecked=this.fileList[event.target.value].enable
+
+    console.log("cheked :  "+ this.isChecked);
 
      this.registerForm.setValue({
         name: this.fileList[event.target.value].name,
-        gmail: this.fileList[event.target.value].googleMail,
+        googleMail: this.fileList[event.target.value].googleMail,
         secondName: this.fileList[event.target.value].secondName,
         email: this.fileList[event.target.value].email,
+        //enablecheck: this.fileList[event.target.value].enable
      });
+
   }
 }

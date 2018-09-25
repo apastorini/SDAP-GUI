@@ -35,7 +35,7 @@ export class CreateUserComponent implements OnInit {
     this.registerForm = this.fb.group({     // {5}
       name: ['', Validators.required],
       secondName: ['', Validators.required],
-      googleMail: ['', Validators.email],
+      gmail: ['', Validators.email],
       email: ['',
       [Validators.required,Validators.email]],
       passwordGoogle:['Mensaje requerido', Validators.required],

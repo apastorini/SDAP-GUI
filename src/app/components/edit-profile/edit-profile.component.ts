@@ -54,12 +54,12 @@ export class EditProfileComponent implements OnInit {
    
           // stop here if form is invalid
           if (this.registerForm.invalid) {
-        console.log('FLAG 10')
+            console.log('alert("Error al crear usuario")')
               return;
           }
         else{
 
-          this.userService.createUser(this.registerForm.value).subscribe(res =>{
+          this.userService.modifyUser(this.registerForm.value).subscribe(res =>{
               console.log('FLAG 11')
             console.log(JSON.stringify(res));
             console.log(JSON.stringify(res['code']));
