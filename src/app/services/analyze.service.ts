@@ -21,8 +21,6 @@ export class AnalyzeService {
 
   public iniciarAnalisis(): Observable<any>{
 
-    
-
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
     let body = {
@@ -47,9 +45,8 @@ export class AnalyzeService {
       "initialDate": "2018-09-04T18:33:45.716Z",
       "terminado": true
     }
-
       return this.http.post(this.iniciarAnalisisUrl,body,{headers: headers});
-
+      
   }
 
 }

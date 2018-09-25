@@ -16,7 +16,7 @@ import {URLSearchParams} from '@angular/http';
 export class FileService {
 
   private fileListUrl = Constants.BASE_URL +  'documentController/listUserFiles';
-  //private downloadFileUrl = Constants.BASE_URL + 'documentController/download/';
+  private sharedFilesUrl = Constants.BASE_URL + 'documentController/listSharedFiles/';
   private downloadFileUrl = Constants.BASE_URL + 'documentController/downloadUserFiles/';
 
   //documentController/download/{fileID}/{email}/{token}
@@ -25,6 +25,11 @@ export class FileService {
 
   public userFilesList(email: string, token: string): Observable<any>{
     return this.http.post(this.fileListUrl + "?email=" + email + "&token=" + token , {responseType: 'text'}).pipe(
+      catchError(new ErrorHandler().handleError('LoginService', null))
+    );
+  }
+  public getSharedFiles(email: string, token: string): Observable<any>{
+    return this.http.post(this.sharedFilesUrl + "?email=" + email + "&token=" + token , {responseType: 'text'}).pipe(
       catchError(new ErrorHandler().handleError('LoginService', null))
     );
   }

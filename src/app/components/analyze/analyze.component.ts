@@ -17,8 +17,9 @@ export class AnalyzeComponent implements OnInit {
    fileList = [];
    fileToAnalize:string;
    filesToCompare = [];
+   sharedFileList = [];
 
-   constructor( 
+   constructor(
     private analyzeService: AnalyzeService,
     private fileService: FileService,
     private http: HttpClient,
@@ -29,6 +30,7 @@ export class AnalyzeComponent implements OnInit {
   doAnalysis(){
           this.analyzeService.iniciarAnalisis().subscribe(res=>{
             console.log("ANALISIS   " + JSON.stringify(res));
+
             alert("Analysis en proceso")
           });
   }
@@ -51,6 +53,7 @@ export class AnalyzeComponent implements OnInit {
   ngOnInit() {
     this.fileToAnalize = '-1';
     this.getAllUserFiles();
+    this.getSharedFiles();
   }
 
 
@@ -77,6 +80,14 @@ export class AnalyzeComponent implements OnInit {
     .subscribe(res => {
       this.fileList =  res['result'];
       console.log("lista files " + JSON.stringify(this.fileList));
+    });
+  }
+
+  getSharedFiles(){
+    this.fileService.getSharedFiles(sessionStorage.getItem('email'),sessionStorage.getItem('token'))
+    .subscribe(res => {
+      this.sharedFileList =  res['result'];
+      console.log("lista shared" + JSON.stringify(this.sharedFileList));
     });
   }
 
