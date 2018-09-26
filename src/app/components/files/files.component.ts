@@ -86,27 +86,23 @@ export class FilesComponent implements OnInit {
   }
 
   showFile(blob){
-    // It is necessary to create a new blob object with mime-type explicitly set
-    // otherwise only Chrome works like it should
-    var newBlob = new Blob([blob], {type: "application/pdf"})
-    console.log("size!!!  " + newBlob.size);
+    console.log("size!!!  " + blob.size);
 
     // IE doesn't allow using a blob object directly as link href
     // instead it is necessary to use msSaveOrOpenBlob
     if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-      window.navigator.msSaveOrOpenBlob(newBlob);
+      window.navigator.msSaveOrOpenBlob(blob);
       return;
     }
 
     // For other browsers:
     // Create a link pointing to the ObjectURL containing the blob.
-    const data = window.URL.createObjectURL(newBlob);
+    const data = window.URL.createObjectURL(blob);
     console.log("data windows url !!!  " + JSON.stringify(data));
     var link = document.createElement('a');
     link.href = data;
     link.download="file.pdf";
     console.log("data file url !!!  " + JSON.stringify(link));
-
     link.click();
 
 
