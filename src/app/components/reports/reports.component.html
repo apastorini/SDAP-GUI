@@ -1,3 +1,34 @@
-<p>
-  reports works!
-</p>
+<h1 class="animated fast fadeIn display-3"> Mis Reportes</h1>
+  <br>
+<div class="table-wrapper-scroll-y">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Documento</th>
+        <th scope="col">Corpus</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Inicio</th>
+        <th scope="col">resultado</th>
+        <th scope="col">Finaliza</th>
+        <th scope="col">Descargar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of reportsList">
+        <th scope="row">#</th>
+        <td>{{report.nombreArchivoAComparar}}</td>
+        <td>{{report.nombreArchivosCorpus}}</td>
+        <td>{{report.terminado}}</td>
+        <td>{{report.fechaPedidoAnalisis}}</td>
+        <td>{{report.resultado}}</td>
+        <td>{{report.fechaFinaAnalisis}}</td>
+        <td>
+          <a id="{{report.idAnalisis}}" (click)="downloadReport(report.idAnalisis)">
+            <img src="assets/img/download.png" alt="Descargar Reporte" style="width:20px;height:20px;border:0;">
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

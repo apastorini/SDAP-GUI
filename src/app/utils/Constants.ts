@@ -3,6 +3,7 @@ export class Constants{
   //static BASE_URL:string = "http://localhost:8080/";
 }
 
+//BUILD_ID=dontKillMe nohup ng serve --host 0.0.0.0 --port 4200 --public-host ec2-18-215-158-201.compute-1.amazonaws.com &
 
 //http://ec2-52-90-154-102.compute-1.amazonaws.com:8888/documentController/downloadUserFiles?email=sdptesttutor@gmail.com&token=7Ybft&fileID=11
 ///loginController/isUsedId

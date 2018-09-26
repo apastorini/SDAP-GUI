@@ -28,7 +28,7 @@ export class AnalyzeComponent implements OnInit {
     private authService: AuthService) { }
 
   doAnalysis(){
-          this.analyzeService.iniciarAnalisis().subscribe(res=>{
+          this.analyzeService.iniciarAnalisis(this.fileToAnalize,this.filesToCompare).subscribe(res=>{
             console.log("ANALISIS   " + JSON.stringify(res));
 
             alert("Analysis en proceso")
