@@ -7,6 +7,8 @@ import { FormGroup, FormBuilder, Validators, FormControl, AsyncValidatorFn, Abst
 import { AuthService } from '../../auth/auth.service';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from '../../utils/modal/modal.component';
 
 @Component({
   selector: 'app-analyze',
@@ -25,27 +27,33 @@ export class AnalyzeComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private fb: FormBuilder,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private modalService: NgbModal
+  ) { }
 
   doAnalysis(){
           this.analyzeService.iniciarAnalisis(this.fileToAnalize,this.filesToCompare).subscribe(res=>{
             console.log("ANALISIS   " + JSON.stringify(res));
+            this.openModal("Analisis Iniciado","Podes ver el estado de este y otros analisis en la pestaña Reportes.","assets/img/green.png")
 
-            alert("Analysis en proceso")
           });
   }
 
   onSubmit(){
     console.log("polo   " + this.fileToAnalize);
     if(this.fileToAnalize=="-1"){
+      this.openModal("No se inició el analisis","Seleccione Archivo a analizar.","assets/img/red.png")
+
       alert("Seleccione Archivo a analizar");
     }else
     {
       console.log("polo 2  " + this.filesToCompare.length);
       if(this.filesToCompare.length == 0){
-          alert("Seleccione 1 o mas archivos de la lista para comparar.");
+        this.openModal("No se inició el analisis","Seleccione 1 o mas archivos de la lista para comparar.","assets/img/red.png")
+
       }else{
           this.doAnalysis();
+
       }
     }
   }
@@ -88,6 +96,19 @@ export class AnalyzeComponent implements OnInit {
     .subscribe(res => {
       this.sharedFileList =  res['result'];
       console.log("lista shared" + JSON.stringify(this.sharedFileList));
+    });
+  }
+
+  openModal(title,text,type) {
+    const modalRef = this.modalService.open(ModalComponent);
+    modalRef.componentInstance.title = title;
+    modalRef.componentInstance.text = text;
+    modalRef.componentInstance.type = type;
+
+    modalRef.result.then((result) => {
+      console.log("resultados del modal  "+result);
+    }).catch((error) => {
+      console.log(error);
     });
   }
 

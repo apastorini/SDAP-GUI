@@ -40,4 +40,8 @@ const APP_ROUTES: Routes = [
   { path: '**', pathMatch: 'full', redirectTo: '' }
 ];
 
+
+//const config = {useHash:true,enableTracing:true};
+
+
 export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES);

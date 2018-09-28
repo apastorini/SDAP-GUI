@@ -9,6 +9,7 @@
         <th scope="col">Extension</th>
         <th scope="col">Tamaño</th>
         <th scope="col">Descargar</th>
+        <th scope="col">Eliminar</th>
       </tr>
     </thead>
     <tbody>
@@ -20,6 +21,11 @@
         <td>
           <a id="{{file.idFile}}" (click)="downloadFile(file.idFile)">
             <img src="assets/img/download.png" alt="Descargar archivo" style="width:20px;height:20px;border:0;">
+          </a>
+        </td>
+        <td>
+          <a id="{{file.idFile}}" (click)="deleteFile(file.idFile)">
+            <img src="assets/img/delete.svg" alt="Eliminar archivo" style="width:20px;height:20px;border:0;">
           </a>
         </td>
       </tr>
@@ -35,7 +41,7 @@
 
 <div class="jumbotron jumbotron-fluid animated fadeIn ">
   <input type="file" (change)=onFileSelected($event)>
-  <button type="button" (click)="onUpload()">Subir Archivo</button>
+  <button type="button" [disabled]="isPending" (click)="onUpload()">Subir Archivo</button>
   <span ng-if="porcentaje != 0">{{porcentaje}}</span>
 
 </div>

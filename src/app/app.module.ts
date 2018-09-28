@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FileSelectDirective } from 'ng2-file-upload';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 //Components
@@ -31,6 +32,7 @@ import { AnalyzeService } from './services/analyze.service';
 import { UserService } from './services/user.service';
 import { FileService } from './services/file.service';
 import { StorageService } from './auth/storageService';
+import { HomeService } from './services/home.service';
 
 //Routing
 import { APP_ROUTING } from './app.routes'
@@ -44,6 +46,7 @@ import { UserCreatedComponent } from './components/user-created/user-created.com
 import { ReportsComponent } from './components/reports/reports.component';
 import { GoogleDriveComponent } from './components/google-drive/google-drive.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { ModalComponent } from './utils/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,8 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     UserCreatedComponent,
     ReportsComponent,
     GoogleDriveComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +79,8 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     FormsModule,
     APP_ROUTING,
     //AppMaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule.forRoot()
   ],
   providers: [
     AuthenticationService,
@@ -85,7 +90,12 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     UserService,
     FileService,
     AnalyzeService,
-    StorageService],
-  bootstrap: [AppComponent]
+    StorageService,
+    HomeService
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [
+  ModalComponent
+]
 })
 export class AppModule { }

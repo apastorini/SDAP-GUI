@@ -24,6 +24,7 @@ export class FileService {
   constructor(private http:HttpClient) { }
 
   public userFilesList(email: string, token: string): Observable<any>{
+    console.log("console log: " + this.fileListUrl);
     return this.http.post(this.fileListUrl + "?email=" + email + "&token=" + token , {responseType: 'text'}).pipe(
       catchError(new ErrorHandler().handleError('LoginService', null))
     );

@@ -20,9 +20,9 @@
         <td>{{report.nombreArchivoAComparar}}</td>
         <td>{{report.nombreArchivosCorpus}}</td>
         <td>{{report.terminado}}</td>
-        <td>{{report.fechaPedidoAnalisis}}</td>
+        <td>{{report.fechaPedidoAnalisis | date}}</td>
         <td>{{report.resultado}}</td>
-        <td>{{report.fechaFinaAnalisis}}</td>
+        <td>{{report.fechaFinaAnalisis | date}}</td>
         <td>
           <a id="{{report.idAnalisis}}" (click)="downloadReport(report.idAnalisis)">
             <img src="assets/img/download.png" alt="Descargar Reporte" style="width:20px;height:20px;border:0;">

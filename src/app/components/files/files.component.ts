@@ -3,6 +3,8 @@ import { Constants } from '../../utils/Constants';
 import { FileService } from '../../services/file.service';
 import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { Session } from '../../auth/loginData';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from '../../utils/modal/modal.component';
 
 
 @Component({
@@ -16,10 +18,12 @@ export class FilesComponent implements OnInit {
   porcentaje = '';
   public uploadFile = Constants.BASE_URL +  'documentController/addFileToUser';
   selectedFile: File = null;
+  isPending = false;
 
   constructor(
     private http: HttpClient,
-    private fileService: FileService
+    private fileService: FileService,
+    private modalService: NgbModal
   ){}
 
   onFileSelected(event){
@@ -28,11 +32,14 @@ export class FilesComponent implements OnInit {
   }
 
   onUpload(){
+    this.isPending = true;
+    console.log("hola"+ this.isPending)
     if(this.selectedFile == null){
-      alert('Archivo no seleccionado');
-
+      this.openModal("Archivo no seleccionado", "Seleccione archivo a subir e intentelo nuevamente","assets/img/red.png");
     }
     else{
+
+
       const fd = new FormData();
 
       fd.append('file',this.selectedFile, this.selectedFile.name)
@@ -51,12 +58,15 @@ export class FilesComponent implements OnInit {
               console.log("EVENT " + JSON.stringify(event));
               console.log("EVENT " + JSON.stringify(HttpEventType.Response));
               if(HttpEventType.Response == 4){
-                alert('Archivo Subido Exitosamente');
+                this.openModal("Archivo subido", "puedes descargarlo o eliminarlo desde la lista de archivos","assets/img/green.png");
+              //  alert('Archivo Subido Exitosamente');
               }
           }
 
         });
       }
+      console.log("chau  "+ this.isPending)
+      this.isPending = false;
   }
 
   ngOnInit() {
@@ -66,6 +76,7 @@ export class FilesComponent implements OnInit {
   getAllUserFiles(){
     this.fileService.userFilesList(sessionStorage.getItem('email'),sessionStorage.getItem('token'))
     .subscribe(res => {
+      console.log("respuesta: " + JSON.stringify(res));
       this.fileList = res['result'];
     });
   }
@@ -83,6 +94,10 @@ export class FilesComponent implements OnInit {
 
     });
 
+  }
+
+  deleteFile(fileID: string){
+    this.openModal("NO SE ELIMINO", "FUNCION NO IMPLEMENTADA,","assets/img/red.png");
   }
 
   showFile(blob){
@@ -104,8 +119,20 @@ export class FilesComponent implements OnInit {
     link.download="file.pdf";
     console.log("data file url !!!  " + JSON.stringify(link));
     link.click();
+  }
 
 
+  openModal(title,text,type) {
+    const modalRef = this.modalService.open(ModalComponent);
+    modalRef.componentInstance.title = title;
+    modalRef.componentInstance.text = text;
+    modalRef.componentInstance.type = type;
+
+    modalRef.result.then((result) => {
+      console.log("resultados del modal  "+result);
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
 
