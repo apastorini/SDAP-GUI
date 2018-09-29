@@ -7,7 +7,6 @@
         <th scope="col">#</th>
         <th scope="col">Documento</th>
         <th scope="col">Corpus</th>
-        <th scope="col">Estado</th>
         <th scope="col">Inicio</th>
         <th scope="col">resultado</th>
         <th scope="col">Finaliza</th>
@@ -19,12 +18,11 @@
         <th scope="row">#</th>
         <td>{{report.nombreArchivoAComparar}}</td>
         <td>{{report.nombreArchivosCorpus}}</td>
-        <td>{{report.terminado}}</td>
         <td>{{report.fechaPedidoAnalisis | date}}</td>
         <td>{{report.resultado}}</td>
         <td>{{report.fechaFinaAnalisis | date}}</td>
         <td>
-          <a id="{{report.idAnalisis}}" (click)="downloadReport(report.idAnalisis)">
+          <a id="{{report.idAnalisis}}"  *ngIf="report.fechaFinaAnalisis != null" (click)="downloadReport(report.idAnalisis)">
             <img src="assets/img/download.png" alt="Descargar Reporte" style="width:20px;height:20px;border:0;">
           </a>
         </td>
@@ -32,3 +30,5 @@
     </tbody>
   </table>
 </div>
+<br>
+<br>

@@ -7,6 +7,8 @@ import { FormGroup, FormBuilder, Validators, FormControl, AsyncValidatorFn, Abst
 import { AuthService } from '../../auth/auth.service';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from '../../utils/modal/modal.component';
 
  //[ existingMobileNumberValidator(this.userService),
 @Component({
@@ -21,6 +23,7 @@ export class CreateUserComponent implements OnInit {
   emailExists:boolean;
   successfullySaved = false;
   errorSaved = false;
+  buttonDisabled: boolean = false;
   private formSubmitAttempt: boolean; // {2}
 
   constructor(
@@ -28,17 +31,17 @@ export class CreateUserComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private fb: FormBuilder,
-    private authService: AuthService)
+    private authService: AuthService,
+    private modalService: NgbModal
+  )
     { }
 
   ngOnInit() {
     this.registerForm = this.fb.group({     // {5}
       name: ['', Validators.required],
       secondName: ['', Validators.required],
-      gmail: ['', Validators.email],
       email: ['',
       [Validators.required,Validators.email]],
-      passwordGoogle:['Mensaje requerido', Validators.required],
       password:['',[
         Validators.required,
         Validators.minLength(6)]],
@@ -61,14 +64,21 @@ export class CreateUserComponent implements OnInit {
         else{
 
           this.userService.createUser(this.registerForm.value).subscribe(res =>{
-            //console.log(JSON.stringify(res['code']));
-            if(res['code']!=0){
+            console.log("DATOOOOS   " + JSON.stringify(res) + " +++++++");
+            console.log("DATOOOOS   " + JSON.stringify(res['code']));
+            console.log(typeof res['code']);
+
+
+            if(res['code']==0){
               this.successfullySaved = true;
-              alert("Usuario creado Exitosamente")
+                this.openModal("Usuario creado", "","assets/img/green.png");
+                this.submitted = false;
+                this.registerForm.reset();
+              //alert("")
             }
             else{
               this.errorSaved = true;
-              alert("Error al crear usuario")
+              this.openModal("Error al crear usuario", "","assets/img/red.png");
             //  alert("Error al crear usuario")
             }
           })
@@ -91,6 +101,20 @@ export class CreateUserComponent implements OnInit {
     //console.log(value);
     this.registerForm.controls['email'].setErrors({'incorrect': value});
   }
+
+  openModal(title,text,type) {
+    const modalRef = this.modalService.open(ModalComponent);
+    modalRef.componentInstance.title = title;
+    modalRef.componentInstance.text = text;
+    modalRef.componentInstance.type = type;
+
+    modalRef.result.then((result) => {
+      console.log("resultados del modal  "+result);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
 
 
 

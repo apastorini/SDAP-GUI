@@ -18,7 +18,7 @@ export class FilesComponent implements OnInit {
   porcentaje = '';
   public uploadFile = Constants.BASE_URL +  'documentController/addFileToUser';
   selectedFile: File = null;
-  isPending = false;
+  buttonDisabled: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -32,16 +32,13 @@ export class FilesComponent implements OnInit {
   }
 
   onUpload(){
-    this.isPending = true;
-    console.log("hola"+ this.isPending)
+    console.log("hola"+ this.buttonDisabled)
     if(this.selectedFile == null){
       this.openModal("Archivo no seleccionado", "Seleccione archivo a subir e intentelo nuevamente","assets/img/red.png");
     }
     else{
-
-
+      this.buttonDisabled=true;
       const fd = new FormData();
-
       fd.append('file',this.selectedFile, this.selectedFile.name)
       this.http.post(this.uploadFile + "?email=" + sessionStorage.email + "&token=" + sessionStorage.token ,fd,{
         reportProgress: true,
@@ -53,6 +50,7 @@ export class FilesComponent implements OnInit {
             console.log('Upload Progress: '+ this.porcentaje)
 
           }else if(event.type === HttpEventType.Response){
+            this.buttonDisabled = false;
               this.getAllUserFiles();
 
               console.log("EVENT " + JSON.stringify(event));
@@ -65,8 +63,7 @@ export class FilesComponent implements OnInit {
 
         });
       }
-      console.log("chau  "+ this.isPending)
-      this.isPending = false;
+      console.log("chau  "+ this.buttonDisabled)
   }
 
   ngOnInit() {

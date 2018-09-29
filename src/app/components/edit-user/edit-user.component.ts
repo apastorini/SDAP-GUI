@@ -7,6 +7,8 @@ import { FormGroup, FormBuilder, Validators, FormControl, AsyncValidatorFn, Abst
 import { AuthService } from '../../auth/auth.service';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from '../../utils/modal/modal.component';
 
 @Component({
   selector: 'app-edit-user',
@@ -28,7 +30,9 @@ export class EditUserComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private fb: FormBuilder,
-    private authService: AuthService) {}
+    private authService: AuthService,
+    private modalService: NgbModal
+  ) {}
 
     // convenience getter for easy access to form fields
    get f() { return this.registerForm.controls; }
@@ -38,7 +42,6 @@ export class EditUserComponent implements OnInit {
     this.registerForm = this.fb.group({     // {5}
     name: ['', Validators.required],
     secondName: ['', Validators.required],
-    googleMail: ['', Validators.email],
     email: ['',
     [Validators.required,Validators.email]],
     //passwordGoogle:['Mensaje requerido', Validators.required],
@@ -60,7 +63,7 @@ onSubmit() {
     this.userService.modifyUser(this.registerForm.value).subscribe(res =>{
      if(true){
        this.getAllUsers();
-       alert("Usuario modificado")
+        this.openModal("Usuario modificado", "","assets/img/green.png");
      }
      else{
        //  alert("Error al crear usuario")
@@ -89,11 +92,25 @@ getAllUsers(){
 
      this.registerForm.setValue({
         name: this.fileList[event.target.value].name,
-        googleMail: this.fileList[event.target.value].googleMail,
         secondName: this.fileList[event.target.value].secondName,
         email: this.fileList[event.target.value].email,
         //enablecheck: this.fileList[event.target.value].enable
      });
 
   }
+
+  openModal(title,text,type) {
+    const modalRef = this.modalService.open(ModalComponent);
+    modalRef.componentInstance.title = title;
+    modalRef.componentInstance.text = text;
+    modalRef.componentInstance.type = type;
+
+    modalRef.result.then((result) => {
+      console.log("resultados del modal  "+result);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+
 }

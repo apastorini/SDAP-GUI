@@ -19,6 +19,9 @@ margin-top: 100px;
 .nav-item{
     color:red;
 }
+.email-link{
+  margin-right: 10px;
+}
 
 .form-control{
   width: 250px

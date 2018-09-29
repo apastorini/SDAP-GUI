@@ -1,17 +1,23 @@
 <h1 class="animated fast fadeIn display-3">Bienvenido</h1>
 <hr>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<div *ngIf="role=='1'" class="jumbotron animated fast fadeIn">
+  <h2 >{{cantUsuariosDelSistema}}</h2>
+  <br>
+  <br>
+  <h2 >{{cantArchivosCarpetaCompartida}}</h2>
+  <br>
+  <br>
+  <h2>{{cantArchivosEnElSistema}}</h2>
+</div>
+<div *ngIf="role=='2'" class="jumbotron animated fast fadeIn">
+  <h2 >{{cantArchivos}}</h2>
+  <br>
+  <br>
+  <h2 >{{cantAnalisis}}</h2>
+  <br>
+  <br>
+  <h2>{{cantAnalisisTerminados}}</h2>
+</div>
 <br>
 <br>
 <br>

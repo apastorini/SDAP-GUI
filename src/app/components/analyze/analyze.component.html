@@ -68,7 +68,7 @@
   <form action="action_page.php">
       <div class="container">
 
-        <button type="submit" (click)="onSubmit()">Analizar</button>
+        <button type="submit" [disabled]="buttonDisabled" (click)="onSubmit()">Analizar</button>
 
         <br>
       </div>

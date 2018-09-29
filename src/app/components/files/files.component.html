@@ -40,8 +40,10 @@
 <br>
 
 <div class="jumbotron jumbotron-fluid animated fadeIn ">
+  {{buttonDisabled}}
+
   <input type="file" (change)=onFileSelected($event)>
-  <button type="button" [disabled]="isPending" (click)="onUpload()">Subir Archivo</button>
+  <button type="button" [disabled]="buttonDisabled" (click)="onUpload()">Subir Archivo</button>
   <span ng-if="porcentaje != 0">{{porcentaje}}</span>
 
 </div>

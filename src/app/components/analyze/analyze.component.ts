@@ -20,6 +20,8 @@ export class AnalyzeComponent implements OnInit {
    fileToAnalize:string;
    filesToCompare = [];
    sharedFileList = [];
+   buttonDisabled : boolean = false;
+
 
    constructor(
     private analyzeService: AnalyzeService,
@@ -32,7 +34,9 @@ export class AnalyzeComponent implements OnInit {
   ) { }
 
   doAnalysis(){
+
           this.analyzeService.iniciarAnalisis(this.fileToAnalize,this.filesToCompare).subscribe(res=>{
+            this.buttonDisabled = false;
             console.log("ANALISIS   " + JSON.stringify(res));
             this.openModal("Analisis Iniciado","Podes ver el estado de este y otros analisis en la pestaña Reportes.","assets/img/green.png")
 
@@ -43,8 +47,6 @@ export class AnalyzeComponent implements OnInit {
     console.log("polo   " + this.fileToAnalize);
     if(this.fileToAnalize=="-1"){
       this.openModal("No se inició el analisis","Seleccione Archivo a analizar.","assets/img/red.png")
-
-      alert("Seleccione Archivo a analizar");
     }else
     {
       console.log("polo 2  " + this.filesToCompare.length);
@@ -52,6 +54,7 @@ export class AnalyzeComponent implements OnInit {
         this.openModal("No se inició el analisis","Seleccione 1 o mas archivos de la lista para comparar.","assets/img/red.png")
 
       }else{
+          this.buttonDisabled = true;
           this.doAnalysis();
 
       }
