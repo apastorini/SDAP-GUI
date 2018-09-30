@@ -13,7 +13,18 @@ margin-top: 100px;
       box-shadow: 0 8px 6px -6px #999;
       background-color: #064598;
       color:#ffffff;
+}
 
+.btn-outline-primary{color:white;background-color:#064598;background-image:none;border-color:white}
+.btn-outline-primary:hover{color:white;background-color:midnightblue;border-color:white}
+.btn-outline-primary:focus,.btn-outline-primary.focus{box-shadow:0 0 0 .2rem rgba(0,128,128,0.5)}
+
+/*.btn-outline-primary{color:teal;background-color:transparent;background-image:none;border-color:teal}
+.btn-outline-primary:hover{color:#222;background-color:#009a9a;border-color:teal}
+.btn-outline-primary:focus,.btn-outline-primary.focus{box-shadow:0 0 0 .2rem rgba(0,128,128,0.5)}*/
+
+.logout-btn{
+  width: 120px
 }
 
 .nav-item{
@@ -26,6 +37,7 @@ margin-top: 100px;
 .form-control{
   width: 250px
 }
+
 
 .login-box{
    position: absolute;

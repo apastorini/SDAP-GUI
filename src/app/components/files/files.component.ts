@@ -88,13 +88,18 @@ export class FilesComponent implements OnInit {
       var file = new Blob([res], {type: 'application/pdf'});
 
       this.showFile(file)
-
     });
-
   }
 
+
   deleteFile(fileID: string){
-    this.openModal("NO SE ELIMINO", "FUNCION NO IMPLEMENTADA,","assets/img/red.png");
+
+    this.fileService.deleteFile(sessionStorage.getItem('email'),sessionStorage.getItem('token'), fileID)
+    .subscribe(res =>{
+      this.getAllUserFiles();
+      console.log("OT " + JSON.stringify(res));
+      //this.openModal("NO SE ELIMINO", "FUNCION NO IMPLEMENTADA,","assets/img/red.png");
+    });
   }
 
   showFile(blob){
