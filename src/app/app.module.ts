@@ -22,6 +22,7 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { HomeComponent } from './components/home/home.component';
+import { WebmasterValidationComponent } from './webmaster-validation/webmaster-validation.component';
 //import { ConfirmationDialogComponent } from './components/shared/confirmation-dialog/confirmation-dialog.component';
 
 //Servicios
@@ -59,6 +60,7 @@ import {
     GoogleApiConfig
 } from "ng-gapi";
 
+
 let gapiClientConfig: NgGapiClientConfig = {
     client_id: "201920202566-uc6jqfou1kv5g7cq6hljg27rr02l1era.apps.googleusercontent.com",
     discoveryDocs: ["https://analyticsreporting.googleapis.com/$discovery/rest?version=v4"],
@@ -91,7 +93,8 @@ let gapiClientConfig: NgGapiClientConfig = {
     ReportsComponent,
     GoogleDriveComponent,
     EditProfileComponent,
-    ModalComponent
+    ModalComponent,
+    WebmasterValidationComponent
   ],
   imports: [
     BrowserModule,

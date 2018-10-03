@@ -14,6 +14,7 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { GoogleDriveComponent } from './components/google-drive/google-drive.component';
 import { AuthGuard } from './auth/auth.guard';
 import { CreateUserSuccessComponent } from './components/create-user-success/create-user-success.component'
+import { WebmasterValidationComponent } from './webmaster-validation/webmaster-validation.component';
 
 
 const APP_ROUTES: Routes = [
@@ -37,7 +38,8 @@ const APP_ROUTES: Routes = [
   { path: 'user-list', component: UserListComponent, canActivate: [AuthGuard]},
   { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard]},
   { path: 'google-drive', component: GoogleDriveComponent, canActivate: [AuthGuard]},
-  { path: '**', pathMatch: 'full', redirectTo: '' }
+  { path: '**', pathMatch: 'full', redirectTo: '' },
+  { path: 'google273105c2716c4f2f.html', component: WebmasterValidationComponent }
 ];
 
 
