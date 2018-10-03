@@ -17,9 +17,8 @@ export class HomeService {
 
 
 getDashBoard(email: string, token: string): Observable<any>{
-  return this.http.post(this.dashBoardUrl + "?email=" + email + "&token=" + token , {responseType: 'text'}).pipe(
-    catchError(new ErrorHandler().handleError('LoginService', null))
-  );
+  return this.http.post(this.dashBoardUrl + "?email=" + email + "&token=" + token , {responseType: 'text'})
+  //.pipe(catchError(new ErrorHandler().handleError('LoginService', null)));
 }
 
 }

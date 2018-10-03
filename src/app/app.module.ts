@@ -33,6 +33,8 @@ import { UserService } from './services/user.service';
 import { FileService } from './services/file.service';
 import { StorageService } from './auth/storageService';
 import { HomeService } from './services/home.service';
+import { DriveResource } from './services/drive-resource.service';
+import { GoogleDriveService } from './services/google-drive.service';
 
 //Routing
 import { APP_ROUTING } from './app.routes'
@@ -47,6 +49,25 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { GoogleDriveComponent } from './components/google-drive/google-drive.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ModalComponent } from './utils/modal/modal.component';
+
+import {
+    GoogleApiModule,
+    GoogleApiService,
+    GoogleAuthService,
+    NgGapiClientConfig,
+    NG_GAPI_CONFIG,
+    GoogleApiConfig
+} from "ng-gapi";
+
+let gapiClientConfig: NgGapiClientConfig = {
+    client_id: "201920202566-uc6jqfou1kv5g7cq6hljg27rr02l1era.apps.googleusercontent.com",
+    discoveryDocs: ["https://analyticsreporting.googleapis.com/$discovery/rest?version=v4"],
+    scope: [
+        "https://www.googleapis.com/auth/analytics.readonly",
+        "https://www.googleapis.com/auth/analytics"
+    ].join(" ")
+};
+
 
 @NgModule({
   declarations: [
@@ -78,9 +99,12 @@ import { ModalComponent } from './utils/modal/modal.component';
     BrowserAnimationsModule,
     FormsModule,
     APP_ROUTING,
-    //AppMaterialModule,
+    GoogleApiModule.forRoot({
+            provide: NG_GAPI_CONFIG,
+            useValue: gapiClientConfig
+          }),
     HttpClientModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
   ],
   providers: [
     AuthenticationService,
@@ -91,7 +115,9 @@ import { ModalComponent } from './utils/modal/modal.component';
     FileService,
     AnalyzeService,
     StorageService,
-    HomeService
+    HomeService,
+    DriveResource,
+    GoogleDriveService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

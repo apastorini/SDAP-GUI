@@ -1,3 +1,55 @@
-<p>
-  google-drive works!
-</p>
+
+
+
+Files  <button class="acc_button" mat-mini-fab (click)="syncFiles()"></button>
+    <button class="acc_button" mat-raised-button (click)="signIn()">Sign in</button>
+    <!-- <button class="acc_button" mat-raised-button oninvalid=""(click)="signOut()">Sign out</button> -->
+
+
+<h1>TEST</h1>
+  <tbody>
+    <tr *ngFor="let file of filteredFiles">
+      <th scope="row">#</th>
+      <td><h4 mat-line><a href="{{file.webContentLink}}"> {{file.title}} </a></h4></td>
+      <td><p class="metaText" mat-line >{{file.fileSize/1000000 | number}} MB</p></td>
+      <td><p mat-line class="metaText">Created On: {{file.createdDate| date}} </p></td>
+    </tr>
+  </tbody>
+
+
+
+<!-- <mat-toolbar>
+  <h2>{{title}}</h2>
+
+    <button class="acc_button" mat-raised-button *ngIf='!isLoggedIn()' (click)="signIn()">Sign in</button>
+    <button class="acc_button" mat-raised-button *ngIf='isLoggedIn()' (click)="signOut()">Sign out</button>
+</mat-toolbar>
+
+
+
+<mat-card *ngIf='isLoggedIn()'>
+  <mat-card-title>
+  <h2>Files  <button class="acc_button" mat-mini-fab (click)="syncFiles()">
+   <mat-icon>sync</mat-icon>
+ </button></h2>
+
+  </mat-card-title>
+  <mat-card-content>
+
+<mat-list>
+
+
+      <mat-list-item *ngFor="let item of filteredFiles;">
+
+
+
+        <mat-icon mat-list-icon >note</mat-icon>
+        <h4 mat-line><a href="{{item.webContentLink}}"> {{item.title}} </a></h4>
+        <p class="metaText" mat-line >{{item.fileSize/1000000 | number}} MB</p>
+        <p mat-line class="metaText">Created On: {{item.createdDate| date}} </p>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+
+</mat-list>
+</mat-card-content>
+</mat-card> -->

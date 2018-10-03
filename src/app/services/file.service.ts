@@ -25,14 +25,12 @@ export class FileService {
 
   public userFilesList(email: string, token: string): Observable<any>{
     console.log("console log: " + this.fileListUrl);
-    return this.http.post(this.fileListUrl + "?email=" + email + "&token=" + token , {responseType: 'text'}).pipe(
-      catchError(new ErrorHandler().handleError('LoginService', null))
-    );
+    return this.http.post(this.fileListUrl + "?email=" + email + "&token=" + token , {responseType: 'text'})
+    //.pipe(catchError(new ErrorHandler().handleError('LoginService', null)));
   }
   public getSharedFiles(email: string, token: string): Observable<any>{
-    return this.http.post(this.sharedFilesUrl + "?email=" + email + "&token=" + token , {responseType: 'text'}).pipe(
-      catchError(new ErrorHandler().handleError('LoginService', null))
-    );
+    return this.http.post(this.sharedFilesUrl + "?email=" + email + "&token=" + token , {responseType: 'text'})
+    //.pipe(catchError(new ErrorHandler().handleError('LoginService', null)));
   }
 
   downloadFile(email: string, token: string, fileId: string) { //get file from service
