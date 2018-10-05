@@ -1,6 +1,6 @@
 //Modulos
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { HttpClient } from 'selenium-webdriver/http';
@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { GapiSession } from './auth/gapi.session';
 
 //Components
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
@@ -60,16 +60,18 @@ import {
     GoogleApiConfig
 } from "ng-gapi";
 
+// let gapiClientConfig: NgGapiClientConfig = {
+//     client_id: "201920202566-uc6jqfou1kv5g7cq6hljg27rr02l1era.apps.googleusercontent.com",
+//     discoveryDocs: ["https://analyticsreporting.googleapis.com/$discovery/rest?version=v4"],
+//     scope: [
+//         "https://www.googleapis.com/auth/analytics.readonly",
+//         "https://www.googleapis.com/auth/analytics"
+//     ].join(" ")
+// };
 
-let gapiClientConfig: NgGapiClientConfig = {
-    client_id: "201920202566-uc6jqfou1kv5g7cq6hljg27rr02l1era.apps.googleusercontent.com",
-    discoveryDocs: ["https://analyticsreporting.googleapis.com/$discovery/rest?version=v4"],
-    scope: [
-        "https://www.googleapis.com/auth/analytics.readonly",
-        "https://www.googleapis.com/auth/analytics"
-    ].join(" ")
-};
-
+export function initGapi(gapiSession: GapiSession) {
+  return () => gapiSession.initClient();
+}
 
 @NgModule({
   declarations: [
@@ -102,10 +104,10 @@ let gapiClientConfig: NgGapiClientConfig = {
     BrowserAnimationsModule,
     FormsModule,
     APP_ROUTING,
-    GoogleApiModule.forRoot({
-            provide: NG_GAPI_CONFIG,
-            useValue: gapiClientConfig
-          }),
+    // GoogleApiModule.forRoot({
+    //         provide: NG_GAPI_CONFIG,
+    //         useValue: gapiClientConfig
+    //       }),
     HttpClientModule,
     NgbModule.forRoot(),
   ],
@@ -120,7 +122,9 @@ let gapiClientConfig: NgGapiClientConfig = {
     StorageService,
     HomeService,
     DriveResource,
-    GoogleDriveService
+    GoogleDriveService,
+    GapiSession,
+    { provide: APP_INITIALIZER, useFactory: initGapi, deps: [GapiSession], multi: true }
   ],
   bootstrap: [AppComponent],
   entryComponents: [
