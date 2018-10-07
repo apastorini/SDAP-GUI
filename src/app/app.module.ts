@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { GapiSession } from './auth/gapi.session';
+import { GapiSession } from '../infrastructure/sessions/gapi.session';
 
 //Components
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
@@ -51,23 +51,25 @@ import { GoogleDriveComponent } from './components/google-drive/google-drive.com
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ModalComponent } from './utils/modal/modal.component';
 
-import {
-    GoogleApiModule,
-    GoogleApiService,
-    GoogleAuthService,
-    NgGapiClientConfig,
-    NG_GAPI_CONFIG,
-    GoogleApiConfig
-} from "ng-gapi";
+// import {
+//     GoogleApiModule,
+//     GoogleApiService,
+//     GoogleAuthService,
+//     NgGapiClientConfig,
+//     NG_GAPI_CONFIG,
+//     GoogleApiConfig
+// } from "ng-gapi";
 
-// let gapiClientConfig: NgGapiClientConfig = {
-//     client_id: "201920202566-uc6jqfou1kv5g7cq6hljg27rr02l1era.apps.googleusercontent.com",
-//     discoveryDocs: ["https://analyticsreporting.googleapis.com/$discovery/rest?version=v4"],
-//     scope: [
-//         "https://www.googleapis.com/auth/analytics.readonly",
-//         "https://www.googleapis.com/auth/analytics"
-//     ].join(" ")
-// };
+
+
+
+import { AppContext } from '../infrastructure/app.context';
+import { AppRepository } from '../infrastructure/repositories/app.repository';
+import { AppSession } from '../infrastructure/sessions/app.session';
+import { FileRepository } from '../infrastructure/repositories/file.repository';
+import { FileSession } from '../infrastructure/sessions/file.session';
+import { UserRepository } from '../infrastructure/repositories/user.repository';
+import { UserSession } from '../infrastructure/sessions/user.session';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -124,7 +126,15 @@ export function initGapi(gapiSession: GapiSession) {
     DriveResource,
     GoogleDriveService,
     GapiSession,
-    { provide: APP_INITIALIZER, useFactory: initGapi, deps: [GapiSession], multi: true }
+    { provide: APP_INITIALIZER, useFactory: initGapi, deps: [GapiSession], multi: true },
+    AppContext,
+    AppRepository,
+    AppSession,
+    FileRepository,
+    FileSession,
+    UserRepository,
+    UserSession
+
   ],
   bootstrap: [AppComponent],
   entryComponents: [
