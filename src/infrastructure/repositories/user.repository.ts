@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { googleUser } from "../../models/googleUser";
+import { User } from "../../model/user"
 
 const TABLE_USER = "users"
 
@@ -18,20 +18,20 @@ export class UserRepository {
         if (foundIndex>=0)
             users.splice(foundIndex,1);
 
-        users.push(googleUser.fromBasicProfile(profile));
+        users.push(User.fromBasicProfile(profile));
         this.save(users);
     }
 
-    getAll():googleUser[]{
+    getAll():User[]{
         var data = localStorage.getItem(TABLE_USER);
         if (data) {
-            return <googleUser[]>(JSON.parse(data));
+            return <User[]>(JSON.parse(data));
         }
         else
             return [];
     }
 
-    save(users :googleUser[]){
+    save(users :User[]){
         localStorage.setItem(TABLE_USER,JSON.stringify(users));
     }
 

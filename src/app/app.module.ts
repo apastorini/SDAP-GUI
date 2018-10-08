@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { GapiSession } from '../infrastructure/sessions/gapi.session';
 
 //Components
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
@@ -50,26 +49,15 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { GoogleDriveComponent } from './components/google-drive/google-drive.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ModalComponent } from './utils/modal/modal.component';
-
-// import {
-//     GoogleApiModule,
-//     GoogleApiService,
-//     GoogleAuthService,
-//     NgGapiClientConfig,
-//     NG_GAPI_CONFIG,
-//     GoogleApiConfig
-// } from "ng-gapi";
-
-
-
-
-import { AppContext } from '../infrastructure/app.context';
+import { GapiSession } from '../infrastructure/sessions/gapi.session';
 import { AppRepository } from '../infrastructure/repositories/app.repository';
-import { AppSession } from '../infrastructure/sessions/app.session';
 import { FileRepository } from '../infrastructure/repositories/file.repository';
-import { FileSession } from '../infrastructure/sessions/file.session';
 import { UserRepository } from '../infrastructure/repositories/user.repository';
+import { AppContext } from '../infrastructure/app.context';
+import { AppSession } from '../infrastructure/sessions/app.session';
 import { UserSession } from '../infrastructure/sessions/user.session';
+import { FileSession } from '../infrastructure/sessions/file.session';
+
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -125,15 +113,16 @@ export function initGapi(gapiSession: GapiSession) {
     HomeService,
     DriveResource,
     GoogleDriveService,
-    GapiSession,
     { provide: APP_INITIALIZER, useFactory: initGapi, deps: [GapiSession], multi: true },
     AppContext,
-    AppRepository,
     AppSession,
-    FileRepository,
     FileSession,
+    GapiSession,
+    UserSession,
+    //BreadCrumbSession,
+    AppRepository,
+    FileRepository,
     UserRepository,
-    UserSession
 
   ],
   bootstrap: [AppComponent],

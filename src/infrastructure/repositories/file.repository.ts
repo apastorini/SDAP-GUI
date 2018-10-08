@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { FileInfo, MIME_TYPE_FOLDER } from "../../models/fileInfo"
+import { FileInfo, MIME_TYPE_FOLDER } from "../../model/fileInfo";
 declare var UploaderForGoogleDrive;
 
 @Injectable()
@@ -12,7 +12,7 @@ export class FileRepository {
             parents: [parentId]
         };
         return gapi.client.drive.files.create({
-            resource: folder,
+            //resource: folder,
             fields: "id, name, mimeType, modifiedTime, size"
         }).then((res) => {
             return FileInfo.fromGoogleFile(res.result);
