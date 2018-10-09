@@ -4,6 +4,8 @@ import { AuthService } from '../../auth/auth.service';
 import { Router,Routes, RouterModule} from '@angular/router';
 import { Constants } from '../../utils/Constants';
 import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from '../../utils/modal/modal.component';
 
 
 @Component({
@@ -18,11 +20,13 @@ export class LoginComponent implements OnInit {
   submitted = false;
   emailExists:boolean;      // {1}
 
+
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,         // {3}
     private authService: AuthService, // {4}
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit() {
@@ -50,14 +54,23 @@ export class LoginComponent implements OnInit {
   goToPassword(){
     this.router.navigate(['password']);
   }
-  
+
    goToSignin(){
      this.router.navigate(['signin']);
   }
 
 
 
+    openModal(title,text,type) {
+      const modalRef = this.modalService.open(ModalComponent);
+      modalRef.componentInstance.title = title;
+      modalRef.componentInstance.text = text;
+      modalRef.componentInstance.type = type;
 
-
-
+      modalRef.result.then((result) => {
+        console.log("resultados del modal  "+result);
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
  }

@@ -39,6 +39,10 @@ export class GapiSession {
         return this.googleAuth.signIn({
             prompt: 'consent'
         }).then((googleUser: gapi.auth2.GoogleUser) => {
+
+          console.log("google user   " + JSON.stringify(googleUser.getBasicProfile()));
+
+
             this.appRepository.User.add(googleUser.getBasicProfile());
         });
     }

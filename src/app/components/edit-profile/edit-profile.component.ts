@@ -9,6 +9,7 @@ import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../../utils/modal/modal.component';
+//import { User } from '../../models';
 
 
 
@@ -16,7 +17,7 @@ import { ModalComponent } from '../../utils/modal/modal.component';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.css']
+  styleUrls: []
 })
 export class EditProfileComponent implements OnInit {
   registerForm: FormGroup;
@@ -30,11 +31,13 @@ export class EditProfileComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private authService: AuthService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    //private user: User
   )
     { }
 
   ngOnInit() {
+    this.getAllUsers();
     this.registerForm = this.fb.group({     // {5}
       name: ['', Validators.required],
       secondName: ['', Validators.required],
@@ -95,6 +98,17 @@ export class EditProfileComponent implements OnInit {
     console.log(value);
     this.registerForm.controls['email'].setErrors({'incorrect': value});
   }
+
+  getAllUsers(){
+    this.userService.getAllUsers().subscribe(res=>{
+      console.log('RES!!!'+JSON.stringify(res['result']) );
+      //this.user = res['result'];
+
+      console.log('RES!!! USEEEEEEER        '+JSON.stringify(res['result'][1]));
+
+    })
+  }
+
 
   openModal(title,text,type) {
     const modalRef = this.modalService.open(ModalComponent);

@@ -1,9 +1,14 @@
 import { Injectable } from "@angular/core";
 import { FileInfo, MIME_TYPE_FOLDER } from "../../model/fileInfo";
 declare var UploaderForGoogleDrive;
+import { HttpClient, HttpHeaders,HttpParams} from '@angular/common/http';
+
 
 @Injectable()
 export class FileRepository {
+
+  private downloadFileGoogleUrl = 'https://www.googleapis.com/drive/v3/files/';
+  constructor(private http:HttpClient) { }
 
     create(parentId: string, folderName: string) {
         var folder = {
@@ -60,4 +65,15 @@ export class FileRepository {
 
         uploader.upload();
     }
+
+    downloadFileGoogle(fileId: string) { //get file from service
+      let headers = new HttpHeaders();
+      headers = headers.set('Accept', 'application/pdf');
+      let url = this.downloadFileGoogleUrl + fileId + "?alt=media"
+      return this.http.get(url,{ headers: headers, responseType: 'blob' })
+    }
+
+
+
+
 }

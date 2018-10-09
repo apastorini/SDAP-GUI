@@ -57,6 +57,10 @@ import { AppContext } from '../infrastructure/app.context';
 import { AppSession } from '../infrastructure/sessions/app.session';
 import { UserSession } from '../infrastructure/sessions/user.session';
 import { FileSession } from '../infrastructure/sessions/file.session';
+import { BreadCrumbSession } from '../infrastructure/sessions/breadcrumb.session';
+import { MatButtonModule, MatIconModule, MatMenuModule, MatTableModule, MatBottomSheetModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatToolbarModule, MatProgressSpinnerModule, MatListModule } from '@angular/material';
+import { DialogOneInputComponent } from './components/dialogoneinput/dialogoneinput.component';
+import { BreadCrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 
 export function initGapi(gapiSession: GapiSession) {
@@ -86,7 +90,9 @@ export function initGapi(gapiSession: GapiSession) {
     GoogleDriveComponent,
     EditProfileComponent,
     ModalComponent,
-    WebmasterValidationComponent
+    WebmasterValidationComponent,
+    DialogOneInputComponent,
+    BreadCrumbComponent
   ],
   imports: [
     BrowserModule,
@@ -100,6 +106,18 @@ export function initGapi(gapiSession: GapiSession) {
     //       }),
     HttpClientModule,
     NgbModule.forRoot(),
+    MatBottomSheetModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatMenuModule,
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatListModule,
   ],
   providers: [
     AuthenticationService,
@@ -119,7 +137,7 @@ export function initGapi(gapiSession: GapiSession) {
     FileSession,
     GapiSession,
     UserSession,
-    //BreadCrumbSession,
+    BreadCrumbSession,
     AppRepository,
     FileRepository,
     UserRepository,

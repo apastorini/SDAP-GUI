@@ -31,6 +31,8 @@ export class HomeComponent implements OnInit {
   private getDashBoard(){
 
     this.homeService.getDashBoard(sessionStorage.getItem('email'),sessionStorage.getItem('token')).subscribe(res => {
+    console.log('%c getDashBoard', 'color: orange;');
+    console.table(" cantArchivos " + res );
     this.cantArchivos = res['result'][0].cantArchivos;
     this.cantAnalisis = res['result'][0].cantAnalisis;
     this.cantAnalisisTerminados = res['result'][0].cantAnalisisTerminados;

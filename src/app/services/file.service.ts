@@ -17,11 +17,13 @@ export class FileService {
   private fileListUrl = Constants.BASE_URL +  'documentController/listUserFiles';
   private sharedFilesUrl = Constants.BASE_URL + 'documentController/listSharedFiles/';
   private downloadFileUrl = Constants.BASE_URL + 'documentController/downloadUserFiles/';
+  private downloadFileGoogleUrl = 'https://www.googleapis.com/drive/v3/files/';
   private removeFileFromUserUrl = Constants.BASE_URL +'/documentController/removeFileFromUser';
 
   //documentController/download/{fileID}/{email}/{token}
   //documentController//downloadUserFiles/{email}/{token}/{fileID}/
   constructor(private http:HttpClient) { }
+
 
   public userFilesList(email: string, token: string): Observable<any>{
     console.log("console log: " + this.fileListUrl);
@@ -39,6 +41,7 @@ export class FileService {
     let url = this.downloadFileUrl + "?email=" + email + "&token=" + token + "&fileID=" + fileId
     return this.http.get(url,{ headers: headers, responseType: 'blob' })
   }
+
 
   deleteFile(email: string, token: string, fileId: string) { //get file from service
     let headers = new HttpHeaders();

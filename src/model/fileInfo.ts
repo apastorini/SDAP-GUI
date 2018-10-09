@@ -5,7 +5,7 @@ export class FileInfo {
 
 
 
-    
+
 
 
     static fromGoogleFile(file: gapi.client.drive.File): FileInfo {
