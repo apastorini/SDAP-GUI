@@ -23,7 +23,7 @@
         <td>{{report.fechaFinaAnalisis | date}}</td>
         <td>
           <a id="{{report.idAnalisis}}"  *ngIf="report.fechaFinaAnalisis != null" (click)="downloadReport(report.idAnalisis)">
-            <img src="assets/img/download.png" alt="Descargar Reporte" style="width:20px;height:20px;border:0;">
+            <img class="canClick" src="assets/img/download.png" alt="Descargar Reporte" style="width:20px;height:20px;border:0;">
           </a>
         </td>
       </tr>

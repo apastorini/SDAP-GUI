@@ -34,6 +34,7 @@ export class GoogleDriveComponent implements OnInit{
 
     ) {
 
+      console.log("TEST FILES   "+ JSON.stringify(this.files))
       this.dataSource = new MatTableDataSource(this.files);
 
 

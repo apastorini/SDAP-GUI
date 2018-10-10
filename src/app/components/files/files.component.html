@@ -20,12 +20,12 @@
         <td>{{file.size}}</td>
         <td>
           <a id="{{file.idFile}}" (click)="downloadFile(file.idFile)">
-            <img src="assets/img/download.png" alt="Descargar archivo" style="width:20px;height:20px;border:0;">
+            <img class="canClick" src="assets/img/download.png" alt="Descargar archivo" style="width:20px;height:20px;border:0;">
           </a>
         </td>
         <td>
           <a id="{{file.idFile}}" (click)="deleteFile(file.idFile)">
-            <img src="assets/img/delete.svg" alt="Eliminar archivo" style="width:20px;height:20px;border:0;">
+            <img class="canClick" src="assets/img/delete.svg" alt="Eliminar archivo" style="width:20px;height:20px;border:0;">
           </a>
         </td>
       </tr>

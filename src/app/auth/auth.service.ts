@@ -80,34 +80,16 @@ login(login: Login){
   this.http.post(this.loginUrl, login,  {headers: headers})
                   .subscribe(res =>  {
                       console.log('pruebba  ' + JSON.stringify(res));
-//
+
                   if (JSON.stringify(res['code'])=="0"|| JSON.stringify(res['code'])=="2"){
                     console.log('SESION    ' + JSON.stringify(res['result']));
-                    //console.log('SESION Robar   ' + JSON.stringify(res['result'][0].token));
-                    //console.log('SESION    ' + this.sesion.token);
 
 
                       this.storageService.setItem('token', res['result'][0].token)
                       this.storageService.setItem('email', res['result'][0].email)
                       this.storageService.setItem('role', res['result'][0].roles[0].id)
-                    // this.session.token = res['result'][0].token;
-                    // this.session.email = res['result'][0].email;
-                    // this.session.role = res['result'][0].roles[0].id;
 
-                    //let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-                    // sessionStorage.setItem('token',res['result'][0].token);
-                    // sessionStorage.setItem('email',res['result'][0].email);
-                    // sessionStorage.setItem('role',res['result'][0].roles[0].id);
-
-                    //sessionStorage.setItem('password',this.sesion.password);
                     console.log('role    ' + sessionStorage.getItem('role'));
-
-
-
-                      // console.log('TOOOKEN    ' + sessionStorage.getItem('token'));
-                      // console.log('EMAIL    ' + sessionStorage.getItem('email'));
-                      // console.log('ROLES    ' + sessionStorage.getItem('role'));
-                    //sessionStorage.setItem('userID',currentUser.userID);
                     this.loggedIn.next(true);
                     this.router.navigate(['/home']);
 
@@ -117,7 +99,6 @@ login(login: Login){
                   }
 
               });
-                  //  .map(res => {
 }
 
 
