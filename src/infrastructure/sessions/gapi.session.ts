@@ -24,7 +24,11 @@ export class GapiSession {
                     discoveryDocs: DISCOVERY_DOCS,
                     scope: SCOPES,
                 }).then(() => {
+
                     this.googleAuth = gapi.auth2.getAuthInstance();
+                    
+                    console.log("GET TOKEN " + gapi.auth.getToken());
+                    console.log("GET TOKEN " + JSON.stringify(gapi.auth.getToken()));
                     resolve();
                 });
             });

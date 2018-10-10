@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { FileInfo, MIME_TYPE_FOLDER } from "../../model/fileInfo";
 declare var UploaderForGoogleDrive;
 import { HttpClient, HttpHeaders,HttpParams} from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
@@ -66,12 +67,27 @@ export class FileRepository {
         uploader.upload();
     }
 
-    downloadFileGoogle(fileId: string) { //get file from service
-      let headers = new HttpHeaders();
-      headers = headers.set('Accept', 'application/pdf');
-      let url = this.downloadFileGoogleUrl + fileId + "?alt=media"
-      return this.http.get(url,{ headers: headers, responseType: 'blob' })
-    }
+    // downloadFileGoogle(fileId: string) { //get file from service
+    //   let headers = new HttpHeaders();
+    //   headers = headers.set('Accept', 'application/pdf');
+    //   let url = this.downloadFileGoogleUrl + fileId + "?alt=media"
+    //   console.log("URL  :  " + url);
+    //   return this.http.get(url,{ headers: headers, responseType: 'blob' })
+    // }
+
+    //import { Http, Headers, Response } from '@angular/http';
+
+  downloadFileGoogle(fileId: string) : Observable<any> { //get file from service
+      console.log("my token experiment:  " + JSON.stringify(gapi.auth.getToken().access_token));
+        let headers = new HttpHeaders({
+          'Content-Type': 'application/pdf',
+          'Authorization': 'Bearer' + ' ' + gapi.auth.getToken().access_token
+        })
+        console.log("FLAG 1");
+        let url = this.downloadFileGoogleUrl + fileId + "?alt=media";
+        console.log("FLAG 2");
+        return this.http.get(url, { headers: headers,responseType: 'blob'})
+      }
 
 
 

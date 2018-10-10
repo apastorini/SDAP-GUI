@@ -20,11 +20,10 @@ import { Router } from "@angular/router";
 export class GoogleDriveComponent implements OnInit{
    breadCrumbItems: BreadCrumbItem[] = [];
    dataSource: MatTableDataSource<FileInfo>;
-   displayedColumns: string[] = ["icon", "name", "modifiedTime", "size", "delete"];
+   //displayedColumns: string[] = ["icon", "name", "modifiedTime", "size", "delete"];
+   displayedColumns: string[] = ["icon", "name", "modifiedTime", "size"];
    files: FileInfo[] = [];
    isSignedIn: boolean = false;
-
-
 
     constructor(
         private appContext: AppContext,
@@ -159,10 +158,15 @@ browse(file: FileInfo) {
 
 
       downloadFile(fileID: string ){
+        console.log("downloadFile");
         console.log("entro!!!  " + fileID)
+        console.log("%c entro!!!, {color= orange}  " + fileID);
+        //console.log("GOOGLE AUTH:   " + JSON.stringify(this.appContext.Session.Gapi.googleAuth));
+
+
         this.appContext.Repository.File.downloadFileGoogle(fileID)
         .subscribe(res => {
-          console.log("entro!!!  " + res);
+          console.log("ENTRO AL BLOB!!!!!! " + res);
           console.log("entro string !!!  " + JSON.stringify(res));
 
           var file = new Blob([res], {type: 'application/pdf'});
