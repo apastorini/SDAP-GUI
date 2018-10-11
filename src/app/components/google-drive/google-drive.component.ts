@@ -15,7 +15,7 @@ import { Router } from "@angular/router";
 @Component({
     selector: "google-drive",
     templateUrl: "./google-drive.component.html",
-    styleUrls: ["./google-drive.component.css"]
+    styleUrls: []
 })
 export class GoogleDriveComponent implements OnInit{
    breadCrumbItems: BreadCrumbItem[] = [];
