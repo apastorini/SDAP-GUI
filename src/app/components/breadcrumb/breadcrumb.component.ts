@@ -5,7 +5,7 @@ import { BreadCrumbItemOption } from "../../../model/breadCrumbItemOption";
 @Component({
     selector: "breadcrumb",
     templateUrl: "./breadcrumb.component.html",
-    styleUrls: ["./breadcrumb.component.css"]
+    styleUrls: []
 
 })
 export class BreadCrumbComponent {

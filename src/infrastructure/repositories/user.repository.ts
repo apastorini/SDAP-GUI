@@ -7,6 +7,7 @@ const TABLE_USER = "users"
 export class UserRepository {
     add(profile:gapi.auth2.BasicProfile){
         let users = this.getAll();
+        //gapi.client.drive.
 
         var foundIndex=-1;
         for (let i=0;i<users.length;i++){
@@ -34,5 +35,7 @@ export class UserRepository {
     save(users :User[]){
         localStorage.setItem(TABLE_USER,JSON.stringify(users));
     }
+
+
 
 }

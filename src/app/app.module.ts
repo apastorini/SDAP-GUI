@@ -58,9 +58,10 @@ import { AppSession } from '../infrastructure/sessions/app.session';
 import { UserSession } from '../infrastructure/sessions/user.session';
 import { FileSession } from '../infrastructure/sessions/file.session';
 import { BreadCrumbSession } from '../infrastructure/sessions/breadcrumb.session';
-import { MatButtonModule, MatIconModule, MatMenuModule, MatTableModule, MatBottomSheetModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatToolbarModule, MatProgressSpinnerModule, MatListModule } from '@angular/material';
 import { DialogOneInputComponent } from './components/dialogoneinput/dialogoneinput.component';
 import { BreadCrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { BreadCrumbItemComponent } from './components/breadcrumb/breadcrumbitem/breadcrumbitem.component';
+import { MatButtonModule, MatIconModule, MatMenuModule, MatTableModule, MatBottomSheetModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatToolbarModule, MatProgressSpinnerModule, MatListModule } from '@angular/material';
 
 
 export function initGapi(gapiSession: GapiSession) {
@@ -92,7 +93,8 @@ export function initGapi(gapiSession: GapiSession) {
     ModalComponent,
     WebmasterValidationComponent,
     DialogOneInputComponent,
-    BreadCrumbComponent
+    BreadCrumbComponent,
+    BreadCrumbItemComponent
   ],
   imports: [
     BrowserModule,
@@ -100,10 +102,6 @@ export function initGapi(gapiSession: GapiSession) {
     BrowserAnimationsModule,
     FormsModule,
     APP_ROUTING,
-    // GoogleApiModule.forRoot({
-    //         provide: NG_GAPI_CONFIG,
-    //         useValue: gapiClientConfig
-    //       }),
     HttpClientModule,
     NgbModule.forRoot(),
     MatBottomSheetModule,

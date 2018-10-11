@@ -67,16 +67,6 @@ export class FileRepository {
         uploader.upload();
     }
 
-    // downloadFileGoogle(fileId: string) { //get file from service
-    //   let headers = new HttpHeaders();
-    //   headers = headers.set('Accept', 'application/pdf');
-    //   let url = this.downloadFileGoogleUrl + fileId + "?alt=media"
-    //   console.log("URL  :  " + url);
-    //   return this.http.get(url,{ headers: headers, responseType: 'blob' })
-    // }
-
-    //import { Http, Headers, Response } from '@angular/http';
-
   downloadFileGoogle(fileId: string) : Observable<any> { //get file from service
       console.log("my token experiment:  " + JSON.stringify(gapi.auth.getToken().access_token));
         let headers = new HttpHeaders({
