@@ -32,10 +32,21 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
+
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" routerLinkActive="active">
+          <button mat-button [routerLink]="['edit-profile']" class="btn btn-outline-primary btn-block profile-btn">{{email}}</button>
+          <!-- <a class="navbar-link email-link" style="color:white;" [routerLink]="['edit-profile']" href="#">{{email}}</a> -->
+           <div class="divider"></div>
+         </li>
+         <li class="nav-item" routerLinkActive="active">
+           <button mat-button  class="btn btn-outline-primary btn-block logout-btn" (click)="onLogout()">Logout</button>
+         </li>
+      </ul>
       <!-- <button mat-button  [routerLink]="['edit-profile']" class="btn btn-outline-primary btn-block logout-btn email-link" href="#">{{email}}</button> -->
-      <a class="navbar-link email-link" style="color:white;" [routerLink]="['edit-profile']" href="#">{{email}}</a>
+      <!-- <a class="navbar-link email-link" style="color:white;" [routerLink]="['edit-profile']" href="#">{{email}}</a>
        <div class="divider"></div>
-      <button mat-button  class="btn btn-outline-primary btn-block logout-btn" (click)="onLogout()">Logout</button>
+      <button mat-button  class="btn btn-outline-primary btn-block logout-btn" (click)="onLogout()">Logout</button> -->
     </form>
   </div>
 </nav>

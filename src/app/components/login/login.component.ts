@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.authService.logout()
+    //this.authService.logout()
     this.form = this.fb.group({     // {5}
       mail: ['', Validators.required],
       password: ['', Validators.required]
@@ -60,8 +60,6 @@ export class LoginComponent implements OnInit {
      this.router.navigate(['signin']);
   }
 
-
-
     openModal(title,text,type) {
       const modalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.title = title;
@@ -74,4 +72,4 @@ export class LoginComponent implements OnInit {
         console.log(error);
       });
     }
- }
+  }

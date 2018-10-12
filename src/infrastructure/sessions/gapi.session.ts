@@ -12,7 +12,8 @@ export class GapiSession {
     constructor(
         private appRepository: AppRepository
 
-    ) {
+    )
+    {
     }
 
     initClient() {
@@ -26,9 +27,9 @@ export class GapiSession {
                 }).then(() => {
 
                     this.googleAuth = gapi.auth2.getAuthInstance();
-                    
-                    console.log("GET TOKEN " + gapi.auth.getToken());
-                    console.log("GET TOKEN " + JSON.stringify(gapi.auth.getToken()));
+
+                    //console.log("GET TOKEN " + gapi.auth.getToken());
+                    //console.log("GET TOKEN " + JSON.stringify(gapi.auth.getToken()));
                     resolve();
                 });
             });
@@ -44,7 +45,7 @@ export class GapiSession {
             prompt: 'consent'
         }).then((googleUser: gapi.auth2.GoogleUser) => {
 
-          console.log("google user   " + JSON.stringify(googleUser.getBasicProfile()));
+          //console.log("google user   " + JSON.stringify(googleUser.getBasicProfile()));
 
 
             this.appRepository.User.add(googleUser.getBasicProfile());

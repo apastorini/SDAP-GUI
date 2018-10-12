@@ -54,6 +54,10 @@ a{
   width: 120px
 }
 
+.profile-btn{
+  width: 200px
+}
+
 .nav-item{
     color:red;
 }
@@ -65,76 +69,137 @@ a{
   width: 250px
 }
 
-
-.login-box{
-   position: absolute;
-   padding-top: 30px;
-   width: 450px;
-   height: 400px;
-   z-index: 15;
-   top: 30%;
-   left: 39%;
-   margin-top: -50px;
-   margin-left: -50px;
-   text-align:center;
-   box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-   background-color: #064598;
-   color:#ffffff;
+.titlelog{
+  text-align:center;
 }
-.signin-box{
-   position: absolute;
-   padding-top: 30px;
-   width: 400px;
-   height: 550px;
-   z-index: 15;
-   top: 30%;
-   left: 39%;
-   margin-top: -50px;
-   margin-left: -50px;
-   text-align:center;
-   box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-   background-color: #064598;
-   color:#ffffff;
+@media (max-width:960px){
+  .background-fixed{
+    background-color: #064598;
+
+  }
+
+  .login-box{
+     position: absolute;
+     width: 300px;
+     height: 400px;
+     z-index: 15;
+     text-align:center;
+     box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0);
+     background-color: #064598;
+     color:#ffffff;
+  }
+  .signin-box{
+     position: absolute;
+     padding-top: 30px;
+     width: 400px;
+     height: 550px;
+     z-index: 15;
+     top: 30%;
+     left: 39%;
+     margin-top: -50px;
+     margin-left: -50px;
+     text-align:center;
+     box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+     background-color: #064598;
+     color:#ffffff;
+  }
+
+  .signin-box .header-box{
+    padding-bottom: 20px;
+    font-size: 16px
+  }
+
+  .signin-box h1{
+    font-size: 28px
+  }
+
+  .signin-box .form-control{
+     margin: auto;
+  }
+
+  .login-box .header-box{
+    padding-bottom: 20px;
+  }
+
+  .login-box .form-control{
+     margin: auto;
+  }
+  .password-link{
+    margin-top: 10px;
+  }
+
+
+}
+@media only screen and (min-width:960px){
+  .login-box{
+     position: absolute;
+     padding-top: 30px;
+     width: 450px;
+     height: 400px;
+     z-index: 15;
+     top: 30%;
+     left: 36%;
+     margin-top: -50px;
+     margin-left: -50px;
+     text-align:center;
+     box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+     background-color: #064598;
+     color:#ffffff;
+  }
+  .signin-box{
+     position: absolute;
+     padding-top: 30px;
+     width: 400px;
+     height: 550px;
+     z-index: 15;
+     top: 30%;
+     left: 39%;
+     margin-top: -50px;
+     margin-left: -50px;
+     text-align:center;
+     box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+     background-color: #064598;
+     color:#ffffff;
+  }
+
+  .signin-box .header-box{
+    padding-bottom: 20px;
+    font-size: 16px
+  }
+
+  .signin-box h1{
+    font-size: 28px
+  }
+
+  .signin-box .form-control{
+     margin: auto;
+  }
+
+  .login-box .header-box{
+    padding-bottom: 20px;
+  }
+
+  .login-box .form-control{
+     margin: auto;
+  }
+  .password-link{
+    margin-top: 10px;
+  }
 }
 
-.signin-box .header-box{
-  padding-bottom: 20px;
-  font-size: 16px
-}
-
-.signin-box h1{
-  font-size: 28px
-}
-
-
-.signin-box .form-control{
-   /*align: center;*/
-   margin: auto;
-}
-
-.login-box .header-box{
-  padding-bottom: 20px;
-}
-
-
-.login-box .form-control{
-   /*align: center;*/
-   margin: auto;
-}
-.password-link{
-  margin-top: 10px;
-}
+/*@media (min-width:961px)  {  tablet, landscape iPad, lo-res laptops ands desktops }*/
+/*.
 
 /*Errors*/
-.invalid-feedback  div{
+/*.invalid-feedback  div{
   color: red;
   font-size: 14px;
-}
+}*/
 
-.img-modal{
+/*.img-modal{
   width: 40px;
   height: 40px;
-}
+}*/
 
 
 /*FOOOOOOOOOTER*/
@@ -192,6 +257,25 @@ footer{
 .invert{
     -webkit-filter: invert(100%);
 }
+
+
+.inlined-elements {
+        width: 200px;
+        height: 600px;
+        background-color: blue;
+
+        position:absolute; /*it can be fixed too*/
+        left:0; right:0;
+        top:0; bottom:0;
+        margin:auto;
+
+        /*this to solve "the content will not be cut when the window is smaller than the content": */
+        max-width:100%;
+        max-height:100%;
+        overflow:auto;
+    }
+
+
 
 /*scroll*/
 .table-wrapper-scroll-y {

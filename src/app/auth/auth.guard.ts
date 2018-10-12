@@ -15,8 +15,9 @@ export class AuthGuard implements CanActivate {
   {
    return this.authService.isLoggedIn         // {1}
      .pipe(take(1),
-     map((isLoggedIn: boolean) =>{
-       if (!isLoggedIn){
+     map((l: boolean) =>{
+       console.log("IS LOGED IN!  " + l);
+       if (!l){
          this.router.navigate(['/login']);  // {4}
            return false;
          }
@@ -24,31 +25,32 @@ export class AuthGuard implements CanActivate {
        })
      )
   }
+
+  // canActivate(next: ActivatedRouteSnapshot,state: RouterStateSnapshot): Observable<boolean>
+  // {
+  //  return this.authService.isLoggedIn         // {1}
+  //    .pipe(take(1),
+  //    map((isLoggedIn: boolean) =>{
+  //      if (!isLoggedIn){
+  //        this.router.navigate(['/login']);  // {4}
+  //          return false;
+  //        }
+  //        return true;
+  //      })
+  //    )
+  // }
+
+ //  canActiuvate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+ //   return this.af.auth.map((auth) => {
+ //       if (!auth) {
+ //         this.router.navigateByUrl('login');
+ //         return false;
+ //       }
+ //       return true;
+ //   }).take(1);
+ // }
+
+
+
+
 }
-  // auth.guard.ts
-// import {Injectable} from '@angular/core';
-// import {Router, CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot} from '@angular/router';
-// import {AuthService} from './auth.service';
-//
-// @Injectable()
-// export class AuthGuard implements CanActivate {
-//     constructor(private router: Router,
-//                 private authService: AuthService) {
-//     }
-//
-//     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-//         const userRole: string = sessionStorage.getItem('role');
-//         const permission = route.data["permission"];
-//
-//         let canActivate: boolean;
-//
-//         if (!permission) throw new Error('Permissions is not setup!');
-//         if (!permission.only.length) throw new Error('Roles are not setup!');
-//
-//         canActivate = permission.only.includes(userRole);
-//
-//         if (!canActivate) this.router.navigate([permission.redirectTo]);
-//
-//         return canActivate;
-//     }
-// }

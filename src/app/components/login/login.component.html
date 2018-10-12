@@ -1,14 +1,10 @@
-<div class="login-box fast animated fadeIn">
+<div class="login-box background-fixed titlelog fast animated fadeIn">
   <h1 class="animated fadeIn display-3">SDP</h1>
   <br>
 <form [formGroup]="form" (ngSubmit)="onSubmit()" >
     <div class="container animated fadeIn ">
       <input type="text" placeholder="Email" class="form-control"  formControlName="mail" required uniqueEmail [ngClass]="{ 'is-invalid': submitted && f.email.errors }" >
       <br>
-
-      <!-- <div class="alert alert-danger">
-          <strong>Error!</strong> El Usuario no existe.
-      </div> -->
 
       <input type="password" placeholder="Password" class="form-control" name="password"  formControlName="password" required>
       <br>
@@ -17,9 +13,6 @@
       <li class="password-link">
         <a class="link" (click)="goToPassword()">Olvidaste tu Contraseña?</a>
       </li>
-      <!-- <li class="Signin-link">
-        <a class="link" (click)="goToSignin()" >Registro de usuario</a>
-      </li> -->
     </div>
 </form>
 </div>
