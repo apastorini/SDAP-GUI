@@ -24,6 +24,7 @@ export class GoogleDriveComponent implements OnInit{
    displayedColumns: string[] = ["icon", "name", "modifiedTime", "size"];
    files: FileInfo[] = [];
    isSignedIn: boolean = false;
+   email: string;
 
     constructor(
         private appContext: AppContext,

@@ -1,28 +1,33 @@
 <h1 class="animated fast fadeIn display-3">Crear Usuario</h1>
 <hr>
+
 <form class="user-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="jumbotron animated fast fadeIn">
       <div class="form-group">
           <input type="text" formControlName="email" emailExists placeholder="Email"  class="form-control" uniqueEmail [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
           <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div class="divider"></div>
               <div class="alert alert-danger" *ngIf="f.email.errors.required">Email is required</div>
               <div class="alert alert-danger" *ngIf="f.email.errors.email">Email must be a valid email address</div>
               <div class="alert alert-danger" *ngIf="f.email.errors['uniqueEmail']">Email existe</div>
               </div>
           </div>
 
+
         <div class="form-group">
             <input type="text" formControlName="name" placeholder="Nombre" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
-            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
 
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div class="divider"></div>
                 <div class="alert alert-danger" *ngIf="f.name.errors.required">First Name is required</div>
                 </div>
             </div>
 
         <div class="form-group">
             <input type="text" formControlName="secondName" placeholder="Apellido" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.secondName.errors }" />
-            <div *ngIf="submitted && f.secondName.errors" class="invalid-feedback">
 
+            <div *ngIf="submitted && f.secondName.errors" class="invalid-feedback">
+                <div class="divider"></div>
                 <div class="alert alert-danger" *ngIf="f.secondName.errors.required">Last Name is required</div>
                 </div>
             </div>
@@ -31,6 +36,7 @@
         <div class="form-group">
           <input type="password" formControlName="password" placeholder="Password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
           <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div class="divider"></div>
             <div class="alert alert-danger" *ngIf="f.password.errors.required">Password is required</div>
             <div class="alert alert-danger" *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
           </div>
@@ -39,6 +45,7 @@
         <div class="form-group">
           <input type="password" formControlName="r_password" placeholder="Confirmar Password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.r_password.errors }" />
           <div *ngIf="submitted && f.r_password.errors" class="invalid-feedback">
+            <div class="divider"></div>
             <div class="alert alert-danger" *ngIf="f.r_password.errors.required">Password is required</div>
             <div class="alert alert-danger" *ngIf="f.r_password.errors.minlength">Password must be at least 6 characters</div>
           </div>

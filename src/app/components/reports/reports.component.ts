@@ -5,7 +5,7 @@ import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
-  styleUrls: ['./reports.component.css']
+  styleUrls: []
 })
 export class ReportsComponent implements OnInit {
   reportsList = [];

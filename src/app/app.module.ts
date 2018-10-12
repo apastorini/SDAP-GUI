@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AppMaterialModule } from './app-material/app-material.module';
+// import { AppMaterialModule } from './app-material/app-material.module';
 import { HttpClient } from 'selenium-webdriver/http';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,12 +14,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { SigninComponent } from './components/signin/signin.component';
 import { FilesComponent } from './components/files/files.component';
 import { PasswordComponent } from './components/password/password.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
-import { UserListComponent } from './components/user-list/user-list.component';
 import { HomeComponent } from './components/home/home.component';
 import { WebmasterValidationComponent } from './webmaster-validation/webmaster-validation.component';
 //import { ConfirmationDialogComponent } from './components/shared/confirmation-dialog/confirmation-dialog.component';
@@ -33,8 +31,7 @@ import { UserService } from './services/user.service';
 import { FileService } from './services/file.service';
 import { StorageService } from './auth/storageService';
 import { HomeService } from './services/home.service';
-import { DriveResource } from './services/drive-resource.service';
-import { GoogleDriveService } from './services/google-drive.service';
+//import { DriveResource } from './services/drive-resource.service';
 
 //Routing
 import { APP_ROUTING } from './app.routes'
@@ -42,9 +39,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { ResultsComponent } from './components/results/results.component';
 import { AnalyzeComponent } from './components/analyze/analyze.component';
-import { CreateUserSuccessComponent } from './components/create-user-success/create-user-success.component';
 import { UniqueEmailValidatorDirective } from './validators/unique-email-validator.directive';
-import { UserCreatedComponent } from './components/user-created/user-created.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { GoogleDriveComponent } from './components/google-drive/google-drive.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
@@ -72,21 +67,17 @@ export function initGapi(gapiSession: GapiSession) {
   declarations: [
     AppComponent,
     LoginComponent,
-    SigninComponent,
     NavbarComponent,
     FilesComponent,
     PasswordComponent,
     CreateUserComponent,
     EditUserComponent,
-    UserListComponent,
     HomeComponent,
     FooterComponent,
     ResultsComponent,
     AnalyzeComponent,
-    CreateUserSuccessComponent,
     UniqueEmailValidatorDirective,
     FileSelectDirective,
-    UserCreatedComponent,
     ReportsComponent,
     GoogleDriveComponent,
     EditProfileComponent,
@@ -127,8 +118,6 @@ export function initGapi(gapiSession: GapiSession) {
     AnalyzeService,
     StorageService,
     HomeService,
-    DriveResource,
-    GoogleDriveService,
     { provide: APP_INITIALIZER, useFactory: initGapi, deps: [GapiSession], multi: true },
     AppContext,
     AppSession,

@@ -7,27 +7,27 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active" *ngIf="role=='2'" >
-        <button mat-button  [routerLink]="['files']" class="btn btn-outline-primary btn-block logout-btn" href="#">Archivos</button>
+        <button mat-button  [routerLink]="['files']" class="btn btn-outline-primary btn-block logout-btn button-nav" href="#">Archivos</button>
       </li>
       <li class="nav-item" *ngIf="role=='1'" >
-        <div class="divider"></div>
-        <button mat-button  [routerLink]="['create-user']" class="btn btn-outline-primary btn-block logout-btn" href="#">Crear Usuario</button>
+        <div class="divider-nav"></div>
+        <button mat-button  [routerLink]="['create-user']" class="btn btn-outline-primary btn-block logout-btn button-nav" href="#">Crear Usuario</button>
       </li>
       <li class="nav-item" *ngIf="role=='1'" >
-        <div class="divider"></div>
-        <button mat-button  [routerLink]="['edit-user']" class="btn btn-outline-primary btn-block logout-btn" href="#">Editar Usuario</button>
+        <div class="divider-nav"></div>
+        <button mat-button  [routerLink]="['edit-user']" class="btn btn-outline-primary btn-block logout-btn button-nav" href="#">Editar Usuario</button>
       </li>
       <li class="nav-item" *ngIf="role=='2'" >
-        <div class="divider"></div>
-        <button mat-button  [routerLink]="['analyze']" class="btn btn-outline-primary btn-block logout-btn" href="#">Analizar</button>
+        <div class="divider-nav"></div>
+        <button mat-button  [routerLink]="['analyze']" class="btn btn-outline-primary btn-block logout-btn button-nav" href="#">Analizar</button>
       </li>
       <li class="nav-item" *ngIf="role=='2'" >
-        <div class="divider"></div>
-        <button mat-button  [routerLink]="['reports']" class="btn btn-outline-primary btn-block logout-btn" href="#">Reportes</button>
+        <div class="divider-nav"></div>
+        <button mat-button  [routerLink]="['reports']" class="btn btn-outline-primary btn-block logout-btn button-nav" href="#">Reportes</button>
       </li>
       <li class="nav-item" *ngIf="role=='2'" >
-        <div class="divider"></div>
-        <button mat-button  [routerLink]="['google-drive']" class="btn btn-outline-primary btn-block logout-btn" href="#">Google Drive</button>
+        <div class="divider-nav"></div>
+        <button mat-button  [routerLink]="['google-drive']" class="btn btn-outline-primary btn-block logout-btn button-nav" href="#">Google Drive</button>
         <!-- <a class="nav-link" style="color:white;" [routerLink]="['google-drive']" href="#">Google Drive</a> -->
       </li>
     </ul>
@@ -37,7 +37,7 @@
         <li class="nav-item" routerLinkActive="active">
           <button mat-button [routerLink]="['edit-profile']" class="btn btn-outline-primary btn-block profile-btn">{{email}}</button>
           <!-- <a class="navbar-link email-link" style="color:white;" [routerLink]="['edit-profile']" href="#">{{email}}</a> -->
-           <div class="divider"></div>
+           <div class="divider-nav"></div>
          </li>
          <li class="nav-item" routerLinkActive="active">
            <button mat-button  class="btn btn-outline-primary btn-block logout-btn" (click)="onLogout()">Logout</button>

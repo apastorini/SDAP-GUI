@@ -13,7 +13,6 @@ export class BreadCrumbSession {
         lastItem.ShowOption = true;
     }
 
-
     init(): any {
         this.items = [];
         this.push("root", "My Drive");

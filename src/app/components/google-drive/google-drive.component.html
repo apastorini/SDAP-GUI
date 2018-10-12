@@ -51,7 +51,12 @@
 <h1 class="animated fast fadeIn display-3"> Mis Archivos de Gmail</h1>
   <hr>
   <p>Para cargar sus archivos de Google Drive primero debe loguearse en su cuenta  de google</p>
+<div class="">
   <button class="btn btn-outline-primary btn-block form-control" (click)="signIn()">Seleccionar Cuenta</button>
+  <div class="divider-nav">
+  <label for="">{{email}}</label>
+  </div>
+</div>
   <!-- <button class="btn btn-outline-primary btn-block form-control" *ngIf="!isSignedIn"(click)="refresh('root')">Refresh</button> -->
       <!-- <button class="acc_button" mat-raised-button oninvalid=""(click)="signOut()">Sign out</button> -->
       <br>

@@ -2,12 +2,6 @@ export const MIME_TYPE_FOLDER = "application/vnd.google-apps.folder";
 
 export class FileInfo {
 
-
-
-
-
-
-
     static fromGoogleFile(file: gapi.client.drive.File): FileInfo {
         let fileInfo = new FileInfo();
         fileInfo.Id = file.id;

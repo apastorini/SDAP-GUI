@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService} from '../../services/user.service';
-//import { AuthService, GoogleLoginProvider } from "angular5-social-login";
 import { HttpClient} from '@angular/common/http'
 import { Router,Routes, RouterModule} from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl, AsyncValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
@@ -9,7 +8,6 @@ import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../../utils/modal/modal.component';
-//import { User } from '../../models';
 
 
 
@@ -38,10 +36,11 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getAllUsers();
+
     this.registerForm = this.fb.group({     // {5}
       name: ['', Validators.required],
       secondName: ['', Validators.required],
-      email: ['',
+      email: [sessionStorage.getItem('email'),
       [Validators.required,Validators.email]],
       password:['',[
         Validators.required,

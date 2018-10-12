@@ -5,7 +5,7 @@ import { DialogOneInputData } from "../../../model/dialogOneInputData";
 @Component({
     selector: "dialogoneinput",
     templateUrl: "./dialogoneinput.component.html",
-    styleUrls:['./dialogoneinput.component.css']
+    styleUrls:[]
 
 })
 export class DialogOneInputComponent implements OnInit {

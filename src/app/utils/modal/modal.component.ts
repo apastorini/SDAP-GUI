@@ -4,15 +4,12 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css']
+  styleUrls: []
 })
 export class ModalComponent implements OnInit {
-
-  //@Input() title = `Information`;
   @Input() text = ``;
   @Input() type = ``;
   @Input() title = ``;
-
 
   constructor(
     public activeModal: NgbActiveModal,

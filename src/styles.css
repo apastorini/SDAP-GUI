@@ -23,8 +23,12 @@ margin-top: 100px;
 .btn-outline-primary:hover{color:white;background-color:midnightblue;border-color:white}
 .btn-outline-primary:focus,.btn-outline-primary.focus{box-shadow:0 0 0 .2rem rgba(0,128,128,0.5)}
 
-.divider{
+.divider-nav{
     width:5px;
+    height:auto;
+    display:inline-block;
+}
+.divider{
     height:auto;
     display:inline-block;
 }
@@ -34,11 +38,16 @@ margin-top: 100px;
 }
 button{
     cursor: pointer;
+}
+
+.button-nav{
+    cursor: pointer;
     margin-left: 10px;
     padding-left: 10px;
     padding-right:10px;
     margin-right: 10px;
 }
+
 select{
   cursor: pointer;
 }
@@ -187,20 +196,23 @@ a{
     margin-top: 10px;
   }
 }
-
-/*@media (min-width:961px)  {  tablet, landscape iPad, lo-res laptops ands desktops }*/
-/*.
+.middle-centered{
+  width: 50%;
+  margin: 0 auto;
+  outline: 2px solid black;
+}
 
 /*Errors*/
-/*.invalid-feedback  div{
+.invalid-feedback  div{
   color: red;
   font-size: 14px;
-}*/
+  width: 250px;
+}
 
-/*.img-modal{
+.img-modal{
   width: 40px;
   height: 40px;
-}*/
+}
 
 
 /*FOOOOOOOOOTER*/

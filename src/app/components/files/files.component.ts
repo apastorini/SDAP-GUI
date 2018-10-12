@@ -10,7 +10,7 @@ import { ModalComponent } from '../../utils/modal/modal.component';
 @Component({
   selector: 'app-files',
   templateUrl: './files.component.html',
-  styleUrls: ['./files.component.css']
+  styleUrls: []
 })
 
 export class FilesComponent implements OnInit {
@@ -57,7 +57,7 @@ export class FilesComponent implements OnInit {
               console.log("EVENT " + JSON.stringify(HttpEventType.Response));
               if(HttpEventType.Response == 4){
                 this.openModal("Archivo subido", "puedes descargarlo o eliminarlo desde la lista de archivos","assets/img/green.png");
-              //  alert('Archivo Subido Exitosamente');
+                
               }
           }
 
