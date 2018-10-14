@@ -11,8 +11,6 @@ import { AnalyzeComponent } from './components/analyze/analyze.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { GoogleDriveComponent } from './components/google-drive/google-drive.component';
 import { AuthGuard } from './auth/auth.guard';
-import { WebmasterValidationComponent } from './webmaster-validation/webmaster-validation.component';
-
 
 const APP_ROUTES: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full', canActivate: [AuthGuard]},
@@ -33,11 +31,6 @@ const APP_ROUTES: Routes = [
   { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard]},
   { path: 'google-drive', component: GoogleDriveComponent, canActivate: [AuthGuard]},
   { path: '**', pathMatch: 'full', redirectTo: '' },
-  { path: 'google273105c2716c4f2f.html', component: WebmasterValidationComponent }
 ];
-
-
-//const config = {useHash:true,enableTracing:true};
-
 
 export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES);

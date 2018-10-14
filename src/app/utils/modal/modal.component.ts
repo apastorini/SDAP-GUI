@@ -10,6 +10,8 @@ export class ModalComponent implements OnInit {
   @Input() text = ``;
   @Input() type = ``;
   @Input() title = ``;
+  @Input() action = ``;
+
 
   constructor(
     public activeModal: NgbActiveModal,

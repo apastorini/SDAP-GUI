@@ -19,7 +19,7 @@ import { PasswordComponent } from './components/password/password.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { HomeComponent } from './components/home/home.component';
-import { WebmasterValidationComponent } from './webmaster-validation/webmaster-validation.component';
+//import { WebmasterValidationComponent } from './webmaster-validation/webmaster-validation.component';
 //import { ConfirmationDialogComponent } from './components/shared/confirmation-dialog/confirmation-dialog.component';
 
 //Servicios
@@ -82,7 +82,6 @@ export function initGapi(gapiSession: GapiSession) {
     GoogleDriveComponent,
     EditProfileComponent,
     ModalComponent,
-    WebmasterValidationComponent,
     DialogOneInputComponent,
     BreadCrumbComponent,
     BreadCrumbItemComponent

@@ -24,7 +24,7 @@
           </a>
         </td>
         <td>
-          <a id="{{file.idFile}}" (click)="deleteFile(file.idFile)">
+          <a id="{{file.idFile}}" (click)="deleteFileFlow(file.idFile)">
             <img class="canClick" src="assets/img/delete.svg" alt="Eliminar archivo" style="width:20px;height:20px;border:0;">
           </a>
         </td>
@@ -46,7 +46,7 @@
     <input type="file" class="file-btn" (change)=onFileSelected($event)>
     <div class="divider-nav">
     </div>
-    <button type="button" class="btn btn-outline-primary btn-block form-control" [disabled]="buttonDisabled" (click)="onUpload()">Subir Archivo</button>
+    <button type="button" class="btn btn-outline-primary btn-block form-control" [disabled]="buttonDisabled" (click)="uploadFlow()">Subir Archivo</button>
 
     <span ng-if="porcentaje != 0">{{porcentaje}}</span>
   </div>

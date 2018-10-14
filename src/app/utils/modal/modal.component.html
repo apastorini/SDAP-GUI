@@ -1,13 +1,25 @@
 <div class="modal-header">
-  <img src="{{type}}" class="img-modal img-fluid pull-xs-left" alt=""><h4 class="modal-title">{{title}}</h4>
+  <img src="assets/img/{{type}}.png" *ngIf="type === 'error' " class="img-modal img-fluid pull-xs-left" alt=""><h4 *ngIf="type === 'error' " class="modal-title">{{title}} </h4>
+  <img src="assets/img/{{type}}.png" *ngIf="type === 'success'" class="img-modal img-fluid pull-xs-left" alt=""><h4 *ngIf="type === 'success' " class="modal-title">{{title}}</h4>
+  <img src="assets/img/{{type}}.png" *ngIf="type === 'confirm'" class="img-modal img-fluid pull-xs-left" alt=""><h4 *ngIf="type === 'confirm' " class="modal-title">{{title}}</h4>
+
   <button type="button" class="close" aria-label="Close"
    (click)="activeModal.dismiss('Cross click')">
   </button>
 </div>
-<div class="modal-body">
+<div *ngIf="text !== ''"class="modal-body">
   <p>{{text}}</p>
 </div>
-<div class="modal-footer">
+<div class="modal-footer" *ngIf="type === 'confirm'">
+  <button (click)="activeModal.close(action)">
+    Confrimar
+  </button>
+
+  <button (click)="activeModal.dismiss('Close clicked')">
+    Cerrar
+  </button>
+</div>
+<div class="modal-footer" *ngIf="type === 'success'||'error'">
   <button (click)="activeModal.dismiss('Close clicked')">
     Cerrar
   </button>

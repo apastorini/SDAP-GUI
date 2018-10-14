@@ -7,7 +7,7 @@ import { FormGroup, FormBuilder, Validators, FormControl, AsyncValidatorFn, Abst
 import { AuthService } from '../../auth/auth.service';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal,NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../../utils/modal/modal.component';
 
 @Component({
@@ -38,7 +38,7 @@ export class AnalyzeComponent implements OnInit {
           this.analyzeService.iniciarAnalisis(this.fileToAnalize,this.filesToCompare).subscribe(res=>{
             this.buttonDisabled = false;
             console.log("ANALISIS   " + JSON.stringify(res));
-            this.openModal("Analisis Iniciado","Podes ver el estado de este y otros analisis en la pestaña Reportes.","assets/img/green.png")
+            this.openModal("Analisis Iniciado","Podes ver el estado de este y otros analisis en la pestaña Reportes.","success","success")
 
           });
   }
@@ -46,12 +46,12 @@ export class AnalyzeComponent implements OnInit {
   onSubmit(){
     console.log("polo   " + this.fileToAnalize);
     if(this.fileToAnalize=="-1"){
-      this.openModal("No se inició el analisis","Seleccione Archivo a analizar.","assets/img/red.png")
+      this.openModal("No se inició el analisis","Seleccione documento a analizar y vuelva a intentarlo.","error","error")
     }else
     {
       console.log("polo 2  " + this.filesToCompare.length);
       if(this.filesToCompare.length == 0){
-        this.openModal("No se inició el analisis","Seleccione 1 o mas archivos de la lista para comparar.","assets/img/red.png")
+        this.openModal("No se inició el analisis","Seleccione 1 o mas archivos de la lista para comparar y vuelva a intentarlo.","error","error")
 
       }else{
           this.buttonDisabled = true;
@@ -102,11 +102,16 @@ export class AnalyzeComponent implements OnInit {
     });
   }
 
-  openModal(title,text,type) {
-    const modalRef = this.modalService.open(ModalComponent);
+  openModal(title,text,type,action) {
+    let ngbModalOptions: NgbModalOptions = {
+          backdrop : 'static',
+          keyboard : false
+    };
+    const modalRef = this.modalService.open(ModalComponent,ngbModalOptions);
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.text = text;
     modalRef.componentInstance.type = type;
+    modalRef.componentInstance.type = action;
 
     modalRef.result.then((result) => {
       console.log("resultados del modal  "+result);

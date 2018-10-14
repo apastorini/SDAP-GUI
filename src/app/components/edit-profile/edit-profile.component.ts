@@ -6,10 +6,8 @@ import { FormGroup, FormBuilder, Validators, FormControl, AsyncValidatorFn, Abst
 import { AuthService } from '../../auth/auth.service';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal,NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../../utils/modal/modal.component';
-
-
 
 
 @Component({
@@ -59,7 +57,7 @@ export class EditProfileComponent implements OnInit {
    
           // stop here if form is invalid
           if (this.registerForm.invalid) {
-            this.openModal("Error al crear usuario", "","assets/img/red.png");
+            this.openModal("Error al crear usuario", "","error","error");
               return;
           }
         else{
@@ -71,7 +69,7 @@ export class EditProfileComponent implements OnInit {
 
             if(true){
 
-              this.openModal("Usuario creado", "","assets/img/green.png");
+              this.openModal("Usuario creado", "","success","success");
 
             }
             else{
@@ -109,11 +107,16 @@ export class EditProfileComponent implements OnInit {
   }
 
 
-  openModal(title,text,type) {
-    const modalRef = this.modalService.open(ModalComponent);
+  openModal(title,text,type,action) {
+    let ngbModalOptions: NgbModalOptions = {
+          backdrop : 'static',
+          keyboard : false
+    };
+    const modalRef = this.modalService.open(ModalComponent,ngbModalOptions);
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.text = text;
     modalRef.componentInstance.type = type;
+    modalRef.componentInstance.type = action;
 
     modalRef.result.then((result) => {
       console.log("resultados del modal  "+result);

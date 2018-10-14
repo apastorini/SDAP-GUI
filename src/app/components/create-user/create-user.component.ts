@@ -7,8 +7,10 @@ import { FormGroup, FormBuilder, Validators, FormControl, AsyncValidatorFn, Abst
 import { AuthService } from '../../auth/auth.service';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal,NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../../utils/modal/modal.component';
+
+
 
  //[ existingMobileNumberValidator(this.userService),
 @Component({
@@ -71,14 +73,14 @@ export class CreateUserComponent implements OnInit {
 
             if(res['code']==0){
               this.successfullySaved = true;
-                this.openModal("Usuario creado", "","assets/img/green.png");
+                this.openModal("Usuario creado", "","success","success");
                 this.submitted = false;
                 this.registerForm.reset();
               //alert("")
             }
             else{
               this.errorSaved = true;
-              this.openModal("Error al crear usuario", "","assets/img/red.png");
+              this.openModal("Error al crear usuario", "","success","success");
             //  alert("Error al crear usuario")
             }
           })
@@ -102,11 +104,17 @@ export class CreateUserComponent implements OnInit {
     this.registerForm.controls['email'].setErrors({'incorrect': value});
   }
 
-  openModal(title,text,type) {
-    const modalRef = this.modalService.open(ModalComponent);
+  openModal(title,text,type,action) {
+    let ngbModalOptions: NgbModalOptions = {
+          backdrop : 'static',
+          keyboard : false
+    };
+    const modalRef = this.modalService.open(ModalComponent,ngbModalOptions);
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.text = text;
     modalRef.componentInstance.type = type;
+    modalRef.componentInstance.type = action;
+
 
     modalRef.result.then((result) => {
       console.log("resultados del modal  "+result);

@@ -7,7 +7,7 @@ import { FormGroup, FormBuilder, Validators, FormControl, AsyncValidatorFn, Abst
 import { AuthService } from '../../auth/auth.service';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal,NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../../utils/modal/modal.component';
 
 @Component({
@@ -63,7 +63,7 @@ onSubmit() {
     this.userService.modifyUser(this.registerForm.value).subscribe(res =>{
      if(true){
        this.getAllUsers();
-        this.openModal("Usuario modificado", "","assets/img/green.png");
+        this.openModal("Usuario modificado", "","success","success");
      }
      else{
        //  alert("Error al crear usuario")
@@ -99,11 +99,17 @@ getAllUsers(){
 
   }
 
-  openModal(title,text,type) {
-    const modalRef = this.modalService.open(ModalComponent);
+  openModal(title,text,type,action) {
+    let ngbModalOptions: NgbModalOptions = {
+          backdrop : 'static',
+          keyboard : false
+    };
+    const modalRef = this.modalService.open(ModalComponent,ngbModalOptions);
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.text = text;
     modalRef.componentInstance.type = type;
+    modalRef.componentInstance.type = action;
+
 
     modalRef.result.then((result) => {
       console.log("resultados del modal  "+result);

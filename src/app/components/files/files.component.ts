@@ -3,8 +3,9 @@ import { Constants } from '../../utils/Constants';
 import { FileService } from '../../services/file.service';
 import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { Session } from '../../auth/loginData';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../../utils/modal/modal.component';
+
 
 
 @Component({
@@ -19,6 +20,7 @@ export class FilesComponent implements OnInit {
   public uploadFile = Constants.BASE_URL +  'documentController/addFileToUser';
   selectedFile: File = null;
   buttonDisabled: boolean = false;
+  fileID = null;
 
   constructor(
     private http: HttpClient,
@@ -31,39 +33,42 @@ export class FilesComponent implements OnInit {
 
   }
 
-  onUpload(){
-    console.log("hola"+ this.buttonDisabled)
+  upload(){
+    this.buttonDisabled=true;
+    const fd = new FormData();
+    console.log("ULPLOAD()")
+    fd.append('file',this.selectedFile, this.selectedFile.name)
+    this.http.post(this.uploadFile + "?email=" + sessionStorage.email + "&token=" + sessionStorage.token ,fd,{
+      reportProgress: true,
+      observe:'events'
+    })
+      .subscribe(event => {
+        if(event.type === HttpEventType.UploadProgress){
+          this.porcentaje = Math.round(event.loaded / event.total * 100) + "%";
+          console.log('Upload Progress: '+ this.porcentaje)
+
+        }else if(event.type === HttpEventType.Response){
+          this.buttonDisabled = false;
+            this.getAllUserFiles();
+
+            console.log("EVENT " + JSON.stringify(event));
+            console.log("EVENT " + JSON.stringify(HttpEventType.Response));
+            if(HttpEventType.Response == 4){
+              this.openModal("Archivo subido", "puedes descargarlo o eliminarlo desde la lista de archivos","success","success");
+
+            }
+        }
+
+      });
+  }
+
+  uploadFlow(){
+    console.log("hola "+ this.selectedFile)
     if(this.selectedFile == null){
-      this.openModal("Archivo no seleccionado", "Seleccione archivo a subir e intentelo nuevamente","assets/img/red.png");
+      this.openModal("Archivo no seleccionado", "Seleccione archivo a subir e intentelo nuevamente","error","error");
     }
-    else{
-      this.buttonDisabled=true;
-      const fd = new FormData();
-      fd.append('file',this.selectedFile, this.selectedFile.name)
-      this.http.post(this.uploadFile + "?email=" + sessionStorage.email + "&token=" + sessionStorage.token ,fd,{
-        reportProgress: true,
-        observe:'events'
-      })
-        .subscribe(event => {
-          if(event.type === HttpEventType.UploadProgress){
-            this.porcentaje = Math.round(event.loaded / event.total * 100) + "%";
-            console.log('Upload Progress: '+ this.porcentaje)
-
-          }else if(event.type === HttpEventType.Response){
-            this.buttonDisabled = false;
-              this.getAllUserFiles();
-
-              console.log("EVENT " + JSON.stringify(event));
-              console.log("EVENT " + JSON.stringify(HttpEventType.Response));
-              if(HttpEventType.Response == 4){
-                this.openModal("Archivo subido", "puedes descargarlo o eliminarlo desde la lista de archivos","assets/img/green.png");
-                
-              }
-          }
-
-        });
-      }
-      console.log("chau  "+ this.buttonDisabled)
+    else
+      this.openModal("Esta seguro de subir el documento?", "Haga click en 'Confirmar' para subir el documento o en 'Cerrar' para cancelar la accion","confirm",'upload');
   }
 
   ngOnInit() {
@@ -77,6 +82,12 @@ export class FilesComponent implements OnInit {
       this.fileList = res['result'];
     });
   }
+
+deleteFileFlow(fileID: string){
+  this.fileID=fileID;
+  this.openModal("Esta seguro de eliminar el archivo?", "Haga click en 'Confirmar' para eliminar el archivo o en 'Cerrar' para cancelar la accion","confirm",'delete')
+
+}
 
   downloadFile(fileID: string ){
     console.log("entro!!!  " + fileID)
@@ -93,7 +104,6 @@ export class FilesComponent implements OnInit {
 
 
   deleteFile(fileID: string){
-
     this.fileService.deleteFile(sessionStorage.getItem('email'),sessionStorage.getItem('token'), fileID)
     .subscribe(res =>{
       this.getAllUserFiles();
@@ -105,8 +115,6 @@ export class FilesComponent implements OnInit {
   showFile(blob){
     console.log("size!!!  " + blob.size);
 
-    // IE doesn't allow using a blob object directly as link href
-    // instead it is necessary to use msSaveOrOpenBlob
     if (window.navigator && window.navigator.msSaveOrOpenBlob) {
       window.navigator.msSaveOrOpenBlob(blob);
       return;
@@ -124,24 +132,35 @@ export class FilesComponent implements OnInit {
   }
 
 
-  openModal(title,text,type) {
-    const modalRef = this.modalService.open(ModalComponent);
+
+  openModal(title,text,type,action) {
+    let ngbModalOptions: NgbModalOptions = {
+          backdrop : 'static',
+          keyboard : false
+    };
+    const modalRef = this.modalService.open(ModalComponent,ngbModalOptions);
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.text = text;
     modalRef.componentInstance.type = type;
+    modalRef.componentInstance.action = action;
+
 
     modalRef.result.then((result) => {
+
       console.log("resultados del modal  "+result);
+      if(result=='delete'){
+        this.deleteFile(this.fileID)
+      }
+      if(result=='upload'){
+        console.log("ENTRO AL upload!!!!")
+        this.upload();
+
+      }
+
     }).catch((error) => {
       console.log(error);
     });
   }
-
-
-
-
-
-
 
 
   }
