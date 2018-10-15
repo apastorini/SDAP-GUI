@@ -9,8 +9,10 @@ import { HomeComponent } from './components/home/home.component';
 import { ResultsComponent } from './components/results/results.component';
 import { AnalyzeComponent } from './components/analyze/analyze.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { GoogleDriveComponent } from './components/google-drive/google-drive.component';
 import { AuthGuard } from './auth/auth.guard';
+import { HelpComponent } from './components/help/help.component';
 
 const APP_ROUTES: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full', canActivate: [AuthGuard]},
@@ -30,7 +32,9 @@ const APP_ROUTES: Routes = [
   { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard]},
   { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard]},
   { path: 'google-drive', component: GoogleDriveComponent, canActivate: [AuthGuard]},
-  { path: '**', pathMatch: 'full', redirectTo: '' },
+  { path: 'help', component: HelpComponent, canActivate: [AuthGuard]},
+  //{ path: '**', pathMatch: 'full', redirectTo: '' },
+  { path: '**', component: PageNotFoundComponent},
 ];
 
 export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES);

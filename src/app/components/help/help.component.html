@@ -1,0 +1,45 @@
+<h1 class="animated fast fadeIn display-3">Ayuda</h1>
+<hr>
+<div *ngIf="role=='1'" class="jumbotron animated fast fadeIn">
+  <h2>Crear Usuario</h2>
+  <hr>
+  <p>Pagina donde crear usuarios, se debe llenar un formulario donde todos los campos son obligatorios.</p>
+  <br>
+  <br>
+  <h2>Editar Usuario</h2>
+  <hr>
+  <p>Pagina donde editar usuarios, se debe elegir el usuario a ser editado y el usuario cargará la información del usuario seleccionado. Se puede modificar el formulario donde todos los campos son obligatorios.</p>
+  <br>
+  <br>
+  <h2>Editar Perfil</h2>
+  <hr>
+  <p>Para acceder a la pagina Editar Perfil, se debe cliquear en el boton que despliega tu email ({{email}}), Se puede modificar el formulario donde todos los campos son obligatorios.</p>
+</div>
+
+<div *ngIf="role=='2'" class="jumbotron animated fast fadeIn">
+  <h2>Archivos</h2>
+  <hr>
+  <p>En esta pagina el usuario podra subir documentos a su cuenta en el sistema, ademas de ver un listado con los documentos que ya subió y la posibilidad de eliminarlos del mismo.</p>
+  <br>
+  <br>
+  <h2>Analizar</h2>
+  <hr>
+  <p>Para realizar un analisis se debe elegir el documento a ser analisado y al menos un documento ya sea de la tabla "Mis documentos" o de la tabla "Documentos compartidos", despues de ser seleccionados y cliquear "Analizar" el sistema iniciara el analisis que podras ver en la pagina de Reportes. </p>
+  <br>
+  <br>
+  <h2>Reportes</h2>
+  <hr>
+  <p>Aqui, se muestran los analisis que se estan ejecutando como los que ya se completaron, dando la opcion de descargar el reporte con los resultados de dicho analisis  </p>
+  <br>
+  <br>
+  <h2>Google Drive</h2>
+  <hr>
+  <p>El boton "Seleccionar Cuenta" permite conectarte a una cuenta de Google Drive y despliega los documentos validos para el sistema. Esta pagina permite la navegacion entre las carpetas de la cuenta y la descarga del archivo que puede posteriormente cargarse en el sistema atraves de la pagina "Archivos".</p>
+  <br>
+  <br>
+  <h2>Editar Perfil</h2>
+  <hr>
+  <p>Para acceder a la pagina Editar Perfil, se debe cliquear en el boton que despliega tu email ({{email}}), Se puede modificar el formulario donde todos los campos son obligatorios.</p>
+</div>
+<br>
+<br>
