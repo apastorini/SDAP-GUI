@@ -17,6 +17,7 @@ export class ModalComponent implements OnInit {
     public activeModal: NgbActiveModal,
   )
    {
+     console.log("DATA MODAL>  "+ this.text + "   " +this.type + "   " +this.title + "   " +this.action)
    }
 
   closeModal() {

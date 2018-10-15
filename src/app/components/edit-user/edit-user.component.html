@@ -26,7 +26,7 @@
             <input type="text" formControlName="name" placeholder="Nombre" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
             <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                 <div class="divider"></div>
-                <div class="alert alert-danger" *ngIf="f.name.errors.required">First Name is required</div>
+                <div class="alert alert-danger" *ngIf="f.name.errors.required">Nombre requerido</div>
                 </div>
             </div>
 
@@ -34,7 +34,7 @@
             <input type="text" formControlName="secondName" placeholder="Apellido" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.secondName.errors }" />
             <div *ngIf="submitted && f.secondName.errors" class="invalid-feedback">
                 <div class="divider"></div>
-                <div class="alert alert-danger" *ngIf="f.secondName.errors.required">Last Name is required</div>
+                <div class="alert alert-danger" *ngIf="f.secondName.errors.required">Aoellido requerido</div>
                 </div>
             </div>
 

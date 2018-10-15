@@ -18,7 +18,7 @@
 
             <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                 <div class="divider"></div>
-                <div class="alert alert-danger" *ngIf="f.name.errors.required">First Name is required</div>
+                <div class="alert alert-danger" *ngIf="f.name.errors.required">Nombre requerido</div>
                 </div>
             </div>
 
@@ -27,7 +27,7 @@
 
             <div *ngIf="submitted && f.secondName.errors" class="invalid-feedback">
                 <div class="divider"></div>
-                <div class="alert alert-danger" *ngIf="f.secondName.errors.required">Last Name is required</div>
+                <div class="alert alert-danger" *ngIf="f.secondName.errors.required">Apellido requerido</div>
                 </div>
             </div>
 
@@ -36,8 +36,8 @@
 
           <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
             <div class="divider"></div>
-            <div class="alert alert-danger" *ngIf="f.password.errors.required">Password is required</div>
-            <div class="alert alert-danger" *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+            <div class="alert alert-danger" *ngIf="f.password.errors.required">Contraseña requerida</div>
+            <div class="alert alert-danger" *ngIf="f.password.errors.minlength">Contraseña menor a 6 digitos</div>
           </div>
         </div>
 
@@ -46,8 +46,8 @@
 
           <div *ngIf="submitted && f.r_password.errors" class="invalid-feedback">
             <div class="divider"></div>
-            <div class="alert alert-danger" *ngIf="f.r_password.errors.required">Password is required</div>
-            <div class="alert alert-danger" *ngIf="f.r_password.errors.minlength">Password must be at least 6 characters</div>
+            <div class="alert alert-danger" *ngIf="f.r_password.errors.required">Confirmación requerida</div>
+            <div class="alert alert-danger" *ngIf="f.r_password.errors.minlength">Confirmación menor a 6 digitos</div>
           </div>
         </div>
 

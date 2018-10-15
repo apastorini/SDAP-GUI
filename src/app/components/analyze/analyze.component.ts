@@ -33,13 +33,16 @@ export class AnalyzeComponent implements OnInit {
     private modalService: NgbModal
   ) { }
 
-  doAnalysis(){
 
+analysisFlow(){
+  this.openModal("¿Esta seguro de iniciar el analisis?","Haga click en 'Confirmar' para iniciar el analisis o en 'Cerrar' para cancelar la accion","analyze","confirm")
+}
+
+
+  doAnalysis(){
           this.analyzeService.iniciarAnalisis(this.fileToAnalize,this.filesToCompare).subscribe(res=>{
-            this.buttonDisabled = false;
             console.log("ANALISIS   " + JSON.stringify(res));
             this.openModal("Analisis Iniciado","Podes ver el estado de este y otros analisis en la pestaña Reportes.","success","success")
-
           });
   }
 
@@ -54,8 +57,7 @@ export class AnalyzeComponent implements OnInit {
         this.openModal("No se inició el analisis","Seleccione 1 o mas archivos de la lista para comparar y vuelva a intentarlo.","error","error")
 
       }else{
-          this.buttonDisabled = true;
-          this.doAnalysis();
+          this.analysisFlow();
 
       }
     }
@@ -115,6 +117,9 @@ export class AnalyzeComponent implements OnInit {
 
     modalRef.result.then((result) => {
       console.log("resultados del modal  "+result);
+      if(result=="analyze"){
+        this.doAnalysis()
+      }
     }).catch((error) => {
       console.log(error);
     });

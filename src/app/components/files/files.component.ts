@@ -85,7 +85,7 @@ export class FilesComponent implements OnInit {
 
 deleteFileFlow(fileID: string){
   this.fileID=fileID;
-  this.openModal("Esta seguro de eliminar el archivo?", "Haga click en 'Confirmar' para eliminar el archivo o en 'Cerrar' para cancelar la accion","confirm",'delete')
+  this.openModal("¿Esta seguro de eliminar el archivo?", "Haga click en 'Confirmar' para eliminar el archivo o en 'Cerrar' para cancelar la accion","confirm",'delete')
 
 }
 

@@ -57,27 +57,27 @@ export class EditProfileComponent implements OnInit {
    
           // stop here if form is invalid
           if (this.registerForm.invalid) {
-            this.openModal("Error al crear usuario", "","error","error");
+            this.openModal("Error al editar perfil", "Uno o mas campos son incorrectos, complete los campos correctamente y vuelva a intentarlo","error","error");
               return;
           }
         else{
 
-          this.userService.modifyUser(this.registerForm.value).subscribe(res =>{
-              console.log('FLAG 11')
-            console.log(JSON.stringify(res));
-            console.log(JSON.stringify(res['code']));
+          this.openModal("¿Esta seguro de modificar su perfil?", "Haga click en 'Confirmar' para modificar el perfil o en 'Cerrar' para cancelar la accion",'edit',"confirm")
 
-            if(true){
 
-              this.openModal("Usuario creado", "","success","success");
-
-            }
-            else{
-            //  alert("Error al crear usuario")
-            }
-          })
       }
   }
+
+
+editarPerfil(){
+  this.userService.modifyUser(this.registerForm.value).subscribe(res =>{
+
+
+      this.openModal("Perfil modificado", "","success","success");
+
+  })
+}
+
 
   goToLogin(){
     this.router.navigate(['login']);
@@ -120,6 +120,9 @@ export class EditProfileComponent implements OnInit {
 
     modalRef.result.then((result) => {
       console.log("resultados del modal  "+result);
+      if(result=='edit'){
+
+      }
     }).catch((error) => {
       console.log(error);
     });
