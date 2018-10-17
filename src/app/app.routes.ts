@@ -6,7 +6,6 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { HomeComponent } from './components/home/home.component';
-import { ResultsComponent } from './components/results/results.component';
 import { AnalyzeComponent } from './components/analyze/analyze.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -20,7 +19,6 @@ const APP_ROUTES: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'password', component: PasswordComponent },
-  { path: 'results', component: ResultsComponent, canActivate: [AuthGuard]},
   { path: 'analyze', component: AnalyzeComponent, canActivate: [AuthGuard]},
   { path: 'create-user', component: CreateUserComponent,  canActivate: [AuthGuard],data: {
         roles: {

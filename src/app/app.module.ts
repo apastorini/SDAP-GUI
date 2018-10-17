@@ -24,7 +24,6 @@ import { HomeComponent } from './components/home/home.component';
 
 //Servicios
 import { LoginService } from './services/login.service';
-import { AuthenticationService } from './services/authentication.service';
 import { AuthService } from './auth/auth.service';
 import { AnalyzeService } from './services/analyze.service';
 import { UserService } from './services/user.service';
@@ -37,7 +36,6 @@ import { HomeService } from './services/home.service';
 import { APP_ROUTING } from './app.routes'
 import { AuthGuard } from './auth/auth.guard';
 import { FooterComponent } from './components/shared/footer/footer.component';
-import { ResultsComponent } from './components/results/results.component';
 import { AnalyzeComponent } from './components/analyze/analyze.component';
 import { UniqueEmailValidatorDirective } from './validators/unique-email-validator.directive';
 import { ReportsComponent } from './components/reports/reports.component';
@@ -76,7 +74,6 @@ export function initGapi(gapiSession: GapiSession) {
     EditUserComponent,
     HomeComponent,
     FooterComponent,
-    ResultsComponent,
     AnalyzeComponent,
     UniqueEmailValidatorDirective,
     FileSelectDirective,
@@ -112,7 +109,6 @@ export function initGapi(gapiSession: GapiSession) {
     MatListModule,
   ],
   providers: [
-    AuthenticationService,
     AuthService,
     AuthGuard,
     LoginService,

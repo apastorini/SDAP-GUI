@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from '../models/User';
-import {URLSearchParams} from '@angular/http';
+import { URLSearchParams } from '@angular/http';
 
 @Injectable()
 export class FileService {
