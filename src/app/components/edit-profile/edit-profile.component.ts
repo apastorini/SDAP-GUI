@@ -98,10 +98,8 @@ editarPerfil(){
 
   getAllUsers(){
     this.userService.getAllUsers().subscribe(res=>{
-      console.log('RES!!!'+JSON.stringify(res['result']) );
       //this.user = res['result'];
 
-      console.log('RES!!! USEEEEEEER        '+JSON.stringify(res['result'][1]));
 
     })
   }

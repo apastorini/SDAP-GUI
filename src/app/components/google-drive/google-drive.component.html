@@ -2,114 +2,55 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 
-    <!-- <div class="table-wrapper-scroll-y">
-      <table #table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-          <ng-container matColumnDef="icon">
-              <th mat-header-cell *matHeaderCellDef></th>
-              <td mat-cell *matCellDef="let item">
-                  <mat-icon>{{item.Icon}}</mat-icon>
-              </td>
-          </ng-container>
-          <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef> Name </th>
-              <td mat-cell *matCellDef="let item" (click)="browse(item)" [class.folder]="item.IsFolder"> {{item.Name}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="modifiedTime">
-              <th mat-header-cell *matHeaderCellDef> Last modified </th>
-              <td mat-cell *matCellDef="let item"> {{item.ModifiedTimeText}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="size">
-              <th mat-header-cell *matHeaderCellDef> Size </th>
-              <td mat-cell *matCellDef="let item"> {{item.SizeText}} </td>
-          </ng-container>
-
-           <ng-container matColumnDef="delete">
-              <th mat-header-cell *matHeaderCellDef></th>
-              <td mat-cell *matCellDef="let item">
-                  <mat-icon class="download" (click)="downloadFile(item.Id)">delete</mat-icon>
-              </td>
-          </ng-container>
-
-          <ng-container>
-              <th mat-header-cell *matHeaderCellDef></th>
-              <td mat-cell *matCellDef="let item">
-                  <img src="assets/img/download.png" alt="">
-                  <mat-icon class="download" (click)="downloadFile(item.Id)">delete</mat-icon>
-              </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-      </div> -->
-
-
-
-
-<h1 class="animated fast fadeIn display-3"> Mis Archivos de Gmail</h1>
+<h1 class="animated fast fadeIn display-3"> Mis Archivos de Google Drive</h1>
   <hr>
-  <p>Para cargar sus archivos de Google Drive primero debe loguearse en su cuenta  de google</p>
+  <p>Para cargar sus archivos debe loguearse en su cuenta de Google Drive</p>
 <div class="">
   <button class="btn btn-outline-primary btn-block form-control" (click)="signIn()">Seleccionar Cuenta</button>
+  <button *ngIf="isSignedIn" type="button"  (click)='onRefresh()'  class="btn btn-outline-primary btn-block form-control"> Volver a carpeta Raiz</button>
   <div class="divider-nav">
   <label for="">{{email}}</label>
   </div>
 </div>
-  <!-- <button class="btn btn-outline-primary btn-block form-control" *ngIf="!isSignedIn"(click)="refresh('root')">Refresh</button> -->
-      <!-- <button class="acc_button" mat-raised-button oninvalid=""(click)="signOut()">Sign out</button> -->
-      <br>
 
-      <breadcrumb (onSelectedOptionChanged)="onSelectedOptionChanged($event)" (onSelectedItemChanged)="onSelectedItemChanged($event)"
-          [items]="breadCrumbItems"></breadcrumb>
-    <br>
-  <div class="table-wrapper-scroll-y">
-    <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Nombre</th>
-          <th scope="col">Ultima Modificacion</th>
-          <th scope="col">Tamaño</th>
-          <th scope="col">Descargar</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let file of files">
-            <ng-template [ngIf]="file.MimeType == 'application/pdf' || file.MimeType == 'application/vnd.google-apps.folder'">
-            <th>
-              <img class="canClick" (click)="browse(file)" [class.folder]="file.IsFolder" *ngIf="file.IsFolder" src="assets/img/folder.png" alt="Descargar archivo" style="width:20px;height:20px;border:0;">
-            </th>
-            <td>{{file.Name}}</td>
-            <td>{{ file.ModifiedTime | date }}</td>
-            <td>{{file.SizeText}}</td>
-            <td>
-              <a *ngIf="file.Icon == 'file'" id="{{file.idFile}}" (click)="downloadFile(file.Id)">
-                <img class="canClick" src="assets/img/download.png" alt="Descargar archivo" style="width:20px;height:20px;border:0;">
-              </a>
-            </td>
-            <td>
-            </td>
-          </ng-template>
-          </tr>
-      </tbody>
-    </table>
+    <div class="jumbotron">
+
+
+
+      <div  class="table-wrapper-scroll-y">
+        <table class="table table-striped table-dark">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Ultima Modificacion</th>
+              <th scope="col">Tamaño</th>
+              <th scope="col">Descargar</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let file of files">
+                <ng-template [ngIf]="file.MimeType == 'application/pdf' || file.MimeType =='application/msword' || file.MimeType == 'application/vnd.google-apps.folder'">
+                <th>
+                  <img class="canClick" (click)="browse(file)" [class.folder]="file.IsFolder" *ngIf="file.IsFolder" src="assets/img/folder.png" alt="Descargar archivo" style="width:20px;height:20px;border:0;">
+                </th>
+                <td>{{file.Name}}</td>
+                <td>{{ file.ModifiedTime | date }}</td>
+                <td>{{file.SizeText}}</td>
+                <td>
+                  <a *ngIf="file.Icon == 'file'" id="{{file.idFile}}" (click)="downloadFile(file.Id)">
+                    <img class="canClick" src="assets/img/download.png" alt="Descargar archivo" style="width:20px;height:20px;border:0;">
+                  </a>
+                </td>
+                <td>
+                </td>
+              </ng-template>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div *ngIf="!isSignedIn" class="">
+        <img  src="assets/img/error.png" class="img-modal img-fluid pull-xs-left" alt="..."><span><strong>  No se encuentra logueado a ninguna cuenta de Google Drive</strong></span>
+      </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-    <mat-toolbar>
-
-        <span class="fill-space"></span>
-    </mat-toolbar>
-    <br>

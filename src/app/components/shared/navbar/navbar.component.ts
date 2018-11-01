@@ -20,7 +20,6 @@ export class NavbarComponent implements OnInit {
 
 
   constructor(
-
     private authService: AuthService,
     private storageService: StorageService
   ) { }
@@ -28,7 +27,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn; // {2}
-    console.log("si funciona bien "+this.isLoggedIn$);
+    console.log("si funciona bien "+ this.isLoggedIn$);
 
     this.email = sessionStorage.getItem('email');
     this.role = sessionStorage.getItem('role');

@@ -8,7 +8,7 @@ import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
   styleUrls: []
 })
 export class ReportsComponent implements OnInit {
-  reportsList = [];
+  reportsList = false;
 
   constructor(
   private analyzeService: AnalyzeService,
@@ -23,9 +23,9 @@ export class ReportsComponent implements OnInit {
 
     this.analyzeService.listarAnalisisPorUsuario().subscribe(res=>{
       console.log("entro!!!  " + JSON.stringify(res))
-    this.reportsList = res['result'];
-
-
+      if(JSON.stringify(res['result']) != "[]"){
+        this.reportsList = res['result'];
+      }
   });
 
 

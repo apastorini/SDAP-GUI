@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //this.authService.logout()
+    this.authService.logout()
     this.form = this.fb.group({     // {5}
       mail: ['', Validators.required],
       password: ['', Validators.required]

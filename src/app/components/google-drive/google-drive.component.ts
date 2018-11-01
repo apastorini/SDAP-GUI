@@ -23,7 +23,7 @@ export class GoogleDriveComponent implements OnInit{
    //displayedColumns: string[] = ["icon", "name", "modifiedTime", "size", "delete"];
    displayedColumns: string[] = ["icon", "name", "modifiedTime", "size"];
    files: FileInfo[] = [];
-   isSignedIn: boolean = false;
+   isSignedIn: boolean = this.appContext.Session.Gapi.isSignedIn;
    email: string;
 
     constructor(
@@ -41,10 +41,15 @@ export class GoogleDriveComponent implements OnInit{
 
     }
 
+onRefresh(){
+    this.refresh("root");
+}
 
 signIn(){
   this.appContext.Session.Gapi.signIn().then(() => {
     if(this.appContext.Session.Gapi.isSignedIn){
+      this.isSignedIn = this.appContext.Session.Gapi.isSignedIn;
+
       console.log("ESTAS LOGUEADO")
       this.appContext.Session.BreadCrumb.init();
       this.breadCrumbItems = this.appContext.Session.BreadCrumb.items;
@@ -68,6 +73,7 @@ browse(file: FileInfo) {
            this.appContext.Repository.File.getFiles(file.Id)
                .then((res) => {
                    this.zone.run(() => {
+
                        this.files = res;
                        this.dataSource.data = this.files;
                        this.appContext.Session.BreadCrumb.navigateTo(file.Id, file.Name);

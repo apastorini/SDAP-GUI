@@ -6,8 +6,6 @@ import { Session } from '../../auth/loginData';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../../utils/modal/modal.component';
 
-
-
 @Component({
   selector: 'app-files',
   templateUrl: './files.component.html',
@@ -15,7 +13,7 @@ import { ModalComponent } from '../../utils/modal/modal.component';
 })
 
 export class FilesComponent implements OnInit {
-  fileList = [];
+  fileList = false;
   porcentaje = '';
   public uploadFile = Constants.BASE_URL +  'documentController/addFileToUser';
   selectedFile: File = null;
@@ -29,6 +27,7 @@ export class FilesComponent implements OnInit {
   ){}
 
   onFileSelected(event){
+    this.porcentaje='';
     this.selectedFile = <File> event.target.files[0];
 
   }
@@ -78,8 +77,12 @@ export class FilesComponent implements OnInit {
   getAllUserFiles(){
     this.fileService.userFilesList(sessionStorage.getItem('email'),sessionStorage.getItem('token'))
     .subscribe(res => {
-      console.log("respuesta: " + JSON.stringify(res));
-      this.fileList = res['result'];
+      console.log("solucion: " + JSON.stringify(res['result']))
+      if(JSON.stringify(res['result'])!="[]"){
+        console.log("Entra");
+        this.fileList = res['result'];
+      }
+
     });
   }
 
@@ -152,7 +155,6 @@ deleteFileFlow(fileID: string){
         this.deleteFile(this.fileID)
       }
       if(result=='upload'){
-        console.log("ENTRO AL upload!!!!")
         this.upload();
 
       }

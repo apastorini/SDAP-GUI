@@ -16,10 +16,10 @@ import { ModalComponent } from '../../utils/modal/modal.component';
   styleUrls: []
 })
 export class AnalyzeComponent implements OnInit {
-   fileList = [];
+   fileList = false;
    fileToAnalize:string;
    filesToCompare = [];
-   sharedFileList = [];
+   sharedFileList = false;
    buttonDisabled : boolean = false;
 
 
@@ -32,12 +32,6 @@ export class AnalyzeComponent implements OnInit {
     private authService: AuthService,
     private modalService: NgbModal
   ) { }
-
-
-analysisFlow(){
-  this.openModal("¿Esta seguro de iniciar el analisis?","Haga click en 'Confirmar' para iniciar el analisis o en 'Cerrar' para cancelar la accion","analyze","confirm")
-}
-
 
   doAnalysis(){
           this.analyzeService.iniciarAnalisis(this.fileToAnalize,this.filesToCompare).subscribe(res=>{
@@ -57,7 +51,8 @@ analysisFlow(){
         this.openModal("No se inició el analisis","Seleccione 1 o mas archivos de la lista para comparar y vuelva a intentarlo.","error","error")
 
       }else{
-          this.analysisFlow();
+        this.openModal("¿Esta seguro de querer iniciar el analisis?","Haga click en 'Confirmar' para iniciar el analisis o en 'Cerrar' para cancelar la accion","confirm","analyze")
+
 
       }
     }
@@ -86,12 +81,12 @@ analysisFlow(){
      this.fileToAnalize = event.target.value;
    }
 
-
-
   getAllUserFiles(){
     this.fileService.userFilesList(sessionStorage.getItem('email'),sessionStorage.getItem('token'))
     .subscribe(res => {
-      this.fileList =  res['result'];
+      if (JSON.stringify(res['result'])!= "[]"){
+        this.fileList =  res['result'];
+      }
       console.log("lista files " + JSON.stringify(this.fileList));
     });
   }
@@ -99,8 +94,11 @@ analysisFlow(){
   getSharedFiles(){
     this.fileService.getSharedFiles(sessionStorage.getItem('email'),sessionStorage.getItem('token'))
     .subscribe(res => {
-      this.sharedFileList =  res['result'];
-      console.log("lista shared" + JSON.stringify(this.sharedFileList));
+
+      if (JSON.stringify(res['result'])!= "[]"){
+        this.sharedFileList =  res['result'];
+      }
+      console.log("lista shared" + this.sharedFileList);
     });
   }
 
@@ -113,10 +111,10 @@ analysisFlow(){
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.text = text;
     modalRef.componentInstance.type = type;
-    modalRef.componentInstance.type = action;
+    modalRef.componentInstance.action = action;
 
     modalRef.result.then((result) => {
-      console.log("resultados del modal  "+result);
+      console.log("resultados del modal  "+ result);
       if(result=="analyze"){
         this.doAnalysis()
       }

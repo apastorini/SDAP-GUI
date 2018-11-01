@@ -25,6 +25,8 @@ export class ModalComponent implements OnInit {
 }
 
   ngOnInit() {
+    console.log("TEXT:   "+ this.text + "   TYPE:    " +this.type + "    TITLE:   " +this.title + "     ACTION:   " +this.action)
   }
+
 
 }

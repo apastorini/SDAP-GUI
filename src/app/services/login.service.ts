@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from '../models/User';
-import {URLSearchParams} from '@angular/http';
+import { URLSearchParams } from '@angular/http';
 
 @Injectable()
 export class LoginService {
@@ -83,25 +83,22 @@ getIsUsedId(eMail: string): boolean{
   if (eMail!== '') { // {3}
 
         console.log("email: "+ eMail);
-        //this.http.post(this.checkUserUrl, user, {responseType: 'text'}).subscribe(respuesta =>this.manageLoginResponse(respuesta));
         this.http.post(this.passwordByEmail, eMail, {responseType: 'text'})
           .subscribe(respuesta =>localStorage.setItem('currentUser', JSON.stringify({ token: respuesta })))
-        //localStorage.setItem('userID',currentUser.userID);
         return true;
   }
 }
 
 
-recuperarPassword(eMail: string){
+recuperarPassword(eMail: string): Observable<any>{
   if (eMail!== '') { // {3}
 
-        console.log("email: "+ eMail);
+        console.log("email!!!!!  : "+ eMail);
 
         let headers = new HttpHeaders();
         headers = headers.append('Content-Type', 'text/xml');
         //this.http.post(this.checkUserUrl, user, {responseType: 'text'}).subscribe(respuesta =>this.manageLoginResponse(respuesta));
-        this.http.get(this.passwordByEmail)
-          .subscribe(res => alert("eMail Enviado"))
+        return this.http.get(this.passwordByEmail + "?email=" + eMail)
         //localStorage.setItem('userID',currentUser.userID);
   }
 }
