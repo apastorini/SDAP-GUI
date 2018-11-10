@@ -7,7 +7,8 @@ import { HttpClient } from 'selenium-webdriver/http';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FileSelectDirective } from 'ng2-file-upload';
+//import { FileSelectDirective } from 'ng2-file-upload';
+import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 //Components
@@ -59,6 +60,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { HelpComponent } from './components/help/help.component';
 
 
+
+
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
 }
@@ -85,7 +88,9 @@ export function initGapi(gapiSession: GapiSession) {
     BreadCrumbComponent,
     BreadCrumbItemComponent,
     PageNotFoundComponent,
-    HelpComponent
+    HelpComponent,
+    FileDropDirective
+
   ],
   imports: [
     BrowserModule,
