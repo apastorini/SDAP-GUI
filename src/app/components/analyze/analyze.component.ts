@@ -16,11 +16,12 @@ import { ModalComponent } from '../../utils/modal/modal.component';
   styleUrls: []
 })
 export class AnalyzeComponent implements OnInit {
-   fileList = false;
+   fileList = [];
    fileToAnalize:string;
    filesToCompare = [];
    sharedFileList = false;
    buttonDisabled : boolean = false;
+   selectedAll: any;
 
 
    constructor(
@@ -31,12 +32,21 @@ export class AnalyzeComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private modalService: NgbModal
-  ) { }
+
+  ) {
+
+    this.fileToAnalize = '-1';
+    this.getAllUserFiles();
+    this.getSharedFiles();
+
+
+  }
 
   doAnalysis(){
           this.analyzeService.iniciarAnalisis(this.fileToAnalize,this.filesToCompare).subscribe(res=>{
             console.log("ANALISIS   " + JSON.stringify(res));
             this.openModal("Analisis Iniciado","Podes ver el estado de este y otros analisis en la pestaña Reportes.","success","success")
+            this.uncheckAll();
           });
   }
 
@@ -59,21 +69,78 @@ export class AnalyzeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fileToAnalize = '-1';
-    this.getAllUserFiles();
-    this.getSharedFiles();
+    // this.fileToAnalize = '-1';
+    // this.getAllUserFiles();
+    // this.getSharedFiles();
   }
 
 
+  uncheckAll(){
+    for (var i = 0; i < this.fileList.length; i++) {
+        this.fileList[i].selected = this.selectedAll;
+    }
+
+    this.filesToCompare =[];
+  }
+
+  onSelectAll(isChecked: boolean){
+    this.selectedAll = !this.selectedAll;
+
+    if(isChecked) {
+      let aux = <any>this.fileList;
+      this.filesToCompare = aux.map(a => a.idFile);
+
+      for (var i = 0; i < this.fileList.length; i++) {
+          this.fileList[i].selected = this.selectedAll;
+      }
+
+    } else {
+      this.uncheckAll();
+
+    //   for (var i = 0; i < this.fileList.length; i++) {
+    //       this.fileList[i].selected = this.selectedAll;
+    //   }
+    //
+    //   this.filesToCompare =[];
+     }
+    console.log(this.filesToCompare)
+  }
+
+  checkIfAllSelected(){
+    if (this.fileList.length == this.filesToCompare.length){
+      this.selectedAll = true;
+    }
+    this.selectedAll = false;
+  }
+
   onChange(id: string, isChecked: boolean) {
+
+    //Check if all is Selected
+
+
         if(isChecked) {
           this.filesToCompare.push(id);
+          console.log(JSON.stringify(this.fileList.length) +  "    "  + JSON.stringify(this.filesToCompare.length))
+
+          if (this.fileList.length == this.filesToCompare.length){
+            console.log("SI!!! SELECCIONASTE TODOS LOS ELEMENTOS")
+            this.selectedAll = true;
+          }else{
+          console.log("NO!!! SELECCIONASTE TODOS LOS ELEMENTOS")
+          this.selectedAll = false;
+          }
+
         } else {
           let index = this.filesToCompare.indexOf(id);
           this.filesToCompare.splice(index,1);
+          if(this.selectedAll){
+            this.selectedAll = false;
+          }
+
+
+
         }
         console.log(this.filesToCompare)
-
     }
 
    onOptionSelected(event){
@@ -86,6 +153,18 @@ export class AnalyzeComponent implements OnInit {
     .subscribe(res => {
       if (JSON.stringify(res['result'])!= "[]"){
         this.fileList =  res['result'];
+         console.log("PROBANDO!" + JSON.stringify(res['result']));
+         console.log("PROBANDO!" + res['result'].length);
+
+        this.fileList.forEach(function(obj) { obj.selected = false });
+
+
+        // for(let i = 0 ;i < res['result'].length;i++){
+        //   this.names.push({ name : JSON.stringify(res['result'][i].idFile), selected : false })
+        // }
+        // console.log("testeo    " + JSON.stringify(this.names));
+
+
       }
       console.log("lista files " + JSON.stringify(this.fileList));
     });
@@ -117,6 +196,7 @@ export class AnalyzeComponent implements OnInit {
       console.log("resultados del modal  "+ result);
       if(result=="analyze"){
         this.doAnalysis()
+
       }
     }).catch((error) => {
       console.log(error);

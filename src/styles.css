@@ -48,6 +48,10 @@ button{
     margin-right: 10px;
 }
 
+.select-all{
+  outline: 2px solid
+}
+
 h3 {
     font-size: 40px;
   }
