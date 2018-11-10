@@ -14,7 +14,7 @@ import { ModalComponent } from '../../utils/modal/modal.component';
   styleUrls: []
 })
 export class LoginComponent implements OnInit {
-  form: FormGroup;                    // {1}
+  registerForm: FormGroup;                    // {1}
   private formSubmitAttempt: boolean; // {2}
 
   submitted = false;
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.authService.logout()
-    this.form = this.fb.group({     // {5}
+    this.registerForm = this.fb.group({     // {5}
       mail: ['', Validators.required],
       password: ['', Validators.required]
     });
@@ -39,14 +39,14 @@ export class LoginComponent implements OnInit {
 
   isFieldInvalid(field: string) { // {6}
     return (
-      (!this.form.get(field).valid && this.form.get(field).touched) ||
-      (this.form.get(field).untouched && this.formSubmitAttempt)
+      (!this.registerForm.get(field).valid && this.registerForm.get(field).touched) ||
+      (this.registerForm.get(field).untouched && this.formSubmitAttempt)
     );
   }
 
   onSubmit() {
-    if (this.form.valid) {
-      this.authService.login(this.form.value);
+    if (this.registerForm.valid) {
+      this.authService.login(this.registerForm.value);
        // {7}
     }
     this.formSubmitAttempt = true;             // {8}
@@ -59,6 +59,9 @@ export class LoginComponent implements OnInit {
    goToSignin(){
      this.router.navigate(['signin']);
   }
+
+  // convenience getter for easy access to form fields
+ get f() { return this.registerForm.controls; }
 
     openModal(title,text,type) {
       const modalRef = this.modalService.open(ModalComponent);
