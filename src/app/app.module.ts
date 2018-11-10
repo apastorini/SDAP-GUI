@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 //import { FileSelectDirective } from 'ng2-file-upload';
-import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload';
+// import { FileUploadModule} from 'ng2-file-upload';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 //Components
@@ -79,7 +79,6 @@ export function initGapi(gapiSession: GapiSession) {
     FooterComponent,
     AnalyzeComponent,
     UniqueEmailValidatorDirective,
-    FileSelectDirective,
     ReportsComponent,
     GoogleDriveComponent,
     EditProfileComponent,
@@ -88,8 +87,7 @@ export function initGapi(gapiSession: GapiSession) {
     BreadCrumbComponent,
     BreadCrumbItemComponent,
     PageNotFoundComponent,
-    HelpComponent,
-    FileDropDirective
+    HelpComponent
 
   ],
   imports: [
