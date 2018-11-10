@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
+    "build": "node --max-old-space-size=8192 node_modules/@angular/cli/bin/ng build --prod --aot",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.8.4",
-    "@angular/cli": "^6.2.1",
+    "@angular/cli": "^6.2.4",
     "@angular/compiler-cli": "^6.1.9",
     "@angular/language-service": "^5.2.11",
     "@types/jasmine": "^2.8.9",
