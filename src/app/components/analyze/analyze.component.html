@@ -15,7 +15,7 @@
     <h3>Tus Archivos</h3>
       <p class="lead"></p>
     <hr>
-    <div *ngIf="!fileList?.length > 0" class="">
+    <div *ngIf="!(fileList?.length > 0)" class="">
       <img src="assets/img/error.png" class="img-modal img-fluid pull-xs-left" alt="..."><span><strong> No hay archivos cargados en el sistema</strong></span>
     </div>
     <div *ngIf="fileList?.length > 0" class="table-wrapper-scroll-y">
