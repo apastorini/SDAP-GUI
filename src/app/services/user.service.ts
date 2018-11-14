@@ -38,7 +38,7 @@ export class UserService {
         headers = headers.set('Content-Type', 'application/json; charset=utf-8');
         headers.append('Access-Control-Allow-Origin','*');
         console.log('headers' + headers.get('Content-Type'));
-        console.log('User ' + JSON.stringify(user));
+        console.log('User los datos del usuairooooooooo  ::::::::::::::: ' + JSON.stringify(user));
         return this.http.post(this.createUserUrl+"?email=" + sessionStorage.getItem('email') + "&token=" + sessionStorage.getItem('token'), user, {headers: headers})
         //this.http.post(this.createUserUrl, user, {headers: headers})
            //.subscribe(respuesta =>JSON.stringify(console.log(respuesta)))
@@ -80,7 +80,7 @@ public recuperarContrasenia(email:string , token :string , password :string){
     "name": "string",
     "password": password,
     "passwordExpiredDate": "string",
-    "passwordToken": "string",
+    "passwordToken": token,
     "roles": [
       {
         "desc": "string",
@@ -89,8 +89,9 @@ public recuperarContrasenia(email:string , token :string , password :string){
       }
     ],
     "secondName": "string",
-    "token": token
+    "token": "string"
   }
+  console.log("IMPORTANTE    TOKEN     " + skeleton.token)
 
   let headers = new HttpHeaders();
   headers = headers.set('Content-Type', 'application/json; charset=utf-8');

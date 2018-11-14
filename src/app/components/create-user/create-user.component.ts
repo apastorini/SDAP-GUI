@@ -21,12 +21,15 @@ import { ModalComponent } from '../../utils/modal/modal.component';
 
 export class CreateUserComponent implements OnInit {
   registerForm: FormGroup;
+  role: FormGroup;
   submitted = false;
   emailExists:boolean;
   successfullySaved = false;
   errorSaved = false;
   buttonDisabled: boolean = false;
   private formSubmitAttempt: boolean; // {2}
+
+  rolesList = ['Seleccionar rol','ADMIN','TUTOR']
 
   constructor(
     private userService: UserService,
@@ -49,7 +52,12 @@ export class CreateUserComponent implements OnInit {
         Validators.minLength(6)]],
       r_password: ['',[
         Validators.required,
-        Validators.minLength(6)]]
+        Validators.minLength(6)]],
+      role: this.fb.group({
+         desc: [''],
+         id:[''],
+         name:['']
+       })
     });
   }
 

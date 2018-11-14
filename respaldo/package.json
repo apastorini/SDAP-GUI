@@ -4,13 +4,12 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
-    "build": "ng build",
+    "start": "ng serve",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-prod": "node --max_old_space_size=5048 ./node_modules/@angular/cli/bin/ng build --prod",
-    "postinstall": "ng build --aot --prod"
+    "build-prod": "node --max_old_space_size=5048 ./node_modules/@angular/cli/bin/ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -38,8 +37,7 @@
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.3.3",
     "tether": "^1.4.5",
-    "zone.js": "^0.8.26",
-    "typescript": "^2.7.2"
+    "zone.js": "^0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.8.4",
@@ -64,9 +62,5 @@
     "tslint": "^5.11.0",
     "typescript": "^2.7.2",
     "webpack": "^4.20.2"
-  },
-  "engines": {
-    "node": "8.11.2",
-    "npm": "5.6.0"
   }
 }

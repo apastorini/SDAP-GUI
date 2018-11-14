@@ -56,7 +56,8 @@ onSubmit() {
 }
 
 recuperarContrasena(){
-  this.userService.recuperarContrasenia(this.email,this.token,"dasdasda").subscribe((res)=>{
+  this.userService.recuperarContrasenia(this.email,this.token,this.registerForm.get("password").value).subscribe((res)=>{
+
      console.log("recuperarContrasena     "+ JSON.stringify(res));
 
   })
