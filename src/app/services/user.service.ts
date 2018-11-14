@@ -21,6 +21,7 @@ export class UserService {
   private modifyUserUrl = Constants.BASE_URL + 'systemController/modifyUser';
   private secureEchoUrl = Constants.BASE_URL + 'Sdp/api/secure/echo/andrei';
   private allUsersUrl = Constants.BASE_URL + 'systemController/listarUsuarios';
+  private recuperarContraseniaUrl = Constants.BASE_URL + 'systemController/recuperarContrasenia';
   constructor(private http: HttpClient, private router: Router) { }
 
   public doLogin(payload: LoginPayload): Observable<any>{
@@ -68,6 +69,36 @@ export class UserService {
        //.subscribe(respuesta =>JSON.stringify(console.log(respuesta))
   }
 
+
+
+public recuperarContrasenia(email:string , token :string , password :string){
+  console.log("EMAIL, TOKEN, PASSWORD:     " + email + "   " + token + "   " + password)
+
+  let skeleton = {
+    "email": email,
+    "enable": true,
+    "name": "string",
+    "password": password,
+    "passwordExpiredDate": "string",
+    "passwordToken": "string",
+    "roles": [
+      {
+        "desc": "string",
+        "id": 0,
+        "name": "string"
+      }
+    ],
+    "secondName": "string",
+    "token": token
+  }
+
+  let headers = new HttpHeaders();
+  headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+  headers.append('Access-Control-Allow-Origin','*');
+  console.log('headers' + headers.get('Content-Type'));
+  return  this.http.post(this.recuperarContraseniaUrl, skeleton, {headers: headers})
+
+}
 
   public modifyUser(user: User){
     console.log('1');

@@ -58,6 +58,7 @@ import { BreadCrumbItemComponent } from './components/breadcrumb/breadcrumbitem/
 import { MatButtonModule, MatIconModule, MatMenuModule, MatTableModule, MatBottomSheetModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatToolbarModule, MatProgressSpinnerModule, MatListModule } from '@angular/material';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HelpComponent } from './components/help/help.component';
+import { NewPasswordComponent } from './components/new-password/new-password.component';
 
 
 
@@ -87,7 +88,8 @@ export function initGapi(gapiSession: GapiSession) {
     BreadCrumbComponent,
     BreadCrumbItemComponent,
     PageNotFoundComponent,
-    HelpComponent
+    HelpComponent,
+    NewPasswordComponent
 
   ],
   imports: [

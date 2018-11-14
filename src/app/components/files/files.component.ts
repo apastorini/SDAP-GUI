@@ -13,7 +13,7 @@ import { ModalComponent } from '../../utils/modal/modal.component';
 })
 
 export class FilesComponent implements OnInit {
-  fileList = false;
+  fileList = [];
   porcentaje = '';
   public uploadFile = Constants.BASE_URL +  'documentController/addFileToUser';
   selectedFile: File = null;
@@ -52,10 +52,18 @@ export class FilesComponent implements OnInit {
 
             console.log("EVENT " + JSON.stringify(event));
             console.log("EVENT " + JSON.stringify(HttpEventType.Response));
-            if(HttpEventType.Response == 4){
-              this.openModal("Archivo subido", "puedes descargarlo o eliminarlo desde la lista de archivos","success","success");
+
+            console.log("EVENT  CODE" + JSON.stringify(event['body']['code']));
+
+            if(JSON.stringify(event['body']['code']) == '1'){
+              this.openModal(JSON.stringify(event['body']['message']),'El archivo ya existe en el sistem o fue eliminado. Cambie el nombre del archivo y vuelva a intentarlo.',"error","error");
 
             }
+            if(JSON.stringify(event['body']['code']) == '0'){
+              this.openModal(JSON.stringify(event['body']['message']),'' ,"success","success");
+
+            }
+
         }
 
       });
@@ -97,7 +105,7 @@ deleteFileFlow(fileID: string){
     this.fileService.downloadFile(sessionStorage.getItem('email'),sessionStorage.getItem('token'), fileID)
     .subscribe(res => {
       console.log("entro!!!  " + res);
-      console.log("entro string !!!  " + JSON.stringify(res));
+      console.log("entro string Importante !!!  " + JSON.stringify(res));
 
       var file = new Blob([res], {type: 'application/pdf'});
 

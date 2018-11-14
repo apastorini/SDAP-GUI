@@ -12,6 +12,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { GoogleDriveComponent } from './components/google-drive/google-drive.component';
 import { AuthGuard } from './auth/auth.guard';
 import { HelpComponent } from './components/help/help.component';
+import { NewPasswordComponent } from './components/new-password/new-password.component';
 
 const APP_ROUTES: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full', canActivate: [AuthGuard]},
@@ -31,6 +32,7 @@ const APP_ROUTES: Routes = [
   { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard]},
   { path: 'google-drive', component: GoogleDriveComponent, canActivate: [AuthGuard]},
   { path: 'help', component: HelpComponent, canActivate: [AuthGuard]},
+  { path: 'new-password', component: NewPasswordComponent},
   //{ path: '**', pathMatch: 'full', redirectTo: '' },
   { path: '**', component: PageNotFoundComponent},
 ];
