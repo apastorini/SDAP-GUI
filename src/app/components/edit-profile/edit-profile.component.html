@@ -3,6 +3,8 @@
 
 <form class="user-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="jumbotron animated fast fadeIn">
+      <label for="">Usuario {{role}}</label>
+        <div class="divider"></div>
       <div class="form-group">
           <input type="text" formControlName="email" emailExists placeholder="Email"  readonly="readonly" class="form-control" uniqueEmail [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
           <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
@@ -31,25 +33,6 @@
                 </div>
             </div>
 
-        <div class="form-group">
-          <input type="password" formControlName="password" placeholder="Password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-
-          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div class="divider"></div>
-            <div class="alert alert-danger" *ngIf="f.password.errors.required">Contraseña requerida</div>
-            <div class="alert alert-danger" *ngIf="f.password.errors.minlength">Contraseña menor a 6 digitos</div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <input type="password" formControlName="r_password" placeholder="Confirmar Password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.r_password.errors }" />
-
-          <div *ngIf="submitted && f.r_password.errors" class="invalid-feedback">
-            <div class="divider"></div>
-            <div class="alert alert-danger" *ngIf="f.r_password.errors.required">Confirmación requerida</div>
-            <div class="alert alert-danger" *ngIf="f.r_password.errors.minlength">Confirmación menor a 6 digitos</div>
-          </div>
-        </div>
 
         <br>
         <div class="form-group">

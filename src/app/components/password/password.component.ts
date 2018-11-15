@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router,Routes, RouterModule} from '@angular/router';
 import { PasswordPayload } from '../../services/payload/PasswordPayload';
 import { LoginService } from '../../services/login.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal,NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../../utils/modal/modal.component';
+
+
+
 
 
 @Component({

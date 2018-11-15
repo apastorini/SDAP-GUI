@@ -38,9 +38,16 @@
                 </div>
             </div>
 
-        <!-- <div class="form-group">
-            Habilitar usuario <input type="checkbox" formControlName="enablecheck" name="enablecheck"  (change)="$event.target.checked" />
-        </div> -->
+            <div class="form-group">
+              <select  id="roles" formControlName="roles" class="form-control">
+                <option value="" selected disabled>Seleccionar Rol</option>
+                <option  *ngFor = "let r of rolesList"  [value] = "r.name" >{{r.name}}</option>
+              </select>
+              <div *ngIf="submitted && f.roles.errors" class="invalid-feedback">
+                <div class="divider"></div>
+                <div class="alert alert-danger" *ngIf="f.roles.errors.required">Rol requerido</div>
+              </div>
+            </div>
 
         <br>
         <div class="form-group">

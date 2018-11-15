@@ -82,6 +82,7 @@ export class AnalyzeComponent implements OnInit {
 
     this.filesToCompare =[];
   }
+  
 
   onSelectAll(isChecked: boolean){
     this.selectedAll = !this.selectedAll;

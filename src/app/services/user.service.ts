@@ -39,6 +39,8 @@ export class UserService {
         headers.append('Access-Control-Allow-Origin','*');
         console.log('headers' + headers.get('Content-Type'));
         console.log('User los datos del usuairooooooooo  ::::::::::::::: ' + JSON.stringify(user));
+        console.log('headers' + user.roles);
+          
         return this.http.post(this.createUserUrl+"?email=" + sessionStorage.getItem('email') + "&token=" + sessionStorage.getItem('token'), user, {headers: headers})
         //this.http.post(this.createUserUrl, user, {headers: headers})
            //.subscribe(respuesta =>JSON.stringify(console.log(respuesta)))

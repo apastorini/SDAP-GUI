@@ -6,20 +6,33 @@
    (click)="activeModal.dismiss('Cross click')">
   </button>
 </div>
-<div *ngIf="text !== ''"class="modal-body">
-  <p>{{text}}</p>
-</div>
-<div class="modal-footer" *ngIf="type === 'confirm'">
-  <button class="btn btn-outline-primary logout-btn " (click)="activeModal.close(action)">
-    Confrimar
-  </button>
+<div *ngIf="type != 'exito'"class="">
+  <div *ngIf="text !== ''"class="modal-body">
+    <p>{{text}}</p>
+  </div>
+  <div class="modal-footer" *ngIf="type === 'confirm'">
+    <button class="btn btn-outline-primary logout-btn " (click)="activeModal.close(action)">
+      Confrimar
+    </button>
 
-  <button class="btn btn-outline-primary  logout-btn " (click)="activeModal.dismiss('Close clicked')">
-    Cerrar
-  </button>
+    <button class="btn btn-outline-primary  logout-btn " (click)="activeModal.dismiss('Close clicked')">
+      Cerrar
+    </button>
+  </div>
+  <div class="modal-footer" *ngIf="type != 'confirm'">
+    <button class="btn btn-outline-primary logout-btn " (click)="activeModal.dismiss('Close clicked')">
+      Cerrar
+    </button>
+  </div>
+
 </div>
-<div class="modal-footer" *ngIf="type != 'confirm'">
-  <button class="btn btn-outline-primary logout-btn " (click)="activeModal.dismiss('Close clicked')">
-    Cerrar
-  </button>
+<div *ngIf="type == 'exito'">
+  <div *ngIf="text !== ''"class="modal-body">
+    <p>{{text}}</p>
+  </div>
+  <div class="modal-footer" *ngIf="type === 'exito'">
+    <button class="btn btn-outline-primary logout-btn " (click)="activeModal.close(action)">
+      exito
+    </button>
+  </div>
 </div>

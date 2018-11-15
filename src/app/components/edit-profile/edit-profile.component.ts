@@ -20,6 +20,7 @@ export class EditProfileComponent implements OnInit {
   submitted = false;
   emailExists:boolean;      // {1}
   private formSubmitAttempt: boolean; // {2}
+  role= "";
 
   constructor(
     private userService: UserService,
@@ -39,13 +40,7 @@ export class EditProfileComponent implements OnInit {
       name: ['', Validators.required],
       secondName: ['', Validators.required],
       email: [sessionStorage.getItem('email'),
-      [Validators.required,Validators.email]],
-      password:['',[
-        Validators.required,
-        Validators.minLength(6)]],
-      r_password: ['',[
-        Validators.required,
-        Validators.minLength(6)]]
+      [Validators.required,Validators.email]]
     });
   }
 
@@ -62,7 +57,7 @@ export class EditProfileComponent implements OnInit {
           }
         else{
 
-          this.openModal("¿Esta seguro de modificar su perfil?", "Haga click en 'Confirmar' para modificar el perfil o en 'Cerrar' para cancelar la accion",'edit',"confirm")
+          this.openModal("¿Esta seguro de modificar su perfil?", "Haga click en 'Confirmar' para modificar el perfil o en 'Cerrar' para cancelar la accion",'confirm',"edit")
 
 
       }
@@ -70,8 +65,9 @@ export class EditProfileComponent implements OnInit {
 
 
 editarPerfil(){
-  this.userService.modifyUser(this.registerForm.value).subscribe(res =>{
+  console.log("MIS DATOS  "+ this.registerForm.value)
 
+  this.userService.modifyUser(this.registerForm.value).subscribe(res =>{
 
       this.openModal("Perfil modificado", "","success","success");
 
@@ -98,7 +94,26 @@ editarPerfil(){
 
   getAllUsers(){
     this.userService.getAllUsers().subscribe(res=>{
+      res['result'].forEach(variable => {
+
+        if(variable.email==sessionStorage.getItem('email')){
+        //  this.user = variable;
+        this.registerForm.setValue({
+           name: variable.name,
+           secondName: variable.secondName,
+           email:sessionStorage.getItem('email')
+
+           //enablecheck: this.fileList[event.target.value].enable
+        });
+
+        this.role=variable.roles[0].name;
+
+        }
+
+      });
+
       //this.user = res['result'];
+
 
 
     })
@@ -114,11 +129,12 @@ editarPerfil(){
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.text = text;
     modalRef.componentInstance.type = type;
-    modalRef.componentInstance.type = action;
+    modalRef.componentInstance.action = action;
 
     modalRef.result.then((result) => {
       console.log("resultados del modal  "+result);
       if(result=='edit'){
+        this.editarPerfil();
 
       }
     }).catch((error) => {

@@ -48,15 +48,15 @@ ngOnInit() {
 onSubmit() {
   console.log("email: " + this.email)
   console.log("token: " + this.token)
-  this.recuperarContrasena()
 
-
+  this.openModal("¿Esta seguro de querer reestablecer la contraseña?","Haga click en 'Confirmar' para reestablecer su contraseña o en 'Cerrar' para cancelar la accion","confirm","modificar")
 
 
 }
 
 recuperarContrasena(){
   this.userService.recuperarContrasenia(this.email,this.token,this.registerForm.get("password").value).subscribe((res)=>{
+    this.openModal("Contraseña reesrablecida","cierre este mensaje para dirigirse a pagina de login","exito","exito")
 
      console.log("recuperarContrasena     "+ JSON.stringify(res));
 
@@ -78,6 +78,17 @@ recuperarContrasena(){
 
     modalRef.result.then((result) => {
       console.log("resultados del modal  "+result);
+
+      if(result=="modificar"){
+        this.recuperarContrasena()
+
+      }
+      if(result=="exito"){
+
+      }
+
+
+
     }).catch((error) => {
       console.log(error);
     });

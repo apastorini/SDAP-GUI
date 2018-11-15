@@ -4,13 +4,6 @@ export class Role{
   "id":string;
   "name":string
 
-constructor(
-
-) { }
-
-
-
-
 }
 
 
@@ -22,5 +15,6 @@ export class User {
     googleMail: string;
     password: string;
     passwordGoogle: string;
-    role:Role;
+    roles:Role;
+    
 }

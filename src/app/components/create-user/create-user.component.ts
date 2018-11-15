@@ -21,7 +21,7 @@ import { ModalComponent } from '../../utils/modal/modal.component';
 
 export class CreateUserComponent implements OnInit {
   registerForm: FormGroup;
-  role: FormGroup;
+  // role: FormGroup;
   submitted = false;
   emailExists:boolean;
   successfullySaved = false;
@@ -29,7 +29,7 @@ export class CreateUserComponent implements OnInit {
   buttonDisabled: boolean = false;
   private formSubmitAttempt: boolean; // {2}
 
-  rolesList = ['Seleccionar rol','ADMIN','TUTOR']
+  rolesList = [{'name':'ADMIN'},{'name':'TUTOR'}]
 
   constructor(
     private userService: UserService,
@@ -47,17 +47,10 @@ export class CreateUserComponent implements OnInit {
       secondName: ['', Validators.required],
       email: ['',
       [Validators.required,Validators.email]],
-      password:['',[
-        Validators.required,
-        Validators.minLength(6)]],
-      r_password: ['',[
-        Validators.required,
-        Validators.minLength(6)]],
-      role: this.fb.group({
-         desc: [''],
-         id:[''],
-         name:['']
-       })
+      roles: ['',Validators.required]
+      // roles: this.fb.group({
+      //    rolname:['']
+      //  })
     });
   }
 
@@ -66,12 +59,19 @@ export class CreateUserComponent implements OnInit {
 
  onSubmit() {
         this.submitted = true;
+        console.log("ANTES DEL CREATE USER  " + JSON.stringify(this.registerForm.value) + " +++++++");
  
         // stop here if form is invalid
         if (this.registerForm.invalid) {
             return;
         }
         else{
+
+        if(this.registerForm.value.roles == "TUTOR"){
+          this.registerForm.value.roles= [{'name':'TUTOR'}]
+        }else{
+          this.registerForm.value.roles= [{'name':'ADMIN'}]
+        }
 
           this.userService.createUser(this.registerForm.value).subscribe(res =>{
             console.log("DATOOOOS   " + JSON.stringify(res) + " +++++++");
