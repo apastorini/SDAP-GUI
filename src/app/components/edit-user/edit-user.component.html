@@ -3,7 +3,8 @@
 <br>
 
 <select (change)='onOptionSelected($event)'>
-  <option value = "-1" selected="selected">Seleccionar Usuario</option>
+<!-- <option value = "-1" selected="selected">Seleccionar Usuario</option> -->
+  <option value="" selected disabled>Seleccionar usuario</option>
   <option *ngFor = "let file of fileList; let i = index" [value] = 'i' >{{file.email}}</option>
 </select>
 

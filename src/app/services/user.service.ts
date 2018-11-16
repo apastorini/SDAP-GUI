@@ -22,6 +22,7 @@ export class UserService {
   private secureEchoUrl = Constants.BASE_URL + 'Sdp/api/secure/echo/andrei';
   private allUsersUrl = Constants.BASE_URL + 'systemController/listarUsuarios';
   private recuperarContraseniaUrl = Constants.BASE_URL + 'systemController/recuperarContrasenia';
+  private changePasswordURL = Constants.BASE_URL + 'systemController/changePassword';
   constructor(private http: HttpClient, private router: Router) { }
 
   public doLogin(payload: LoginPayload): Observable<any>{
@@ -40,7 +41,7 @@ export class UserService {
         console.log('headers' + headers.get('Content-Type'));
         console.log('User los datos del usuairooooooooo  ::::::::::::::: ' + JSON.stringify(user));
         console.log('headers' + user.roles);
-          
+
         return this.http.post(this.createUserUrl+"?email=" + sessionStorage.getItem('email') + "&token=" + sessionStorage.getItem('token'), user, {headers: headers})
         //this.http.post(this.createUserUrl, user, {headers: headers})
            //.subscribe(respuesta =>JSON.stringify(console.log(respuesta)))
@@ -113,6 +114,19 @@ public recuperarContrasenia(email:string , token :string , password :string){
         headers.append('Access-Control-Allow-Origin','*');
         console.log('headers' + headers.get('Content-Type'));
         return  this.http.post(this.modifyUserUrl+"?email=" + sessionStorage.getItem('email') + "&token=" + sessionStorage.getItem('token'), user, {headers: headers})
+        //this.http.post(this.createUserUrl, user, {headers: headers})
+           //.subscribe(respuesta =>JSON.stringify(console.log(respuesta)))
+    }
+  }
+
+  public changePassword(password){
+    if (password !== '') { // {3}
+
+        let headers = new HttpHeaders();
+        headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+        headers.append('Access-Control-Allow-Origin','*');
+        console.log('headers' + headers.get('Content-Type'));
+        return  this.http.post(this.changePasswordURL+"?email=" + sessionStorage.getItem('email') + "&token=" + sessionStorage.getItem('token') + "&password=" + password, {headers: headers})
         //this.http.post(this.createUserUrl, user, {headers: headers})
            //.subscribe(respuesta =>JSON.stringify(console.log(respuesta)))
     }

@@ -61,16 +61,18 @@
           <th scope="col">Nombre</th>
           <th scope="col">Extension</th>
           <th scope="col">Tamaño</th>
-          <th scope="col">Seleccionar</th>
+          <th scope="col">
+            <input type="checkbox" class="checkbox select-all" (change)="onSelectAllShared($event.target.checked)" [checked]="selectedAllShared" type="checkbox"/>
+          </th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let f of sharedFileList">
+        <tr *ngFor="let s of sharedFileList">
           <th scope="row">#</th>
-          <td>{{f.name}}</td>
-          <td>{{f.extension}}</td>
-          <td>{{f.size}}</td>
-          <td><input type="checkbox"  (change)="onChange(f.idFile, $event.target.checked)"name="{{ f.name }}" type="checkbox" id="{{f.idFile}}"/></td>
+          <td>{{s.name}}</td>
+          <td>{{s.extension}}</td>
+          <td>{{s.size}}</td>
+          <td><input type="checkbox" class="checkbox" [(ngModel)]="s.selected"  (change)="onChangeShared(s.idFile, $event.target.checked)" name="{{ s.name }}" type="checkbox" id="{{s.idFile}}"/></td>
         </tr>
       </tbody>
     </table>

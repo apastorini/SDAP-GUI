@@ -8,7 +8,7 @@ import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
   styleUrls: []
 })
 export class ReportsComponent implements OnInit {
-  reportsList = false;
+  reportsList = [];
 
   constructor(
   private analyzeService: AnalyzeService,

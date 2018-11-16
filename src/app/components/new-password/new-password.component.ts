@@ -40,23 +40,27 @@ ngOnInit() {
    this.token = this.route.snapshot.queryParamMap.get('token');
 
   this.registerForm = this.fb.group({     // {5}
-  password: ['', Validators.required],
+  password: ['', [Validators.required,Validators.minLength(6)]],
   confirmation: ['', Validators.required]
   });
 }
 
 onSubmit() {
-  console.log("email: " + this.email)
-  console.log("token: " + this.token)
+  this.submitted = true;
+
+  if(this.registerForm.value.password==this.registerForm.value.confirmation){
 
   this.openModal("¿Esta seguro de querer reestablecer la contraseña?","Haga click en 'Confirmar' para reestablecer su contraseña o en 'Cerrar' para cancelar la accion","confirm","modificar")
 
-
+  }
+  else{
+    this.openModal("Error: Las contraseñas no coinciden","Los campos 'Password' y 'Confirmacion' deben coicidir, modifiquielo e intentelo otra vez","error","error")
+  }
 }
 
 recuperarContrasena(){
   this.userService.recuperarContrasenia(this.email,this.token,this.registerForm.get("password").value).subscribe((res)=>{
-    this.openModal("Contraseña reesrablecida","cierre este mensaje para dirigirse a pagina de login","exito","exito")
+    this.openModal("Contraseña reesrablecida","cierre este mensaje para dirigirse a pagina de login","exito","Cerrar")
 
      console.log("recuperarContrasena     "+ JSON.stringify(res));
 
@@ -83,7 +87,7 @@ recuperarContrasena(){
         this.recuperarContrasena()
 
       }
-      if(result=="exito"){
+      if(result=="Cerrar"){
 
       }
 

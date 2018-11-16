@@ -16,12 +16,15 @@ import { ModalComponent } from '../../utils/modal/modal.component';
   styleUrls: []
 })
 export class AnalyzeComponent implements OnInit {
-   fileList = [];
    fileToAnalize:string;
+   fileList = [];
    filesToCompare = [];
-   sharedFileList = false;
+   sharedFileList = [];
+   filesToCompareShared = [];
+   allFilesToCompare = [];
    buttonDisabled : boolean = false;
-   selectedAll: any;
+   selectedAll: boolean = false;
+   selectedAllShared: boolean = false;
 
 
    constructor(
@@ -51,13 +54,18 @@ export class AnalyzeComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log("polo   " + this.fileToAnalize);
+    // console.log("polo   " + this.fileToAnalize);
+    this.allFilesToCompare= this.filesToCompare.concat(this.filesToCompareShared);
+    console.log("ARRAY A ANALIZAR  " +   this.allFilesToCompare);
+
+
+
     if(this.fileToAnalize=="-1"){
       this.openModal("No se inició el analisis","Seleccione documento a analizar y vuelva a intentarlo.","error","error")
     }else
     {
-      console.log("polo 2  " + this.filesToCompare.length);
-      if(this.filesToCompare.length == 0){
+      console.log("polo 2  " + this.allFilesToCompare.length);
+      if(this.allFilesToCompare.length == 0){
         this.openModal("No se inició el analisis","Seleccione 1 o mas archivos de la lista para comparar y vuelva a intentarlo.","error","error")
 
       }else{
@@ -82,17 +90,28 @@ export class AnalyzeComponent implements OnInit {
 
     this.filesToCompare =[];
   }
-  
+
+  uncheckAllShared(){
+    for (var i = 0; i < this.sharedFileList.length; i++) {
+        this.sharedFileList[i].selected = this.selectedAllShared;
+    }
+
+    this.filesToCompareShared =[];
+  }
+
 
   onSelectAll(isChecked: boolean){
     this.selectedAll = !this.selectedAll;
 
     if(isChecked) {
-      let aux = <any>this.fileList;
-      this.filesToCompare = aux.map(a => a.idFile);
+      let aux1 = <any>this.fileList;
+      this.filesToCompare = aux1.map(a => a.idFile);
 
       for (var i = 0; i < this.fileList.length; i++) {
+        console.log("  el chekbox ANTES "+  JSON.stringify( this.fileList[i]))
+        console.log(" this.selectedAll "+   this.selectedAll)
           this.fileList[i].selected = this.selectedAll;
+          console.log("  el chekbox DESPUES "+  JSON.stringify( this.fileList[i]))
       }
 
     } else {
@@ -106,6 +125,36 @@ export class AnalyzeComponent implements OnInit {
      }
     console.log(this.filesToCompare)
   }
+  onSelectAllShared(isChecked: boolean){
+    this.selectedAllShared = !this.selectedAllShared;
+    console.log("selectedAllShared   "+ this.selectedAllShared)
+
+    if(isChecked) {
+      console.log("ENTRO AL IF   "+ this.selectedAllShared)
+      let aux = <any>this.sharedFileList;
+      this.filesToCompareShared = aux.map(a => a.idFile);
+
+        console.log("selectedAllShared   "+ this.selectedAllShared)
+
+      for (var i = 0; i < this.sharedFileList.length; i++) {
+        console.log("  el chekbox ANTES "+  JSON.stringify( this.sharedFileList[i]))
+        console.log(" this.selectedAllShared "+   this.selectedAllShared)
+
+          this.sharedFileList[i].selected = this.selectedAllShared;
+          console.log("  el chekbox DESPUES "+  JSON.stringify( this.sharedFileList[i]))
+      }
+
+    } else {
+      this.uncheckAllShared();
+
+    //   for (var i = 0; i < this.fileList.length; i++) {
+    //       this.fileList[i].selected = this.selectedAll;
+    //   }
+    //
+    //   this.filesToCompare =[];
+     }
+    console.log(this.filesToCompareShared)
+  }
 
   checkIfAllSelected(){
     if (this.fileList.length == this.filesToCompare.length){
@@ -113,36 +162,73 @@ export class AnalyzeComponent implements OnInit {
     }
     this.selectedAll = false;
   }
+  checkIfAllSelectedShared(){
+    console.log("all selected shared???")
+    if (this.sharedFileList.length == this.filesToCompareShared.length){
+      this.selectedAllShared = true;
+      console.log("YES")
+    }
+    this.selectedAllShared = false;
+    console.log("NO")
+  }
 
-  onChange(id: string, isChecked: boolean) {
-
-    //Check if all is Selected
-
+  onChangeShared(id: string, isChecked: boolean) {
 
         if(isChecked) {
-          this.filesToCompare.push(id);
-          console.log(JSON.stringify(this.fileList.length) +  "    "  + JSON.stringify(this.filesToCompare.length))
+          this.filesToCompareShared.push(id);
+          console.log(JSON.stringify(this.sharedFileList.length) +  "    "  + JSON.stringify(this.filesToCompareShared.length))
 
-          if (this.fileList.length == this.filesToCompare.length){
-            console.log("SI!!! SELECCIONASTE TODOS LOS ELEMENTOS")
-            this.selectedAll = true;
+          if (this.sharedFileList.length == this.filesToCompareShared.length){
+            console.log("SI!!! SELECCIONASTE TODOS LOS ELEMENTOS De la tabla shared")
+            this.selectedAllShared = true;
           }else{
-          console.log("NO!!! SELECCIONASTE TODOS LOS ELEMENTOS")
-          this.selectedAll = false;
+          console.log("NO!!! SELECCIONASTE TODOS LOS ELEMENTOS De la tabla shared")
+          this.selectedAllShared = false;
           }
 
         } else {
-          let index = this.filesToCompare.indexOf(id);
-          this.filesToCompare.splice(index,1);
-          if(this.selectedAll){
-            this.selectedAll = false;
+          let index = this.filesToCompareShared.indexOf(id);
+          this.filesToCompareShared.splice(index,1);
+          if(this.selectedAllShared){
+            this.selectedAllShared = false;
           }
 
 
 
         }
-        console.log(this.filesToCompare)
+        console.log(this.filesToCompareShared)
     }
+
+
+    onChange(id: string, isChecked: boolean) {
+
+      //Check if all is Selected
+
+
+          if(isChecked) {
+            this.filesToCompare.push(id);
+            console.log(JSON.stringify(this.fileList.length) +  "    "  + JSON.stringify(this.filesToCompare.length))
+
+            if (this.fileList.length == this.filesToCompare.length){
+              console.log("SI!!! SELECCIONASTE TODOS LOS ELEMENTOS")
+              this.selectedAll = true;
+            }else{
+            console.log("NO!!! SELECCIONASTE TODOS LOS ELEMENTOS")
+            this.selectedAll = false;
+            }
+
+          } else {
+            let index = this.filesToCompare.indexOf(id);
+            this.filesToCompare.splice(index,1);
+            if(this.selectedAll){
+              this.selectedAll = false;
+            }
+
+
+
+          }
+          console.log(this.filesToCompare)
+      }
 
    onOptionSelected(event){
      console.log(event.target.value);

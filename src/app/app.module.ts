@@ -59,6 +59,7 @@ import { MatButtonModule, MatIconModule, MatMenuModule, MatTableModule, MatBotto
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HelpComponent } from './components/help/help.component';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 
 
@@ -89,7 +90,8 @@ export function initGapi(gapiSession: GapiSession) {
     BreadCrumbItemComponent,
     PageNotFoundComponent,
     HelpComponent,
-    NewPasswordComponent
+    NewPasswordComponent,
+    ChangePasswordComponent
 
   ],
   imports: [

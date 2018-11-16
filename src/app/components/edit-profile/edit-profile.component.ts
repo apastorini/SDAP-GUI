@@ -119,6 +119,10 @@ editarPerfil(){
     })
   }
 
+  goToChangePassword(){
+    this.router.navigate(['change-password']);
+  }
+
 
   openModal(title,text,type,action) {
     let ngbModalOptions: NgbModalOptions = {

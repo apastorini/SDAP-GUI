@@ -2,6 +2,8 @@
   <img src="assets/img/{{type}}.png" *ngIf="type === 'error' " class="img-modal img-fluid pull-xs-left" alt=""><h4 *ngIf="type === 'error' " class="modal-title">{{title}} </h4>
   <img src="assets/img/{{type}}.png" *ngIf="type === 'success'" class="img-modal img-fluid pull-xs-left" alt=""><h4 *ngIf="type === 'success' " class="modal-title">{{title}}</h4>
   <img src="assets/img/{{type}}.png" *ngIf="type === 'confirm'" class="img-modal img-fluid pull-xs-left" alt=""><h4 *ngIf="type === 'confirm' " class="modal-title">{{title}}</h4>
+  <img src="assets/img/success.png" *ngIf="type === 'exito'" class="img-modal img-fluid pull-xs-left" alt=""><h4 *ngIf="type === 'exito' " class="modal-title">{{title}}</h4>
+
   <button type="button" class="close" aria-label="Close"
    (click)="activeModal.dismiss('Cross click')">
   </button>
@@ -32,7 +34,7 @@
   </div>
   <div class="modal-footer" *ngIf="type === 'exito'">
     <button class="btn btn-outline-primary logout-btn " (click)="activeModal.close(action)">
-      exito
+      Ok
     </button>
   </div>
 </div>
