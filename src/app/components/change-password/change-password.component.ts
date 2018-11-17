@@ -44,6 +44,9 @@ export class ChangePasswordComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    if (this.registerForm.invalid) {
+      return;
+    }
 
     if(this.registerForm.value.password==this.registerForm.value.confirmation){
 
@@ -52,7 +55,7 @@ export class ChangePasswordComponent implements OnInit {
     }
     else
     {
-      this.openModal("Error: Las contraseñas no coinciden","Los campos 'Password' y 'Confirmacion' deben coicidir, modifiquielo e intentelo otra vez","error","error")
+      this.openModal("Error: Las contraseñas no coinciden","Los campos 'Password' y 'Confirmacion' deben coincidir, modifiquielo e intentelo otra vez","error","error")
 
     }
   }

@@ -59,8 +59,6 @@ export class CreateUserComponent implements OnInit {
 
  onSubmit() {
         this.submitted = true;
-        console.log("ANTES DEL CREATE USER  " + JSON.stringify(this.registerForm.value) + " +++++++");
- 
         // stop here if form is invalid
         if (this.registerForm.invalid) {
             return;

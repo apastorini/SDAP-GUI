@@ -88,8 +88,15 @@ export class FilesComponent implements OnInit {
       console.log("solucion: " + JSON.stringify(res['result']))
       if(JSON.stringify(res['result'])!="[]"){
         console.log("Entra");
+
         this.fileList = res['result'];
+
+        console.log("fileList length:  " + this.fileList.length  );
+      }else
+      {
+        this.fileList = [];
       }
+
 
     });
   }

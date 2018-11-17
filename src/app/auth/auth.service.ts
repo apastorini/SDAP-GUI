@@ -65,6 +65,7 @@ export class AuthService {
   }
 
 login(login: Login){
+
   console.log("User and password: "+ login);
 
   let headers = new HttpHeaders();
@@ -106,7 +107,7 @@ openModal(title,text,type,action) {
   modalRef.componentInstance.title = title;
   modalRef.componentInstance.text = text;
   modalRef.componentInstance.type = type;
-  modalRef.componentInstance.type = action;
+  modalRef.componentInstance.action = action;
 
   modalRef.result.then((result) => {
     console.log("resultados del modal  "+result);

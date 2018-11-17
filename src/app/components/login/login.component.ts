@@ -4,7 +4,7 @@ import { AuthService } from '../../auth/auth.service';
 import { Router,Routes, RouterModule} from '@angular/router';
 import { Constants } from '../../utils/Constants';
 import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal,NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../../utils/modal/modal.component';
 
 
@@ -46,8 +46,11 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.registerForm.valid) {
+
       this.authService.login(this.registerForm.value);
        // {7}
+    }else{
+      this.openModal("Error en login","Los campos Email y Contraseña deben tener informacion.","error","error");
     }
     this.formSubmitAttempt = true;             // {8}
   }
@@ -63,16 +66,24 @@ export class LoginComponent implements OnInit {
   // convenience getter for easy access to form fields
  get f() { return this.registerForm.controls; }
 
-    openModal(title,text,type) {
-      const modalRef = this.modalService.open(ModalComponent);
-      modalRef.componentInstance.title = title;
-      modalRef.componentInstance.text = text;
-      modalRef.componentInstance.type = type;
+   openModal(title,text,type,action) {
+     let ngbModalOptions: NgbModalOptions = {
+           backdrop : 'static',
+           keyboard : false
+     };
+     const modalRef = this.modalService.open(ModalComponent,ngbModalOptions);
+     modalRef.componentInstance.title = title;
+     modalRef.componentInstance.text = text;
+     modalRef.componentInstance.type = type;
+     modalRef.componentInstance.action = action;
 
-      modalRef.result.then((result) => {
-        console.log("resultados del modal  "+result);
-      }).catch((error) => {
-        console.log(error);
-      });
-    }
+     modalRef.result.then((result) => {
+       console.log("resultados del modal  "+result);
+       if(result=='edit'){
+
+       }
+     }).catch((error) => {
+       console.log(error);
+     });
+   }
   }

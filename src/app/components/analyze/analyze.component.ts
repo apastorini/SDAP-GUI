@@ -109,7 +109,7 @@ export class AnalyzeComponent implements OnInit {
 
       for (var i = 0; i < this.fileList.length; i++) {
         console.log("  el chekbox ANTES "+  JSON.stringify( this.fileList[i]))
-        console.log(" this.selectedAll "+   this.selectedAll)
+        console.log(" this.selectedA "+   this.selectedAll)
           this.fileList[i].selected = this.selectedAll;
           console.log("  el chekbox DESPUES "+  JSON.stringify( this.fileList[i]))
       }
