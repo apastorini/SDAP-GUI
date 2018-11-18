@@ -29,11 +29,11 @@
               <!-- {{report.nombreArchivosCorpus}} -->
               <label data-toggle="tooltip" data-delay="0" title="{{report.nombreArchivosCorpus}}" for="">Ver más</label>
             </td>
-            <td>{{report.fechaPedidoAnalisis | date}}</td>
+            <td>{{report.fechaPedidoAnalisis}}</td>
             <!-- <td>{{report.resultado}}</td> -->
-            <td>{{report.fechaFinaAnalisis | date}}</td>
+            <td>{{report.fechaFinaAnalisis}}</td>
             <td>
-              <a id="{{report.idAnalisis}}"  *ngIf="report.fechaFinaAnalisis != null" (click)="downloadReport(report.idAnalisis)">
+              <a id="{{report.idAnalisis}}"  *ngIf="report.fechaFinaAnalisis != '-'" (click)="downloadReport(report.idAnalisis)">
                 <img class="canClick" src="assets/img/download.png" alt="Descargar Reporte" style="width:20px;height:20px;border:0;">
               </a>
             </td>

@@ -22,9 +22,11 @@ export class ReportsComponent implements OnInit {
   getReportList(){
 
     this.analyzeService.listarAnalisisPorUsuario().subscribe(res=>{
+      console.log("FLSG")
 
       if(JSON.stringify(res['result']) != "[]"){
         this.reportsList = res['result'];
+          console.log("entro11111!!!  " + JSON.stringify(res['result']))
           console.log("entro!!!  " + JSON.stringify(res['result'][2]))
 
       }
