@@ -5,7 +5,7 @@ import { HttpClient} from '@angular/common/http'
 import { Router,Routes, RouterModule} from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl, AsyncValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { AuthService } from '../../auth/auth.service';
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import 'rxjs/add/operator/map';
 import { NgbModal,NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../../utils/modal/modal.component';

@@ -368,6 +368,12 @@ footer{
     opacity: 0;
 }
 
+.upload{
+               background: url(assets/img/upload.png) no-repeat;
+               cursor:pointer;
+               border: none;
+           }
+
 .successfully-saved {
     color: #FFFFFF;
     text-align: center;

@@ -1,22 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {AnalyzeService} from '../../services/analyze.service';
 import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
+import 'rxjs/add/observable/interval';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
   styleUrls: []
 })
-export class ReportsComponent implements OnInit {
+export class ReportsComponent implements OnInit, OnDestroy {
   reportsList = [];
+  public sub:Subscription;
 
   constructor(
   private analyzeService: AnalyzeService,
   private http: HttpClient
-  ) { }
+  ) {
+
+    this.sub = Observable.interval(10000)
+      .subscribe((val) => {
+        this.getReportList()
+        console.log('TIMER!'); });
+  }
 
   ngOnInit() {
     this.getReportList()
+  }
+
+  ngOnDestroy(){
+    this.sub.unsubscribe();
   }
 
   getReportList(){

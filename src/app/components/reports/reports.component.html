@@ -17,7 +17,7 @@
             <th scope="col">Corpus</th>
             <th scope="col">Inicio</th>
             <!-- <th scope="col">resultado</th> -->
-            <th scope="col">Finaliza</th>
+            <th scope="col">Finalizado</th>
             <th scope="col">Descargar</th>
           </tr>
         </thead>
@@ -31,7 +31,10 @@
             </td>
             <td>{{report.fechaPedidoAnalisis}}</td>
             <!-- <td>{{report.resultado}}</td> -->
-            <td>{{report.fechaFinaAnalisis}}</td>
+            <td>
+              <p *ngIf="report.fechaFinaAnalisis != '-'">{{report.fechaFinaAnalisis}}</p>
+              <p *ngIf="report.fechaFinaAnalisis == '-'">Procesando...</p>
+            </td>
             <td>
               <a id="{{report.idAnalisis}}"  *ngIf="report.fechaFinaAnalisis != '-'" (click)="downloadReport(report.idAnalisis)">
                 <img class="canClick" src="assets/img/download.png" alt="Descargar Reporte" style="width:20px;height:20px;border:0;">

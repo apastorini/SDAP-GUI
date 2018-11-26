@@ -24,12 +24,15 @@
             <td>{{file.extension}}</td>
             <td>{{file.size}}</td>
             <td>
-              <a id="{{file.idFile}}" (click)="downloadFile(file.idFile)">
+              <a id="{{file.idFile}}" *ngIf="file.pdf" (click)="downloadFile(file.idFile)">
                 <img class="canClick" src="assets/img/download.png" alt="Descargar archivo" style="width:20px;height:20px;border:0;">
               </a>
+                <p *ngIf="!(file.pdf)">Procesando...</p>
+
+
             </td>
             <td>
-              <a id="{{file.idFile}}" (click)="deleteFileFlow(file.idFile)">
+              <a id="{{file.idFile}}"  (click)="deleteFileFlow(file.idFile)">
                 <img class="canClick" src="assets/img/delete.svg" alt="Eliminar archivo" style="width:20px;height:20px;border:0;">
               </a>
             </td>

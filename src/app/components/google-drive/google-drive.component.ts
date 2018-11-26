@@ -8,6 +8,12 @@ import { MatDialog } from "@angular/material/dialog";
 import { DialogOneInputComponent } from "../dialogoneinput/dialogoneinput.component"
 import { DialogOneInputData } from "../../../model/dialogOneInputData"
 import { MatBottomSheet } from '@angular/material';
+import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
+import { Constants } from '../../utils/Constants';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from '../../utils/modal/modal.component';
+
+
 
 
 import { Router } from "@angular/router";
@@ -25,6 +31,10 @@ export class GoogleDriveComponent implements OnInit{
    files: FileInfo[] = [];
    isSignedIn: boolean = this.appContext.Session.Gapi.isSignedIn;
    email: string;
+   public uploadFile = Constants.BASE_URL +  'documentController/addFileToUser';
+   public buttonDisabled: boolean = false;
+   public porcentaje=''
+
 
     constructor(
         private appContext: AppContext,
@@ -32,6 +42,9 @@ export class GoogleDriveComponent implements OnInit{
         private zone: NgZone,
         public dialog: MatDialog,
         private bottomSheet: MatBottomSheet,
+        private http: HttpClient,
+        private modalService: NgbModal
+
 
     ) {
 
@@ -165,7 +178,7 @@ browse(file: FileInfo) {
 
 
 
-      downloadFile(fileID: string ){
+      downloadFile(fileID: string,name:string ){
         console.log("downloadFile");
         console.log("entro!!!  " + fileID)
         console.log("%c entro!!!, {color= orange}  " + fileID);
@@ -179,9 +192,55 @@ browse(file: FileInfo) {
 
           var file = new Blob([res], {type: 'application/pdf'});
 
-          this.showFile(file)
+          let fd=new FormData();
+          fd.append("blob",file, name);
+          this.upload(file,name)
+
+          //this.showFile(file)
         });
       }
+
+
+
+      upload(file:Blob, name:string){
+        this.buttonDisabled=true;
+        const fd = new FormData();
+        console.log("ULPLOAD()")
+        fd.append('file',file, name )
+        console.log("Archivo a subir" + file)
+        console.log("Archivo a subir" + JSON.stringify(file) )
+        this.http.post(this.uploadFile + "?email=" + sessionStorage.email + "&token=" + sessionStorage.token ,fd,{
+          reportProgress: true,
+          observe:'events'
+        })
+          .subscribe(event => {
+            if(event.type === HttpEventType.UploadProgress){
+              this.porcentaje = Math.round(event.loaded / event.total * 100) + "%";
+              //console.log('Upload Progress: '+ this.porcentaje)
+
+            }else if(event.type === HttpEventType.Response){
+              this.buttonDisabled = false;
+                //this.getAllUserFiles();
+
+                console.log("EVENT " + JSON.stringify(event));
+                console.log("EVENT " + JSON.stringify(HttpEventType.Response));
+
+                console.log("EVENT  CODE" + JSON.stringify(event['body']['code']));
+
+                if(JSON.stringify(event['body']['code']) == '1'){
+                  this.openModal(JSON.stringify(event['body']['message']),'El archivo ya existe en el sistem o fue eliminado.',"error","error");
+
+                }
+                if(JSON.stringify(event['body']['code']) == '0'){
+                  this.openModal(JSON.stringify(event['body']['message']),'' ,"success","success");
+
+                }
+
+            }
+
+          });
+      }
+
         showFile(blob){
           console.log("size!!!  " + blob.size);
 
@@ -202,4 +261,38 @@ browse(file: FileInfo) {
           console.log("data file url !!!  " + JSON.stringify(link));
           link.click();
         }
+
+
+
+
+
+
+
+
+          openModal(title,text,type,action) {
+            let ngbModalOptions: NgbModalOptions = {
+                  backdrop : 'static',
+                  keyboard : false
+            };
+            const modalRef = this.modalService.open(ModalComponent,ngbModalOptions);
+            modalRef.componentInstance.title = title;
+            modalRef.componentInstance.text = text;
+            modalRef.componentInstance.type = type;
+            modalRef.componentInstance.action = action;
+
+
+            modalRef.result.then((result) => {
+
+              console.log("resultados del modal  "+result);
+
+
+            }).catch((error) => {
+              console.log(error);
+            });
+          }
+
+
+
+
+
 }

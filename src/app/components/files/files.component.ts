@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Constants } from '../../utils/Constants';
 import { FileService } from '../../services/file.service';
 import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { Session } from '../../auth/loginData';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../../utils/modal/modal.component';
+import 'rxjs/add/observable/interval';
+import { Subscription } from 'rxjs';
+import { Observable } from "rxjs";
+
 
 @Component({
   selector: 'app-files',
@@ -12,25 +16,40 @@ import { ModalComponent } from '../../utils/modal/modal.component';
   styleUrls: []
 })
 
-export class FilesComponent implements OnInit {
+export class FilesComponent implements OnInit, OnDestroy {
   fileList = [];
   porcentaje = '';
   public uploadFile = Constants.BASE_URL +  'documentController/addFileToUser';
   selectedFile: File = null;
   buttonDisabled: boolean = false;
   fileID = null;
+  public sub:Subscription;
+
+
+
 
   constructor(
     private http: HttpClient,
     private fileService: FileService,
     private modalService: NgbModal
-  ){}
+  ){
+
+    this.sub = Observable.interval(10000)
+
+      .subscribe((val) => {
+        this.getAllUserFiles();
+
+        console.log('TIMER FILES'); });
+  }
 
   onFileSelected(event){
     this.porcentaje='';
     this.selectedFile = <File> event.target.files[0];
 
   }
+
+
+
 
   upload(){
     this.buttonDisabled=true;
@@ -80,6 +99,10 @@ export class FilesComponent implements OnInit {
 
   ngOnInit() {
     this.getAllUserFiles();
+  }
+
+  ngOnDestroy(){
+    this.sub.unsubscribe();
   }
 
   getAllUserFiles(){
