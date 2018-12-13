@@ -46,7 +46,7 @@ export class AnalyzeComponent implements OnInit {
   }
 
   doAnalysis(){
-          this.analyzeService.iniciarAnalisis(this.fileToAnalize,this.filesToCompare).subscribe(res=>{
+          this.analyzeService.iniciarAnalisis(this.fileToAnalize,this.allFilesToCompare).subscribe(res=>{
             console.log("ANALISIS   " + JSON.stringify(res));
             this.openModal("Analisis Iniciado","Podes ver el estado de este y otros analisis en la pestaña Reportes.","success","success")
             this.uncheckAll();
